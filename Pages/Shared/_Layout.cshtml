@@ -1,0 +1,238 @@
+﻿<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Warehouse Management System</title>
+
+    <script type="importmap"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WMSys.styles.css" asp-append-version="true" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo-section">
+            <h2>
+                <i class="fas fa-warehouse"></i>
+                WMS
+            </h2>
+
+            <p class="subtitle">
+                Warehouse Platform
+            </p>
+        </div>
+
+        <ul class="nav">
+
+            <li>
+                <a asp-page="/sidemenu/Dashboard">
+                    <i class="fas fa-gauge-high"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a asp-page="/sidemenu/Inventory">
+                    <i class="fas fa-boxes-stacked"></i>
+                    Inventory
+                </a>
+            </li>
+
+            <li>
+                <a asp-page="/sidemenu/Receiving">
+                    <i class="fas fa-truck-ramp-box"></i>
+                    Receiving
+                </a>
+            </li>
+
+            <li>
+                <a asp-page="/sidemenu/Shipping">
+                    <i class="fas fa-truck-fast"></i>
+                    Shipping
+                </a>
+            </li>
+
+            <li>
+                <a asp-page="/sidemenu/Locations">
+                    <i class="fas fa-location-dot"></i>
+                    Locations
+                </a>
+            </li>
+
+            <li>
+                <a asp-page="/sidemenu/Reports">
+                    <i class="fas fa-chart-line"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a asp-page="/sidemenu/Users">
+                    <i class="fas fa-users"></i>
+                    Users
+                </a>
+            </li>     
+            
+            <br /><br /><br /><br /><br /><br /><br />
+            <li>
+                <a asp-page="/sidemenu/settings">
+                    <i class="fas fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Top Navigation -->
+        <header class="topbar">
+
+            <div class="page-title">
+                @ViewData["Title"]
+            </div>
+
+            <div class="topbar-right">
+
+                <button class="icon-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+
+                <div class="user-profile">
+                    <i class="fas fa-user-circle"></i>
+                    Admin
+                </div>
+
+            </div>
+
+        </header>
+
+        <main class="content-card">
+            @RenderBody()
+        </main>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script> //DARK MODE TOGGLE
+            // Load saved preference
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+
+            // Listen for toggle changes (only on Settings page)
+            const toggle = document.getElementById("darkModeToggle");
+            if (toggle) {
+                // Set initial state
+                toggle.checked = localStorage.getItem("darkMode") === "enabled";
+
+                toggle.addEventListener("change", function () {
+                    if (this.checked) {
+                        document.body.classList.add("dark-mode");
+                        localStorage.setItem("darkMode", "enabled");
+                    } else {
+                        document.body.classList.remove("dark-mode");
+                        localStorage.setItem("darkMode", "disabled");
+                    }
+                });
+            }
+    </script>
+
+
+    <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+                const ctx = document.getElementById('inventoryChart');
+
+                if (ctx) {
+
+                                new Chart(ctx, {
+
+                type: 'bar',
+
+                data: {
+
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+
+                    datasets: [
+
+                                    {
+                label: 'Received',
+                data: [120, 180, 150, 100, 80, 60, 90],
+                backgroundColor: '#0d6efd',
+                borderRadius: 8,
+                borderSkipped: false,
+                barThickness: 24
+            },
+            {
+                label: 'Shipped',
+                data: [100, 160, 140, 90, 70, 50, 80],
+                backgroundColor: '#16a34a',
+                borderRadius: 8,
+                borderSkipped: false,
+                barThickness: 24
+            }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    plugins: {
+
+                        legend: {
+                            position: 'top'
+                        }
+
+                    },
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+                }
+
+            });
+
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+﻿@page "/Receiving"
+@model WMSys.Pages.sidemenu.ReceivingModel
+@{
+    ViewData["Title"] = "Receiving Management";
+}
+
+<h1>Receiving Management</h1>
+
+<!-- Summary Boxes -->
+<div class="receiving-summary">
+    <div class="summary-box">Scheduled Today: <strong>0</strong></div>
+    <div class="summary-box">In Transit: <strong>1</strong></div>
+    <div class="summary-box">Received Today: <strong>0</strong></div>
+    <div class="summary-box">Delayed: <strong>1</strong></div>
+</div>
+
+<!-- Filter Tabs -->
+<div class="receiving-filters">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn">Pending</button>
+    <button class="filter-btn">In Transit</button>
+    <button class="filter-btn">Received</button>
+    <button class="filter-btn">Delayed</button>
+</div>
+
+<!-- Table -->
+<table class="receiving-table">
+    <thead>
+        <tr>
+            <th>PO Number</th>
+            <th>Supplier</th>
+            <th>Items</th>
+            <th>Expected</th>
+            <th>Received</th>
+            <th>Dock</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>PO-4892</td>
+            <td>TechCorp Ltd</td>
+            <td>240</td>
+            <td>2026-07-06</td>
+            <td>2026-07-06</td>
+            <td>Dock 01</td>
+            <td class="status received">Received</td>
+        </tr>
+        <tr>
+            <td>PO-4895</td>
+            <td>FurniturePlus</td>
+            <td>45</td>
+            <td>2026-07-07</td>
+            <td>—</td>
+            <td>Dock 01</td>
+            <td class="status transit">In Transit</td>
+        </tr>
+        <tr>
+            <td>PO-4901</td>
+            <td>SafetyFirst</td>
+            <td>320</td>
+            <td>2026-07-07</td>
+            <td>—</td>
+            <td>Dock 03</td>
+            <td class="status pending">Pending</td>
+        </tr>
+        <tr>
+            <td>PO-4888</td>
+            <td>DisplayPro</td>
+            <td>60</td>
+            <td>2026-07-05</td>
+            <td>—</td>
+            <td>Dock 01</td>
+            <td class="status delayed">Delayed</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- New Receipt Button -->
+<div class="new-receipt">
+    <button class="btn btn-primary">New Receipt</button>
+</div>
