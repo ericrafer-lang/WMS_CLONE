@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace practice_for_wms.Pages
 {
-    public class IndexModel : PageModel
+    public class UserManagementModel : PageModel
     {
         public void OnGet()
         {
-
         }
     }
 }

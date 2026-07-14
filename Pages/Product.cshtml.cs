@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WMSys.Pages
+namespace practice_for_wms.Pages
 {
-    public class ProjectsModel : PageModel
+    public class ProductModel : PageModel
     {
         public void OnGet()
         {

@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WMSys.Pages
+namespace practice_for_wms.Pages
 {
-    public class PrivacyModel : PageModel
+    public class SupplierModel : PageModel
     {
         public void OnGet()
         {
         }
     }
-
 }
