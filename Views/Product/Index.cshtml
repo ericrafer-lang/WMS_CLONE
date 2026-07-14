@@ -1,6 +1,4 @@
-﻿@page
-@model practice_for_wms.Pages.ProductModel
-@{
+﻿@{
     ViewData["Title"] = "Product";
 }
 
@@ -19,21 +17,121 @@
         
         <div class="flex justify-center items-center gap-3">
             <select class="flex flex-column btn-style gap-3 shadow-md px-5">
-                <option>
-                    <span>All Categories</span>
-                </option>
-                <option>
-                    <span>Safety Equipment</span>
-                </option>
-                <option>
-                    <span>Packaging</span>
-                </option>
+                <option>All Categories</option>
+                <option>Safety Equipment</option>
+                <option>Packaging</option>
             </select>
 
-            <button class="flex btn-style bg-blue-600 text-white text-sm gap-2">
+            <button class="flex btn-style bg-blue-600 text-white text-sm gap-2" id="openModal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
                 <span>Add Product</span>
             </button>
+            
+            <!-- Modal Overlay -->
+            <div id="productModal"
+                 class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+
+                <!-- Modal -->
+                <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
+
+                    <!-- Close Button -->
+                    <button id="closeModal"
+                            class="absolute top-4 right-4 text-gray-500 hover:text-black text-xl">
+                        ✕
+                    </button>
+
+                    <h2 class="text-2xl font-semibold mb-6">Add Product</h2>
+
+                    <form method="post">
+
+                        <div class="grid grid-cols-2 gap-4">
+
+                            <div class="col-span-2">
+                                <label class="font-medium">Product Name</label>
+                                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            <div>
+                                <label>Product ID</label>
+                                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            <div>
+                                <label>Barcode?</label>
+                                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            <div>
+                                <label>Category</label>
+                                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option>Select</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Unit</label>
+                                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option>pcs</option>
+                                    <option>box</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Quantity</label>
+                                <input type="number"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            @* <div>
+                                <label>Min Stock</label>
+                                <input type="number"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div> *@
+
+                            <div>
+                                <label>Price</label>
+                                <input type="number"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            <div>
+                                <label>Quality Status</label>
+                                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option>Good</option>
+                                    <option>Bad</option>
+                                    <option>Under Inspection</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label>Stock-in Date</label>
+                                <input type="date"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            <div class="col-span-2">
+                                <label>Description</label>
+                                <textarea class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="flex justify-end gap-3 mt-6">
+
+                            <button type="button"
+                                    id="cancelModal"
+                                    class="px-4 py-2 border rounded-lg">
+                                Cancel
+                            </button>
+
+                            <button type="submit"
+                                    class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                                Create
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -123,6 +221,7 @@
                         <td>
                             <span class="badge bad">
                                 Bad
+                            </span>
                         </td>
                         <td>
                             <span class="badge inactive">
@@ -138,6 +237,7 @@
                             </button>
                         </td>
                     </tr>
+                </tbody>
             </table>
         </div>
     </div>
