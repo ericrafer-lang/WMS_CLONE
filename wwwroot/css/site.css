@@ -11,7 +11,7 @@ html {
     font-size: 14px;
     font-family: "Inter", sans-serif;
 }
-input:focus {
+input:focus, select:focus, option:focus {
     outline: 0;
 }
 
@@ -124,7 +124,7 @@ th {
 th,td  {
     font-size: 0.800rem;
     padding: 8px 13px;
-    text-align: left;
+    text-align: center;
 }
 
 thead tr ,tbody tr{
@@ -136,6 +136,7 @@ thead tr ,tbody tr{
     font-weight: 600;
 }
 
+/* CARD STATUSES */
 .badge {
     display: inline-flex;
     padding: 6px 14px;
@@ -144,19 +145,19 @@ thead tr ,tbody tr{
     font-weight: 600;
 }
 
-.good, .active {
+.good, .active, .approve, .completed {
     background: #d9fbe6;
     color: #007f5f;
     text-transform:capitalize;
 }
 
-.inspection {
+.inspection, .pending {
     background: rgb(254 243 199);
     color: rgb(180 83 9);
     text-transform: capitalize;
 }
 
-.bad, .inactive {
+.bad, .inactive, .rejected {
     background: #FEE2E2;
     color: #DC2626;
     text-transform: capitalize;
@@ -166,3 +167,36 @@ thead tr ,tbody tr{
     background: hsl(217 91% 50% / .1); 
     color: #0C64F4;
 }
+
+.arrived {
+    background: #CFFAFE;
+    color: #0E7490;
+    text-transform: capitalize;
+}
+
+.in-transit {
+    background: #DBEAFE;
+    color: #1D4ED8;
+    text-transform: capitalize;
+}
+
+/* ROLES */
+.admin {
+    background: #F3E8FF;
+    color: #7E22CE;
+    text-transform: capitalize;
+}
+
+.supervisor {
+    background: #DBEAFE;
+    color: #1D4ED8;
+    text-transform: capitalize;
+}
+
+.staff {
+    background: #F3F4F6;
+    color: #374151;
+    text-transform: capitalize;
+}
+
+
