@@ -11,7 +11,7 @@ html {
     font-size: 14px;
     font-family: "Inter", sans-serif;
 }
-input:focus, select:focus, option:focus {
+input:focus{
     outline: 0;
 }
 
@@ -33,7 +33,6 @@ html {
 .sidebar-list li {
     color: #ffffff;
     margin-bottom: 5px;
-    
 }
 
 .sidebar-list li a {
@@ -199,4 +198,11 @@ thead tr ,tbody tr{
     text-transform: capitalize;
 }
 
-
+/*  */
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: rgb(59 130 246);
+    box-shadow: 0 0 0 2px rgb(59 130 246 / 0.35), 0 1px 2px rgb(0 0 0 / 0.05);
+}
