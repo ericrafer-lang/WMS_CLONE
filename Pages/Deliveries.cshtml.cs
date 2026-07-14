@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WMSys.Pages.sidemenu
+namespace practice_for_wms.Pages
 {
-    public class InventoryModel : PageModel
+    public class DeliveriesModel : PageModel
     {
         public void OnGet()
         {
