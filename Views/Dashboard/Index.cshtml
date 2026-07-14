@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="p-4 lg:p-6">
+    <h1 class="text-2xl font-bold">
+        Admin Dashboard
+    </h1>
+
+    <p class="text-sm mt-1 text-[#65758B]">
+        Overview of your wirehouse operations
+    </p>
+    
+    @* CARDS !!!!!!*@
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-row-auto mt-5 gap-4">
+        @* Total Product !!!!!!*@
+        <div class="grid-card">
+            <div>
+                <p class="grid-header-text">Total Product</p>
+                <p>0</p>
+            </div>
+            <div class="flex justify-center items-center w-11 h-11 bg-blue-50 text-blue-600 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-icon lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" /><path d="M12 22V12" /><polyline points="3.29 7 12 12 20.71 7" /><path d="m7.5 4.27 9 5.15" /></svg>
+            </div>
+        </div>
+        @* Available Stocks !!!!!!*@
+        <div class="grid-card">
+            <div>
+                <p class="grid-header-text">Available Stock</p>
+                <p>0</p>
+            </div>
+            <div class="flex justify-center items-center w-11 h-11 bg-green-50 text-green-600 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up-icon lucide-trending-up"><path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" /></svg>
+            </div>
+        </div>
+        @* Available Stocks !!!!!!*@
+        <div class="grid-card">
+            <div>
+                <p class="grid-header-text">Low Stock Items</p>
+                <p>0</p>
+            </div>
+            <div class="flex justify-center items-center w-11 h-11 bg-yellow-50 text-yellow-600 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>
+            </div>
+        </div>
+        @* GOOD !!!!!!*@
+        <div class="grid-card">
+            <div>
+                <p class="grid-header-text">Quality: Good</p>
+                <p>0</p>
+            </div>
+            <div class="flex justify-center items-center w-11 h-11 bg-emerald-50 text-emerald-600 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check-icon lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>
+            </div>
+        </div>
+        @* SUPPLIERS TOTAL !!!!!!*@
+        <div class="grid-card">
+            <div>
+                <p class="grid-header-text">Total Suppliers</p>
+                <p>0</p>
+            </div>
+            <div class="flex justify-center items-center w-11 h-11 bg-cyan-50 text-cyan-600 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck-icon lucide-truck"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" /><path d="M15 18H9" /><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14" /><circle cx="17" cy="18" r="2" /><circle cx="7" cy="18" r="2" /></svg>
+            </div>
+        </div>
+        @* BRANCHES TOTAL !!!!!!*@
+        <div class="grid-card">
+            <div>
+                <p class="grid-header-text">Total Branches</p>
+                <p>0</p>
+            </div>
+            <div class="flex justify-center items-center w-11 h-11 bg-purple-50 text-purple-600 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building2-icon lucide-building-2"><path d="M10 12h4" /><path d="M10 8h4" /><path d="M14 21v-3a2 2 0 0 0-4 0v3" /><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></svg>
+            </div>
+        </div>
+        @* TOTAL STAFFs !!!!!!*@
+        <div class="grid-card">
+            <div>
+                <p class="grid-header-text">Total Staff</p>
+                <p>0</p>
+            </div>
+            <div class="flex justify-center items-center w-11 h-11 bg-blue-50 text-blue-600 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-icon lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+            </div>
+        </div>
+        @* PENDING REQUEST !!!!!!*@
+        <div class="grid-card">
+            <div>
+                <p class="grid-header-text">Pending Requests</p>
+                <p>0</p>
+            </div>
+            <div class="flex justify-center items-center w-11 h-11 bg-amber-50 text-amber-600 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list-icon lucide-clipboard-list"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4" /><path d="M12 16h4" /><path d="M8 11h.01" /><path d="M8 16h.01" /></svg>
+            </div>
+        </div>
+    </div>
+
+    @* GRAPHS !!!!!!*@
+    <div class="grid grid-cols-1 lg:grid-cols-2 mt-6 gap-6">
+        <div class="grid-card p-3 lg:p-5    ">
+            <div class="flex flex-col justify-between items-center ">
+                <div class="text-base font-semibold mb-5">Inventory by Category</div>
+                <div>GRAPH</div>
+            </div>
+        </div>
+        <div class="grid-card">
+            <div class="flex flex-col justify-between items-center ">
+                <div class="text-base font-semibold mb-5">Product Quality Status</div>
+                <div>GRAPH</div>
+            </div>
+        </div>
+    </div>
+
+    @* ACTIVITIES Graph !!!!!!*@
+    <div class="flex flex-col border grid-card mt-6 p-5">
+        <div class="flex justify-start items-center gap-2 mb-4">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity-icon lucide-activity"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" /></svg>
+                </div>
+            <div class="text-base font-semibold ">Recent Activities</div>
+        </div>
+
+        <div>GRAPH</div>
+    </div>
+</div>
