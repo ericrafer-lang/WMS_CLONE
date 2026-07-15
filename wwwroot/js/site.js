@@ -1,28 +1,31 @@
 ﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
+    // MODAL SECTION
+function initializeModal(modalId, openId, closeId, cancelId) {
+    const modal = document.getElementById(modalId);
+    const openBtn = document.getElementById(openId);
+    const closeBtn = document.getElementById(closeId);
+    const cancelBtn = document.getElementById(cancelId);
 
-// MODAL SECTION
-const modal = document.getElementById("productModal");
-const openBtn = document.getElementById("openModal"); //Add Product Btn
-const closeBtn = document.getElementById("closeModal"); //Close Btn
-const cancelBtn = document.getElementById("cancelModal");
+    if (!modal || !openBtn || !closeBtn || !cancelBtn) return;
 
-openBtn.addEventListener("click", () => {
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-    console.log("clicked")
-});
+    function closeModal() {
+        modal.classList.remove("flex");
+        modal.classList.add("hidden");
+    }
 
-function modalClose() {
-    modal.classList.remove("flex");
-    modal.classList.add("hidden");
+    openBtn.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
 }
-
-closeBtn.addEventListener("click", modalClose);
-cancelBtn.addEventListener("click", modalClose);
-
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) modalClose()
-});
