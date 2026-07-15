@@ -22,7 +22,7 @@
                 <option>Packaging</option>
             </select>
 
-            <button class="flex btn-style bg-blue-600 text-white text-sm gap-2" id="openModal">
+            <button class="flex btn-style bg-blue-600 text-white text-sm gap-2" id="openModal" onclick="initializeModal('productModal','openModal','closeModal','cancelModal')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
                 <span>Add Product</span>
             </button>
@@ -79,7 +79,8 @@
                             <div>
                                 <label>Quantity</label>
                                 <input type="number"
-                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                       min="0"/>
                             </div>
 
                             @* <div>
@@ -91,7 +92,8 @@
                             <div>
                                 <label>Price</label>
                                 <input type="number"
-                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                       min="0"/>
                             </div>
 
                             <div>
@@ -156,6 +158,7 @@
                         <th>Supplier</th>
                         <th>Category</th>
                         <th>Qty</th>
+                        <th>Price</th>
                         <th>Quality</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -168,6 +171,7 @@
                         <td>SOLIS MENDEZ WAREHOUSE</td>
                         <td>Electronics</td>
                         <td>250 pcs</td>
+                        <td>520</td>
                         <td>
                             <span class="badge good">
                                 Good
@@ -178,7 +182,7 @@
                                 Active
                             </span>
                         </td>
-                        <td class="flex gap-3">
+                        <td>
                             <button class="badge inline-flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
                             </button>
@@ -188,14 +192,15 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>TRD-001</td>
+                        <td>TRD-002</td>
                         <td class="table-product-name">Circuit Board A1</td>
                         <td>SOLIS MENDEZ WAREHOUSE</td>
                         <td>Electronics</td>
                         <td>250 pcs</td>
+                        <td>670</td>
                         <td>
-                            <span class="badge inspection">
-                                Under Inspection
+                            <span class="badge good">
+                                Good
                             </span>
                         </td>
                         <td>
@@ -203,7 +208,7 @@
                                 Active
                             </span>
                         </td>
-                        <td class="flex gap-3">
+                        <td>
                             <button class="badge inline-flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
                             </button>
@@ -213,22 +218,23 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>TRD-001</td>
+                        <td>TRD-003</td>
                         <td class="table-product-name">Circuit Board A1</td>
                         <td>SOLIS MENDEZ WAREHOUSE</td>
                         <td>Electronics</td>
                         <td>250 pcs</td>
+                        <td>232</td>
                         <td>
-                            <span class="badge bad">
-                                Bad
+                            <span class="badge good">
+                                Good
                             </span>
                         </td>
                         <td>
-                            <span class="badge inactive">
-                                Inactive
+                            <span class="badge active">
+                                Active
                             </span>
                         </td>
-                        <td class="flex gap-3">
+                        <td>
                             <button class="badge inline-flex">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
                             </button>
