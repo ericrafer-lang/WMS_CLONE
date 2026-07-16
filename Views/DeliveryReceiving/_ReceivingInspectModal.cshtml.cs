@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace practice_for_wms.Views.DeliveryReceiving
 {
-    public class _DeliveryModalModel : PageModel
+    public class _ReceivingInspectModalModel : PageModel
     {
         public void OnGet()
         {
