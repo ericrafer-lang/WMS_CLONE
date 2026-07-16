@@ -17,23 +17,17 @@
 
         <div class="flex justify-center items-center gap-3">
 
-            <button class="flex btn-style bg-blue-600 text-white text-sm gap-2" id="openModal" onclick="initializeModal('userModal','openModal','closeModal','cancelModal')">
+            <button class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2" data-modal="userModal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus-icon lucide-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><line x1="19" x2="19" y1="8" y2="14" /><line x1="22" x2="16" y1="11" y2="11" /></svg>
                 <span>Invite User</span>
             </button>
 
             <!-- Modal Overlay -->
             <div id="userModal"
-                 class="fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+                 class="modal-overlay fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
 
                 <!-- Modal -->
                 <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
-
-                    <!-- Close Button -->
-                    <button id="closeModal"
-                            class="absolute top-4 right-4 text-gray-500 hover:text-black text-xl">
-                        ✕
-                    </button>
 
                     <h2 class="text-2xl font-semibold mb-6">Add Product</h2>
 
@@ -117,7 +111,7 @@
 
                             <button type="button"
                                     id="cancelModal"
-                                    class="px-4 py-2 border rounded-lg">
+                                    class="close-modal px-4 py-2 border rounded-lg">
                                 Cancel
                             </button>
 
