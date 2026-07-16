@@ -1,28 +1,38 @@
 ﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-// Write your JavaScript code.
+    // MODAL SECTION
+function initializeModals() {
+    // open modal
+    document.querySelectorAll(".open-modal").forEach((button) => {
+        button.addEventListener("click", () => {
+            const modalId = button.dataset.modal;
+            const modal = document.getElementById(modalId);
 
-// MODAL SECTION
-const modal = document.getElementById("productModal");
-const openBtn = document.getElementById("openModal"); //Add Product Btn
-const closeBtn = document.getElementById("closeModal"); //Close Btn
-const cancelBtn = document.getElementById("cancelModal");
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+        });
+    });
 
-openBtn.addEventListener("click", () => {
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
-    console.log("clicked")
-});
+    // close modal
+    document.querySelectorAll(".close-modal").forEach((button) => {
+        button.addEventListener("click", () => {
+            const modal = button.closest(".modal-overlay");
 
-function modalClose() {
-    modal.classList.remove("flex");
-    modal.classList.add("hidden");
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");
+        });
+    });
+
+
+    document.querySelectorAll(".modal-overlay").forEach((modal) => {
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("flex");
+                modal.classList.add("hidden");
+            }
+        })
+    })
 }
 
-closeBtn.addEventListener("click", modalClose);
-cancelBtn.addEventListener("click", modalClose);
-
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) modalClose()
-});
+initializeModals();
