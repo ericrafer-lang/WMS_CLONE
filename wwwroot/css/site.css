@@ -101,7 +101,7 @@ main {
     font-weight: 500;
 }
 
-.btn-style {
+.btn-style, .btn-style[type="submit"] {
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 10px;
