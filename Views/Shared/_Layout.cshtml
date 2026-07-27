@@ -25,10 +25,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
 </head>
-<body class="flex min-h-screen">
-    <div class="flex min-h-screen w-screen">
+<body class="h-screen overflow-hidden">
+    <div class="flex h-screen w-screen overflow-hidden">
 
-        <aside class="w-72 bg-[#0E1830] text-white flex flex-col">
+        <aside class="w-72 bg-[#0E1830] text-white flex flex-col overflow-y-auto scrollbar-hide">
 
             @* LOGO *@
             <div class="flex items-center p-3 w-full border-b border-gray-800">
@@ -151,7 +151,7 @@
                 </div>
             </header>
 
-            <main role="main" class="flex-1">
+            <main role="main" class="flex-1 overflow-y-auto">
                 @RenderBody()
             </main>
         </div>

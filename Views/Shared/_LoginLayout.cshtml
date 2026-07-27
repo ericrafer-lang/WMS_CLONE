@@ -19,18 +19,23 @@
 </head>
 
 <body>
-        @RenderBody()
+    @RenderBody()
 
-<script>
-function togglePassword() {
-    const passwordInput = document.getElementById("password");
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-    } else {
-        passwordInput.type = "password";
-    }
-}
-</script>
+    <script>
+            function togglePassword() {
+                const passwordInput = document.getElementById("password");
+                const eyeOpen = document.querySelector(".pass-true");
+                const eyeClose = document.querySelector(".pass-false");
+
+                const isHidden = passwordInput.type === "password";
+
+                passwordInput.type = isHidden ? "text" : "password";
+
+                eyeOpen.classList.toggle("hidden", isHidden);
+                eyeClose.classList.toggle("hidden", !isHidden);
+            }
+
+    </script>
 
 </body>
 </html>
