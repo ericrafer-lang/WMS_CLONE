@@ -8,5 +8,10 @@ namespace practice_for_wms.Controllers
         {
             return View();
         }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
     }
 }
