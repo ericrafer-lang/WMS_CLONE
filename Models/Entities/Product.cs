@@ -1,4 +1,4 @@
-﻿namespace practice_for_wms.Models
+﻿namespace practice_for_wms.Models.Entities
 {
     public class Product
     {
