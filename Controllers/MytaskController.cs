@@ -2,7 +2,7 @@
 
 namespace practice_for_wms.Controllers
 {
-    public class MytaskController : Controller
+    public class MyTaskController : Controller
     {
         public IActionResult Index()
         {
