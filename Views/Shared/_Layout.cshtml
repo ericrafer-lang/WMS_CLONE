@@ -21,14 +21,14 @@
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
 </head>
-<body class="flex min-h-screen">
-    <div class="flex min-h-screen w-screen">
+<body class="h-screen overflow-hidden">
+    <div class="flex h-screen w-screen overflow-hidden">
 
-        <aside class="w-72 bg-[#0E1830] text-white flex flex-col">
+        <aside class="w-72 bg-[#0E1830] text-white flex flex-col overflow-y-auto scrollbar-hide">
 
             @* LOGO *@
             <div class="flex items-center p-3 w-full border-b border-gray-800">
@@ -77,6 +77,10 @@
                         <span> User Management</span>
                     </a>
                 </li>
+                <li class="sidebar-options @(currentController == "StaffManagement" ? "sidebar-selected" : "")">
+                    <a asp-controller="StaffManagement" asp-action="Index">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-user-icon lucide-book-user"><path d="M15 13a3 3 0 1 0-6 0" /><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" /><circle cx="12" cy="8" r="2" /></svg>
+                        <span> Staff Management</span>
                  <li class="sidebar-options @(currentController == "MyTask" ? "sidebar-selected" : "")">
                     <a asp-controller="MyTask" asp-action="Index">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users-round-icon lucide-users-round"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg>
@@ -84,6 +88,12 @@
                     </a>
                 </li>
                 <label>operation</label>
+                <li class="sidebar-options @(currentController == "Fulfillment" ? "sidebar-selected" : "")">
+                    <a asp-controller="Fulfillment" asp-action="Index">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-check-big-icon lucide-square-check-big"><path d="M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344" /><path d="m9 11 3 3L22 4" /></svg>
+                        <span> Fulfillment</span>
+                    </a>
+                </li>
                 <li class="sidebar-options @(currentController == "ProductRequest" ? "sidebar-selected" : "")">
                     <a asp-controller="ProductRequest" asp-action="Index">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list-icon lucide-clipboard-list"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4" /><path d="M12 16h4" /><path d="M8 11h.01" /><path d="M8 16h.01" /></svg>
@@ -151,7 +161,7 @@
                 </div>
             </header>
 
-            <main role="main" class="flex-1">
+            <main role="main" class="flex-1 overflow-y-auto">
                 @RenderBody()
             </main>
         </div>

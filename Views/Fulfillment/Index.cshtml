@@ -1,0 +1,201 @@
+﻿@{
+    ViewData["Title"] = "Fulfillment";
+}
+
+<div class="p-4 lg:p-6">
+    @* HEADING !!!!!!*@
+    <div class="flex justify-between items-center">
+        <div class="flex flex-col">
+            <p class="font-bold text-2xl mb-1">
+               Order Fulfillment
+            </p>
+
+            <p class="">
+                3 active orders
+            </p>
+        </div>
+
+        <div class="flex justify-center items-center gap-3">
+
+            <button class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2" data-modal="fulfillmentModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+                <span>New Order</span>
+            </button>
+
+            <!-- Modal Overlay -->
+            <div id="fulfillmentModal"
+                 class="modal-overlay fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+
+                <!-- Modal -->
+                <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
+                    <h2 class="text-2xl font-semibold mb-6">New Fulfillment Order</h2>
+
+                    <form method="post">
+
+                        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-3">
+
+                            <div class="col-span-2">
+                                <label class="font-medium">Order Number</label>
+                                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            </div>
+
+                            <div>
+
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Assigned To</label>
+
+                                    <select class="modern-select">
+                                        <option>Select staff member</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Priority</label>
+
+                                    <select class="modern-select">
+                                        <option>Low</option>
+                                        <option>Medium</option>
+                                        <option>High</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="col-span-2">
+                                <label>Description</label>
+                                <textarea class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            </div>
+
+                        </div>
+
+                        @* buttons *@
+                        <div class="flex justify-end gap-3 mt-6">
+
+                            <button type="button"
+                                    id="cancelModal"
+                                    class="close-modal btn-style px-4 py-2 border rounded-lg">
+                                Cancel
+                            </button>
+
+                            <button type="submit"
+                                    class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                                Create
+                            </button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @* TABLE !!!!!!*@
+    <div class="card flex flex-col justify-center items-start mt-5 rounded-xl w-full">
+        @* HEADER !!!!!!*@
+        <div class="flex items-center card w-[30%] m-3 p-2">
+            <span class="mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search">
+                    <path d="m21 21-4.34-4.34" />
+                    <circle cx="11" cy="11" r="8" />
+                </svg>
+            </span>
+            <input placeholder="Search..." class="font-sm w-full" />
+        </div>
+
+        @* TABLE DATA!!!!!!*@
+        <div class=" w-full">
+            <table class="product-table w-full border-collapse">
+                <thead class="">
+                    <tr>
+                        <th>Order#</th>
+                        <th>Assigned To</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="table-product-name">001</td>
+                        <td>Techno Corp</td>
+                        <td>
+                            <span class="badge high">
+                                High
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge approve">
+                                Approved
+                            </span>
+                        </td>
+                        <td class="px-4 py-3">
+                            <button class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">
+                                Completed
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="w-4 h-4"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-product-name">002</td>
+                        <td>KLT Fruits</td>
+                        <td>
+                            <span class="badge approve">
+                                Low
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge rejected">
+                                Rejected
+                            </span>
+                        </td>
+                        <td class="px-4 py-3">
+                            <span class="badge done">
+                                Done
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-product-name">003</td>
+                        <td>FCIE Dasma</td>
+                        <td>
+                            <span class="badge medium">
+                                Medium
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge pending">
+                                pending
+                            </span>
+                        </td>
+                        <td class="px-4 py-3">
+                            <button class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold text-gray-700 hover:bg-gray-100 transition">
+                                Picking
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="w-4 h-4"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

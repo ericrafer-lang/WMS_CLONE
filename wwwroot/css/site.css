@@ -11,7 +11,8 @@ html {
     font-size: 14px;
     font-family: "Inter", sans-serif;
 }
-input:focus, select:focus{
+
+input:focus, select:focus {
     outline: 0;
 }
 
@@ -58,14 +59,13 @@ html {
     color: #F8FAFCB2
 }
 
-
-.sidebar-selected, .sidebar-selected a {
+.sidebar-list li.sidebar-selected a {
     background: var(--sidebar-background);
-    color: #ffffff !important;
+    color: #fff !important;
     border-radius: 10px;
 }
 
-.sidebar-list li:hover, .sidebar-list a:hover{
+.sidebar-list li:not(.sidebar-selected):hover, .sidebar-list a:not(.sidebar-selected):hover {
     background: var(--sidebar-hover-bg);
     color: #ffffff;
     border-radius: 10px;
@@ -73,6 +73,10 @@ html {
 
 .sidebar-list li a span {
     margin-left: 10px;
+}
+
+aside {
+    scrollbar-width: none;
 }
 
 main {
@@ -90,16 +94,19 @@ main {
     font-size: 0.877rem;
     background: #ffffff;
     transition: box-shadow 0.3s ease;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
 }
 
-.grid-card:hover {
-    box-shadow: 0 4px 7px 1px rgb(0 0 0 / 20%);
-}
+    .grid-card:hover {
+        box-shadow: 0 4px 7px 1px rgb(0 0 0 / 20%);
+    }
 
-.grid-card .grid-header-text{
-    color: var(--text-muted);
-    font-weight: 500;
-}
+    .grid-card .grid-header-text {
+        color: var(--text-muted);
+        font-weight: 500;
+    }
 
 .btn-style, .btn-style[type="submit"] {
     padding: 10px;
@@ -115,9 +122,18 @@ main {
     border-radius: 10px;
 }
 
+/*DASHBOARD CATEGORY*/
+.textcolor {
+    color: #6B7280; /* Tailwind's gray-500 hex value */
+}
+
+.colortext {
+    color: #ffffff;
+}
+
 /* PRODUCT */
-option{
-    border-radius: 10px;    
+option {
+    border-radius: 10px;
 }
 
 .product-table thead {
@@ -125,59 +141,71 @@ option{
     color: var(--text-muted);
 }
 
-.product-table thead tr{
-    padding: 2px 10px;
-    background: var(--muted-bg);
-    color: var(--text-muted);
-}
+    .product-table thead tr {
+        padding: 2px 10px;
+        background: var(--muted-bg);
+        color: var(--text-muted);
+    }
 
 th {
     font-weight: 700;
 }
-th,td  {
+
+th, td {
     font-size: 0.800rem;
     padding: 8px 13px;
     text-align: center;
 }
 
-thead tr ,tbody tr{
-    border-bottom: 1px solid var(--border-color); 
+thead tr, tbody tr {
+    border-bottom: 1px solid var(--border-color);
     padding: 8px 13px;
 }
 
 .table-product-name {
     font-weight: 600;
+    white-space: nowrap;
+}
+
+table {
+    width: 100%;
 }
 
 /* CARD STATUSES */
 .badge {
     display: inline-flex;
-    padding: 6px 14px;
+    padding: 7px 20px;
     border-radius: 999px;
     font-size: .8rem;
     font-weight: 600;
 }
 
-.good, .active, .approve, .completed {
-    background: #d9fbe6;
+.good, .active, .approve, .completed, .low, .done, .green {
+    background: #AFEEEE;
     color: #007f5f;
-    text-transform:capitalize;
+    text-transform: capitalize;
 }
 
-.inspection, .pending {
+.dispatched, .assigned {
+    background: #B8E3E9;
+    color: #305CDE;
+    text-transform: capitalize;
+}
+
+.inspection, .pending, .medium, .picking, .yellow {
     background: rgb(254 243 199);
     color: rgb(180 83 9);
     text-transform: capitalize;
 }
 
-.bad, .inactive, .rejected {
+.bad, .inactive, .rejected, .high, red {
     background: #FEE2E2;
     color: #DC2626;
     text-transform: capitalize;
 }
 
 .product {
-    background: hsl(217 91% 50% / .1); 
+    background: hsl(217 91% 50% / .1);
     color: #0C64F4;
 }
 
@@ -200,7 +228,7 @@ thead tr ,tbody tr{
     text-transform: capitalize;
 }
 
-.supervisor {
+.supervisor, .blue {
     background: #DBEAFE;
     color: #1D4ED8;
     text-transform: capitalize;
@@ -221,6 +249,133 @@ form textarea:focus {
     box-shadow: 0 0 0 2px rgb(59 130 246 / 0.35), 0 1px 2px rgb(0 0 0 / 0.05);
 }
 
+/*modal form for fulfillment*/
+.form-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.modern-select {
+    width: 200%;
+    padding: 12px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 15px;
+    color: #374151;
+    cursor: pointer;
+    outline: none;
+    transition: .2s;
+}
+
+    .modern-select:hover {
+        border-color: #9ca3af;
+    }
+
+    .modern-select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+    }
+/*LOGIN PAGE*/
+
+.form-user, .form-pass {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+login {
+    margin: 0;
+    font-family: 'Inter',sans-serif;
+    overflow: hidden;
+}
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/warehouse-bg.jpg');
+    background-size: cover; /* scale image to cover */
+    background-position: center; /* center the image */
+    background-repeat: no-repeat; /* prevent tiling */
+    position: relative; /* for overlay */
+}
+
+    .login-page::before {
+        content: "";
+        position: absolute;
+        inset: 0; /* cover entire page */
+        background: rgba(15,23,42,.55); /* semi-transparent overlay */
+        backdrop-filter: blur(4px); /* blur effect */
+    }
+
+.login-card {
+    position: relative;
+    z-index: 2;
+    width: 420px;
+    padding: 40px;
+    border-radius: 24px;
+    background: rgba(255,255,255,.1);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255,255,255,.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 18px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255,255,255,.9);
+    font-size: 15px;
+    transition: .25s;
+}
+
+    .form-control:focus {
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(37,99,235,.2);
+    }
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+    .login-btn:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(37,99,235,.35);
+    }
+
+.login-card {
+    animation: fadeIn .8s ease;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .eye-icon {
     cursor: pointer;
     transition: color 0.2s ease;

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "User Management";
+    ViewData["Title"] = "Staff Management";
 }
 
 <div class="p-4 lg:p-6">
@@ -7,70 +7,87 @@
     <div class="flex justify-between items-center">
         <div class="flex flex-col">
             <p class="font-bold text-2xl mb-1">
-                User Management
+                Staff Management
             </p>
 
             <p class="">
-                0 Users
+                3 warehouse staff
             </p>
         </div>
 
         <div class="flex justify-center items-center gap-3">
 
-            <button class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2" data-modal="userModal">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus-icon lucide-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><line x1="19" x2="19" y1="8" y2="14" /><line x1="22" x2="16" y1="11" y2="11" /></svg>
-                <span>Invite User</span>
+            <button class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2" data-modal="staffModal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <line x1="19" x2="19" y1="8" y2="14" />
+                    <line x1="22" x2="16" y1="11" y2="11" />
+                </svg>
+                <span>Invite Staff</span>
             </button>
 
             <!-- Modal Overlay -->
-            <div id="userModal"
+            <div id="staffModal"
                  class="modal-overlay fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
 
                 <!-- Modal -->
                 <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
 
-                    <h2 class="text-2xl font-semibold mb-6">Invite New User</h2>
+                    <h2 class="text-2xl font-semibold mb-6">Add New Staff Member</h2>
 
                     <form method="post">
 
                         <div class="grid grid-cols-2 gap-4">
 
                             <div class="col-span-2">
-                                <label class="font-medium">Full Name <span class="text-red-500">*</span></label>
-                                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
-                            </div>
-
-                            <div class="col-span-2">
                                 <label class="font-medium">Email Address <span class="text-red-500">*</span></label>
-                                <input type="email" placeholder="email@example.com"
+                                <input type="email" placeholder="staff@example.com"
                                        class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
                             </div>
 
+                            <div class="col-span-2">
+                                <label class="font-medium">Full Name <span class="text-red-500">*</span></label>
+                                <input type="text" placeholder="e.g. Juan dela Cruz"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                            </div>
+
                             <div>
+                                <label class="font-medium">Job Role</label>
+                                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                    <option>General Warehouse</option>
+                                    <option>Supervisor</option>
+                                    <option>Driver</option>
+                                </select>
+                            </div>
 
-                                
-                                <div class="form-group">
-                                    <label class="form-label">Role <span class="text-red-500">*</span></label>
+                            <div>
+                                <label class="font-medium">Phone Number</label>
+                                <input type="tel" placeholder="+63 912 345 6789"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                            </div>
 
-                                    <select class="modern-select">
-                                        <option>Select staff member</option>
-                                    </select>
-                                </div>
+                            <div>
+                                <label class="font-medium">Shift</label>
+                                <input type="text" placeholder="e.g. Morning / Night"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                            </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">Branch</label>
+                            <div>
+                                <label class="font-medium">Branch Assignment</label>
+                                <input type="text" placeholder="e.g. Main Warehouse"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+                            </div>
 
-                                    <select class="modern-select">
-                                        <option>Selecr a branch (optional)</option>
-                                    </select>
-                                </div>
-
+                            <div class="col-span-2">
+                                <label class="font-medium">Notes</label>
+                                <textarea placeholder="Any additional info..."
+                                          class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
                             </div>
 
                         </div>
 
                         <div class="flex justify-end gap-3 mt-6">
-
                             <button type="button"
                                     id="cancelModal"
                                     class="close-modal px-4 py-2 border rounded-lg">
@@ -86,6 +103,8 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 
     @* TABLE !!!!!!*@
