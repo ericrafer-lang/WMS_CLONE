@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Mytask";
+}
+<div class="p-4 lg:p-6">
+    <h1 class="text-2xl font-bold">
+        My Task
+    </h1>
+
+    <p class="text-sm mt-1 text-[#65758B]">
+        2 active tasks
+    </p>
+
+    <p class="text-md font-semibold mt-8 text-[#65758B]">
+        ACTIVE
+    </p>
+
+    @* Pending/Incoming card details *@
+    <div class="h-30 bg-white border border-gray-200 rounded-2xl p-6 mt-6">
+        <div class="flex justify-between items-center">
+            <div>
+
+                <div class=" items-center gap-3">
+                    <h3 class="text-l font-semibold">
+                        Order #ORD-001
+                    </h3>
+                    <span class="bg-[#DBEAFE] text-[#1D4ED8] font-semibold rounded-full px-3 py-1 text-xs">
+                        Dispatched
+                    </span>
+                    <span class="bg-[#fee2e2] text-[#B91C1C] font-semibold rounded-full px-3 py-1 text-xs">
+                        High
+                    </span>
+
+                </div>
+                <p class="text-sm text-gray-500 mt-2">
+                    Urgent — deliver to Branch A by end of day
+                </p>
+
+            </div>
+
+            @*Receive/Inspect Button*@
+            <button class="flex item-center gap-2 text-sm bg-blue-600 text-white px-6 py-2 rounded-xl">
+                Completed
+            </button>
+        </div>
+    </div>
+
+    @* Pending/Incoming card details *@
+    <div class="h-30 bg-white border border-gray-200 rounded-2xl p-6 mt-6">
+        <div class="flex justify-between items-center">
+            <div>
+
+                <div class=" items-center gap-3">
+                    <h3 class="text-l font-semibold">
+                        Order #ORD-003
+                    </h3>
+                    <span class="bg-[#DBEAFE] text-[#1D4ED8] font-semibold rounded-full px-3 py-1 text-xs">
+                        Assigned
+                    </span>
+                    <span class="bg-[#D1FAE5] text-[#047857] font-semibold rounded-full px-3 py-1 text-xs">
+                        Low
+                    </span>
+
+                </div>
+                <p class="text-sm text-gray-500 mt-2">
+                    Weekly supply run
+                </p>
+
+            </div>
+
+            @*Receive/Inspect Button*@
+            <button class="flex item-center gap-2 text-sm bg-blue-600 text-white px-6 py-2 rounded-xl">
+                Picking
+            </button>
+        </div>
+    </div>
+
+    <p class="text-md font-semibold mt-8 text-[#65758B]">
+        COMPLETED
+    </p>
+    @* Pending/Incoming card details *@
+    <div class="h-25 bg-white border border-gray-200 rounded-2xl p-6 mt-6">
+        <div class="flex justify-between items-center">
+
+            <div class=" items-center gap-3">
+                <h3 class="text-l font-semibold">
+                    Order #ORD-002
+                </h3>
+
+                <span class="bg-[#D1FAE5] text-[#047857] rounded-full px-3 py-1 text-xs">
+                    Completed
+                </span>
+
+            </div>
+        </div>
+    </div>
+
+    @* Pending/Incoming card details *@
+    <div class="h-25 bg-white border border-gray-200 rounded-2xl p-6 mt-6">
+        <div class="flex justify-between items-center">
+
+            <div class=" items-center gap-3">
+                <h3 class="text-l font-semibold">
+                    Order #ORD-004
+                </h3>
+
+                <span class="bg-[#D1FAE5] text-[#047857] rounded-full px-3 py-1 text-xs">
+                    Completed
+                </span>
+
+            </div>
+        </div>
+    </div>
+</div>
+
