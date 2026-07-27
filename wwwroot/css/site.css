@@ -376,3 +376,12 @@ login {
         transform: translateY(0);
     }
 }
+.eye-icon {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+ .eye-icon:hover {
+    color: #2563eb;
+    transform: scale(1.15);
+}
