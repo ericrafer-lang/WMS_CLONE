@@ -5,104 +5,94 @@
 }
 
 <!-- Modal Overlay -->
-<div id="productModal"
-     class="modal-overlay fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+<!-- Modal -->
+<div class="flex flex-col bg-white shadow-xl h-full w-full p-6">
+    <h2 class="text-3xl font-semibold mb-7">Add Product</h2>
 
-    <!-- Modal -->
-    <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
-        <h2 class="text-2xl font-semibold mb-6">Add Product</h2>
+    <form method="post">
 
-        <form method="post">
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-3">
 
-            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-3">
-
-                <div class="col-span-2">
-                    <label class="font-medium">Product Name</label>
-                    <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                <div>
-                    <label>Product ID</label>
-                    <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                <div>
-                    <label>Barcode?</label>
-                    <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                <div>
-                    <label>Category</label>
-                    <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option>Select</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Unit</label>
-                    <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option>pcs</option>
-                        <option>box</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Quantity</label>
-                    <input type="number"
-                           class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           min="0" />
-                </div>
-
-                @* <div>
-                                <label>Min Stock</label>
-                                <input type="number"
-                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div> *@
-
-                <div>
-                    <label>Price</label>
-                    <input type="number"
-                           class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           min="0" />
-                </div>
-
-                <div>
-                    <label>Quality Status</label>
-                    <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option>Good</option>
-                        <option>Bad</option>
-                        <option>Under Inspection</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label>Stock-in Date</label>
-                    <input type="date"
-                           class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                <div class="col-span-2">
-                    <label>Description</label>
-                    <textarea class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                </div>
-
+            <div class="col-span-2">
+                <label class="font-medium">Product Name</label>
+                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
 
-            @* buttons *@
-            <div class="flex justify-end gap-3 mt-6">
-
-                <button type="button"
-                        id="cancelModal"
-                        class="close-modal btn-style px-4 py-2 border rounded-lg">
-                    Cancel
-                </button>
-
-                <button type="submit"
-                        class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-                    Create
-                </button>
-
+            <div>
+                <label>Product ID</label>
+                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
-        </form>
-    </div>
+
+            <div>
+                <label>Barcode?</label>
+                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+
+            <div>
+                <label>Category</label>
+                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>Select</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Unit</label>
+                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>pcs</option>
+                    <option>box</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Quantity</label>
+                <input type="number"
+                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       min="0" />
+            </div>  
+
+            <div>
+                <label>Price</label>
+                <input type="number"
+                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       min="0" />
+            </div>
+
+            <div>
+                <label>Quality Status</label>
+                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>Good</option>
+                    <option>Bad</option>
+                    <option>Under Inspection</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Stock-in Date</label>
+                <input type="date"
+                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+
+            <div class="col-span-2">
+                <label>Description</label>
+                <textarea class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+
+        </div>
+
+        @* buttons *@
+        <div class="flex justify-end gap-3 mt-6">
+
+            <a asp-action="Index" type="button"
+               id="cancelModal"
+               class="close-modal btn-style px-4 py-2 border rounded-lg">
+                Cancel
+            </a>
+
+            <button type="submit"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                Create
+            </button>
+
+        </div>
+    </form>
 </div>
