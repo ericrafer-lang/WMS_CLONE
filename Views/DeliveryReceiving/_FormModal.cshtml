@@ -1,0 +1,94 @@
+﻿@page
+@model practice_for_wms.Views.DeliveryReceiving._FormModalModel
+@{
+}
+
+@*Form*@
+<div class="bg-gray-100  rounded-2xl p-5 ">
+    <div class="grid grid-cols-2 gap-x-12 gap-y-4">
+        <div class="flex gap-2">
+            <span class="text-gray-500">Supplier:</span>
+            <span class="font-semibold">Company Name</span>
+        </div>
+
+        <div class="flex gap-2 ">
+            <span class="text-gray-500">Branch:</span>
+            <span class="font-semibold">East Distribution</span>
+        </div>
+
+        <div class="flex gap-2">
+            <span class="text-gray-500">Expected:</span>
+            <span class="font-semibold">-</span>
+        </div>
+
+        <div class="flex gap-2">
+            <span class="text-gray-500">Status:</span>
+            <span class="bg-[#FEF3C7] text-[#B45309] font-semibold rounded-full px-3 py-1 text-xs">
+                Inspecting
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="flex justify-between mt-8 mb-5">
+    <p class="text-xl font-semibold">Product Inspection</p>
+
+    <button class="flex btn-style bg-white text-sm font-semibold gap-2 ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
+        <span>Add Product</span>
+    </button>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-2xl p-5">
+
+    <h4 class="font-semibold text-md">Item 1</h4>
+
+           
+    <div class="mt-4">
+        <label class="text-sm font-semibold">Product</label>
+        <select class="flex flex-column w-full btn-style gap-3 shadow-md px-10">
+            <option class="text-sm mb-2">Circuit Board A1 (Electronics)</option>
+            <option class="text-sm mb-2">LED Display Panel (Electronics)</option>
+            <option class="text-sm mb-2">Steel Sheets 4mm (Raw Materials)</option>
+            <option class="text-sm mb-2">Copper Wire 2mm (Raw Materials)</option>
+        </select>
+    </div>
+
+    <div class="grid grid-cols-2 mt-4 gap-5">
+        <div>
+            <label class="text-sm font-semibold">Quantity Arrivied</label>
+            <input type="number" class="w-full h-9 border border-gray-300 rounded-md shadow-md p-4" />
+        </div>
+        <div>
+            <label class="text-sm font-semibold">Defective Quantity</label>
+            <input type="number" class="w-full h-9 border border-gray-300 rounded-md shadow-md p-4" />
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <label class="text-sm font-semibold">Item Notes</label>
+        <input class=" w-full  border border-gray-300 rounded-2xl shadow-sm p-5 " placeholder="e.g. damaged packaging." />
+    </div>
+</div>
+
+<div class="mt-4">
+    <label class="text-sm font-semibold">Overall Notes</label>
+    <input class=" w-full  border border-gray-300 rounded-2xl shadow-sm p-5 " placeholder="General Remarks avout this delivery" />
+</div>
+
+<div class="h-dvg bg-[#DBEAFE] border border-blue-400 rounded-2xl mt-4 p-4 ">
+    <p class="text-sm font-semibold">Summary</p>
+    <div class="flex gap-1">
+        <span class="text-sm">Total Arrived:</span>
+        <span class="text-sm font-bold">6</span>
+    </div>
+    <div class="flex gap-1">
+        <span class="text-sm">Total Defective:</span>
+        <span class="text-sm text-[#B45309] font-semibold ">0</span>
+    </div>
+
+    <div class="flex gap-1">
+        <span class="text-sm">Added to the inventory:</span>
+        <span class="text-sm text-green-500 font-semibold ">0</span>
+    </div>
+</div>
