@@ -5,6 +5,12 @@
     --main-bg: hsl(210 40% 98%);
     --border-color: hsl(214 32% 91%);
     --muted-bg: hsl(210 40% 96%);
+
+     --sidebar-text: #F8FAFCB2;
+    --sidebar-text-active: #ffffff;
+    --sidebar-bg-hover: hsl(217 33% 17%);
+    --accent: #258cfb;
+    --radius-sm: 8px;
 }
 
 html {
@@ -74,7 +80,52 @@ html {
 .sidebar-list li a span {
     margin-left: 10px;
 }
+.sidebar {
+    transition: width 0.18s ease, min-width 0.18s ease;
+}
 
+.sidebar.collapsed {
+    width: 76px;
+    min-width: 76px;
+}
+
+#appSidebar {
+    width: 288px;
+    min-width: 288px;
+    transition: width 0.3s ease, min-width 0.3s ease;
+}
+
+    #appSidebar.collapsed {
+        width: 76px;
+        min-width: 76px;
+    }
+
+        #appSidebar.collapsed span,
+        #appSidebar.collapsed label {
+            display: none;
+        }
+
+        #appSidebar.collapsed .sidebar-options a {
+            justify-content: center;
+        }
+
+.sidebar-options a {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 8px;
+    transition: background 0.18s ease, transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+    .sidebar-options a:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateX(3px);
+    }
+
+.sidebar-selected a {
+    background: rgba(255, 255, 255, 0.1);
+}
 aside {
     scrollbar-width: none;
 }
