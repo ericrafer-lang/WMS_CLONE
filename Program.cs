@@ -1,6 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using practice_for_wms.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ApplicationDbContextcs>(options => 
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WMSPortal")));
+    
 
 var app = builder.Build();
 
