@@ -10,7 +10,7 @@ using practice_for_wms.Data;
 
 namespace practice_for_wms.Migrations
 {
-    [DbContext(typeof(ApplicationDbContextcs))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20260727093326_Initial Migration")]
     partial class InitialMigration
     {
