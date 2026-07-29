@@ -198,7 +198,7 @@ table {
     text-transform: capitalize;
 }
 
-.bad, .inactive, .rejected, .high, red {
+.bad, .inactive, .rejected, .high, .red {
     background: #FEE2E2;
     color: #DC2626;
     text-transform: capitalize;
@@ -384,4 +384,9 @@ login {
  .eye-icon:hover {
     color: #2563eb;
     transform: scale(1.15);
+}
+/*delete button color*/
+.btndelete {
+    color: #DC2626;
+    text-transform: capitalize;
 }
