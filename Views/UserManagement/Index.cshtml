@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "User Management";
+
+    var userCount = Model.Users?.Count() ?? 0;
 }
+
+
 
 @model practice_for_wms.Models.ViewModels.UserManagementIndexViewModel
 
@@ -12,8 +16,8 @@
                 User Management
             </p>
 
-            <p class="">
-                0 Users
+            <p>
+                @userCount @(userCount == 1 || userCount == 0 ? "User" : "Users")
             </p>
         </div>
 
