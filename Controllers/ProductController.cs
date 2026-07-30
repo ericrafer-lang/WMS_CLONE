@@ -12,12 +12,12 @@ namespace practice_for_wms.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.Suppliers = _context.Suppliers.Where(s => s.Status == "Active").ToList();
-            var products = _context.Products
+            ViewBag.Suppliers = await _context.Suppliers.Where(s => s.Status == "Active").ToListAsync();
+            var products = await _context.Products
                 .Include(p => p.Supplier)
-                .ToList();
+                .ToListAsync();
             return View(products);
         }
 
