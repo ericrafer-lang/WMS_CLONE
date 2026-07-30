@@ -10,7 +10,6 @@ namespace practice_for_wms.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Branch> Branches { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
     }
