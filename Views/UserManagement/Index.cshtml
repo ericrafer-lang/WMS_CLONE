@@ -2,6 +2,8 @@
     ViewData["Title"] = "User Management";
 }
 
+@model practice_for_wms.Models.ViewModels.UserManagementIndexViewModel
+
 <div class="p-4 lg:p-6">
     @* HEADING !!!!!!*@
     <div class="flex justify-between items-center">
@@ -31,23 +33,28 @@
 
                     <h2 class="text-2xl font-semibold mb-6">Invite New User</h2>
 
-                    <form method="post">
+                    <form asp-controller="UserManagement" asp-action="Create" method="post">
 
                         <div class="grid grid-cols-2 gap-4">
 
                             <div class="col-span-2">
-                                <label class="font-medium">First: <span class="text-red-500">*</span></label>
-                                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required/>
+                                <label class="font-medium">First Name: <span class="text-red-500">*</span></label>
+                                <input asp-for="CreateUser.FirstName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                            </div>
+
+                            <div class="col-span-2">
+                                <label class="font-medium">Middle Name: <span class="text-red-500">*</span></label>
+                                <input asp-for="CreateUser.MiddleName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                             </div>
 
                             <div class="col-span-2">
                                 <label class="font-medium">Surname: <span class="text-red-500">*</span></label>
-                                <input class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                                <input asp-for="CreateUser.LastName" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                             </div>
 
                             <div class="col-span-2">
                                 <label class="font-medium">Email Address: <span class="text-red-500">*</span></label>
-                                <input type="email" placeholder="email@example.com"
+                                <input asp-for="CreateUser.Email" type="email" placeholder="email@example.com"
                                        class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
                             </div>
 
@@ -113,6 +120,8 @@
                         <th>Role</th>
                         <th>Branch</th>
                         <th>Status</th>
+                        <th>Created At</th>
+                        <th>Last Login</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
