@@ -1,6 +1,8 @@
 ﻿@model List<practice_for_wms.Models.Entities.Product>
+
 @{
     ViewData["Title"] = "Product";
+    var suppliers = ViewBag.Suppliers as List<practice_for_wms.Models.Entities.Supplier> ?? new List<practice_for_wms.Models.Entities.Supplier>();
 }
 
 <div class="p-4 lg:p-6">
@@ -36,68 +38,57 @@
                 <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
                     <h2 class="text-2xl font-semibold mb-6">Add Product</h2>
 
-                    <form method="post">
-
+                    <form asp-controller="Product" asp-action="Add" method="post">
+                        @Html.AntiForgeryToken()
                         <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-3">
 
                             <div class="col-span-2">
                                 <label class="font-medium">Product Name</label>
-                                <input placeholder="Enter Product Name" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div>
-
-                            <div>
-                                <label>Product ID</label>
-                                <input placeholder="Enter Product ID" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div>
-
-                            <div>
-                                <label>Barcode?</label>
-                                <input placeholder="Enter Product Barcode" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <input name="name" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                             </div>
 
                             <div>
                                 <label>Category</label>
-                                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option>Select</option>
+                                <select name="category" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Safety Equipment">Safety Equipment</option>
+                                    <option value="Packaging">Packaging</option>
+                                    <option value="General">General</option>
                                 </select>
                             </div>
-
+                            <div>
+                                <label>Supplier</label>
+                                <select name="supplierId" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">— No Supplier —</option>
+                                   
+                                </select>
+                            </div>
                             <div>
                                 <label>Unit</label>
-                                <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option>pcs</option>
-                                    <option>box</option>
+                                <select name= "unit" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option>Peaces</option>
+                                    <option>Box</option>
                                 </select>
                             </div>
 
                             <div>
                                 <label>Quantity</label>
-                                <input placeholder="Enter Product Quantity" type="number"
+                                <input name="qty" placeholder="Enter Product Quantity" type="number"
                                        class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                        min="0"/>
                             </div>
-
-                            @* <div>
-                                <label>Min Stock</label>
-                                <input type="number"
-                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div> *@
 
                             <div>
                                 <label>Price</label>
-                                <input placeholder="Enter Product Price" type="number"
+                                <input name="price" placeholder="Enter Product Price" type="number"
                                        class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
                                        min="0"/>
                             </div>
 
-                            <div class="col-span-2">
-                                <label class="font-medium">Expiration Date</label>
-                                <input type="date"class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            </div>
 
                             <div class="col-span-2">
                                 <label>Description</label>
-                                <textarea placeholder="Enter Product Description" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                <textarea name="description" placeholder="Enter Product Description" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                             </div>
 
                         </div>
@@ -105,11 +96,11 @@
                         @* buttons *@
                         <div class="flex justify-end gap-3 mt-6">
                             
-                            <button type="button"
+                            <a asp-action="Index" type="button"
                                     id="cancelModal"
                                     class="close-modal btn-style px-4 py-2 border rounded-lg">
                                 Cancel
-                            </button>
+                            </a>
 
                             <button type="submit"
                                     class="bg-blue-600 text-white px-4 py-2 rounded-lg">
@@ -147,202 +138,110 @@
                         <th>Category</th>
                         <th>Qty</th>
                         <th>Price</th>
-                        <th>Quality</th>
-                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>TRD-001</td>
-                        <td class="table-product-name">Circuit Board A1</td>
-                        <td>SOLIS MENDEZ WAREHOUSE</td>
-                        <td>Electronics</td>
-                        <td>250 pcs</td>
-                        <td>520</td>
-                        <td>
-                            <span class="badge good">
-                                Good
-                            </span>
-                        </td>
-                        <td>
-                            <span class="badge active">
-                                Active
-                            </span>
-                        </td>
-                        <td >
-                            <div class="flex justify-center items-center gap-3 h-full">
-                                <button class="open-modal flex gap-2" data-modal="editModal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
-                                </button>
+                    @foreach (var product in Model)
+                    {
+                        <tr>
+                            <td>@product.Id</td>
+                            <td class="table-product-name">@product.Name</td>
+                            @* <td>@(product.Supplier?.Name ?? "—")</td> *@
+                            <td>@product.Category</td>
+                            <td>@product.qty pcs</td>
+                            <td>@product.Price</td>
+                            <td>
+                                <div class="flex justify-center items-center gap-3 h-full">
+                                    <button class="open-modal flex gap-2" data-modal="editModal-@product.Id">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
+                                    </button>
 
-                                <div id="editModal"
-                                     class="modal-overlay fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+                                    <div id="editModal-@product.Id"
+                                         class="modal-overlay fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+                                        <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
+                                            <h2 class="text-2xl font-semibold mb-6">Edit Product</h2>
 
-                                    <!-- Modal -->
-                                    <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
-                                        <h2 class="text-2xl font-semibold mb-6">Edit Product</h2>
+                                            <form asp-controller="Product" asp-action="Update" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <input type="hidden" name="id" value="@product.Id" />
 
-                                        <form method="post">
+                                                <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-3">
+                                                    <div class="col-span-2">
+                                                        <label class="font-medium">Product Name</label>
+                                                        <input name="name" value="@product.Name"
+                                                               class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                                                    </div>
 
-                                            <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-3">
+                                                    <div>
+                                                        <label>Category</label>
+                                                        <select name="category" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                            @foreach (var cat in new[] { "Electronics", "Safety Equipment", "Packaging", "General" })
+                                                            {
+                                                                <option value="@cat" selected="@(product.Category == cat)">@cat</option>
+                                                            }
+                                                        </select>
+                                                    </div>
 
-                                                <div class="col-span-2">
-                                                    <label class="font-medium">Product Name</label>
-                                                    <input placeholder="Enter Product Name"
-                                                        class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                                    @* <div>
+                                                        <label>Supplier</label>
+                                                        <select name="supplierId" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                            <option value="">— No Supplier —</option>
+                                                            @foreach (var s in suppliers)
+                                                            {
+                                                                <option value="@s.Id" selected="@(product.SupplierId == s.Id)">@s.Name</option>
+                                                            }
+                                                        </select>
+                                                    </div> *@
+
+                                                    <div>
+                                                        <label>Unit</label>
+                                                        <select name="unit" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                            @foreach (var u in new[] { "Peaces", "Box" })
+                                                            {
+                                                                <option selected="@(product.Unit == u)">@u</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Quantity</label>
+                                                        <input name="qty" type="number" value="@product.qty"
+                                                               class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" />
+                                                    </div>
+
+                                                    <div>
+                                                        <label>Price</label>
+                                                        <input name="price" type="number" value="@product.Price"
+                                                               class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" min="0" />
+                                                    </div>
+
+                                                    <div class="col-span-2">
+                                                        <label>Description</label>
+                                                        <textarea name="description" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">@product.Description</textarea>
+                                                    </div>
                                                 </div>
 
-                                                <div>
-                                                    <label>Product ID</label>
-                                                    <input placeholder="Enter Product ID" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                                <div class="flex justify-end gap-3 mt-6">
+                                                    <button type="button" class="close-modal btn-style px-4 py-2 border rounded-lg">Cancel</button>
+                                                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Save</button>
                                                 </div>
-
-                                                <div>
-                                                    <label>Barcode?</label>
-                                                    <input placeholder="Enter Product Barcode" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                                </div>
-
-                                                <div>
-                                                    <label>Category</label>
-                                                    <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                        <option>Select</option>
-                                                    </select>
-                                                </div>
-
-                                                <div>
-                                                    <label>Unit</label>
-                                                    <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                        <option>pcs</option>
-                                                        <option>box</option>
-                                                    </select>
-                                                </div>
-
-                                                <div>
-                                                    <label>Quantity</label>
-                                                    <input placeholder="Enter Product Quantity" type="number"
-                                                           class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                                           min="0"/>
-                                                </div>
-
-                                                <div>
-                                                    <label>Min Stock</label>
-                                                    <input placeholder="Enter Minimum Stock" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                                           min="0"/>
-                                                </div>
-
-                                                <div>
-                                                    <label>Price</label>
-                                                    <input placeholder="Enter Product Price" type="number"
-                                                           class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                                           min="0"/>
-                                                </div>
-
-                            
-                                                <div>
-                                                    <label>Quality Status</label>
-                                                    <select class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                        <option>good</option>
-                                                        <option>damaged</option>
-                                                        <option>expired</option>
-                                                        <option>under inspection</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="col-span-2">
-                                                    <label class="font-medium">Expiration Date</label>
-                                                    <input type="date"class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                                </div>
-
-                                                <div class="col-span-2">
-                                                    <label>Description</label>
-                                                    <textarea placeholder="Enter Product Description" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                                                </div>
-
-                                            </div>
-
-                                            @* buttons *@
-                                            <div class="flex justify-end gap-3 mt-6">
-                            
-                                                <button type="button"
-                                                        id="cancelModal"
-                                                        class="close-modal btn-style px-4 py-2 border rounded-lg">
-                                                    Cancel
-                                                </button>
-
-                                                <button type="submit"
-                                                        class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-                                                    Create
-                                                </button>
-
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
+                                    <form asp-action="Delete" method="post" style="display:inline">
+                                     @Html.AntiForgeryToken()
+                                     <input type="hidden" name="id" value="@product.Id" />
+                                    <button type="submit" class="btndelete" onclick="return confirm('Delete this product?')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
+                                    </button>
+                                    </form>
+
+
                                 </div>
-
-                                <button class="btndelete">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>TRD-002</td>
-                        <td class="table-product-name">Circuit Board A1</td>
-                        <td>SOLIS MENDEZ WAREHOUSE</td>
-                        <td>Electronics</td>
-                        <td>250 pcs</td>
-                        <td>670</td>
-                        <td>
-                            <span class="badge inspection">
-                                Under Inspection
-                            </span>
-                        </td>
-                        <td>
-                            <span class="badge inactive">
-                                Inactive
-                            </span>
-                        </td>
-                        <td>
-                            <div class="flex justify-center items-center gap-3 h-full">
-                                <button class="open-modal flex text-sm gap-2" data-modal="editModal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
-                                </button>
-
-                                <button class="btndelete">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>TRD-003</td>
-                        <td class="table-product-name">Circuit Board A1</td>
-                        <td>SOLIS MENDEZ WAREHOUSE</td>
-                        <td>Electronics</td>
-                        <td>250 pcs</td>
-                        <td>232</td>
-                        <td>
-                            <span class="badge bad">
-                                Bad
-                            </span>
-                        </td>
-                        <td>
-                            <span class="badge active">
-                                Active
-                            </span>
-                        </td>
-                        <td>
-                            <div class="flex justify-center items-center gap-3 h-full">
-                                <button class="open-modal flex text-sm gap-2" data-modal="editModal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
-                                </button>
-                                <button class="btndelete">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

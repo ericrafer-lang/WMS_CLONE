@@ -14,12 +14,7 @@ namespace practice_for_wms.Models.Entities
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
-        public string quality { get; set; } = "Good";
-        public string status { get; set; } = "Active";
         public string? Description { get; set; }
-        public string? Barcode { get; set; }
-        public DateTime? StockInDate { get; set; }
-
         public int? SupplierId { get; set; }
         [ForeignKey("SupplierId")]
         public Supplier? Supplier { get; set; }
