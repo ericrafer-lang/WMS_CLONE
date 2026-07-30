@@ -44,7 +44,7 @@
 
                             <div class="col-span-2">
                                 <label class="font-medium">Middle Name: <span class="text-red-500">*</span></label>
-                                <input asp-for="CreateUser.MiddleName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                                <input asp-for="CreateUser.MiddleName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             </div>
 
                             <div class="col-span-2">
@@ -62,21 +62,21 @@
                                 <div class="form-group">
                                     <label class="form-label">Role <span class="text-red-500">*</span></label>
 
-                                    <select class="modern-select">
+                                    <select asp-for="CreateUser.Role" class="modern-select">
                                         <option>-Select Role-</option>
-                                        <option>Administrator</option>
-                                        <option>Supervisor</option>
-                                        <option>Staff</option>
+                                        <option value="admin">Administrator</option>
+                                        <option value="supervisor">Supervisor</option>
+                                        <option value="staff">Staff</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label">Branch</label>
 
-                                    <select class="modern-select">
+                                    <select asp-for="CreateUser.BranchId" class="modern-select">
                                         <option>-Select Branch-</option>
-                                        <option>Munting Ilog</option>
-                                        <option>Silang Tagaytay</option>
+                                        <option value="1">Munting Ilog</option>
+                                        <option value="2">Silang Tagaytay</option>
                                     </select>
                                 </div>
                             </div>
@@ -134,24 +134,26 @@
                     @foreach (var user in Model.Users)
                     {
                         <tr>
-                            <td class="table-product-name">@user.FirstName @user.LastName</td>
+                            <td class="table-product-name">@user.FirstName @user.MiddleName @user.LastName</td>
                             <td>@user.Email</td>
                             <td>
                                 <span class="badge @user.Role.ToLower()">
                                     @user.Role
                                 </span>
                             </td>
-                            <td>@user.BranchId</td>
                             <td>
-                                <span class="badge @user.Status">
+                                @user.BranchId
+                            </td>
+                            <td>
+                                <span class="badge @(user.Status.ToString().ToLowerInvariant())">
                                     @user.Status
                                 </span>
                             </td>
                             <td>@user.CreatedAt.ToString("MM/dd/yyyy")</td>
                             <td>
                                 @(user.LastLogin.HasValue
-                                        ? user.LastLogin.Value.ToString("MM/dd/yyyy")
-                                        : "Never")
+                                ? user.LastLogin.Value.ToString("MM/dd/yyyy")
+                                : "Never logged in")
                             </td>
                             <td>
                                 <div class="flex justify-center items-center gap-3 h-full">
