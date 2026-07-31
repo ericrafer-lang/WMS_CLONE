@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using practice_for_wms.Data;
 using practice_for_wms.Models.Entities;
@@ -11,12 +11,28 @@ namespace practice_for_wms.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, string categoryFilter)
         {
+            ViewBag.SearchString = searchString;
+            ViewBag.CategoryFilter = categoryFilter;
+
             ViewBag.Suppliers = await _context.Suppliers.Where(s => s.Status == "Active").ToListAsync();
-            var products = await _context.Products
+            
+            var productsQuery = _context.Products
                 .Include(p => p.Supplier)
-                .ToListAsync();
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                productsQuery = productsQuery.Where(p => p.Name.Contains(searchString) || (p.Supplier != null && p.Supplier.SupplierName.Contains(searchString)));
+            }
+
+            if (!string.IsNullOrEmpty(categoryFilter) && categoryFilter != "All Categories")
+            {
+                productsQuery = productsQuery.Where(p => p.Category == categoryFilter);
+            }
+
+            var products = await productsQuery.ToListAsync();
             return View(products);
         }
 
@@ -28,7 +44,7 @@ namespace practice_for_wms.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Add(string name, string category, string unit, int qty, decimal price,
-             string? description)
+             string? description, int? supplierId)
         {
             var product = new Product
             {
@@ -38,6 +54,7 @@ namespace practice_for_wms.Controllers
                 qty = qty,
                 Price = price,
                 Description = description,
+                SupplierId = supplierId
             };
             _context.Products.Add(product);
             _context.SaveChanges();
@@ -46,7 +63,7 @@ namespace practice_for_wms.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(int id, string name, string category, string unit, int qty, decimal price, string? description)
+        public IActionResult Update(int id, string name, string category, string unit, int qty, decimal price, string? description, int? supplierId)
         {
             var product = _context.Products.Find(id);
             if (product == null)
@@ -60,6 +77,7 @@ namespace practice_for_wms.Controllers
             product.qty = qty;
             product.Price = price;
             product.Description = description;
+            product.SupplierId = supplierId;
 
             _context.SaveChanges();
             return RedirectToAction("Index");

@@ -1,4 +1,4 @@
-﻿@model List<practice_for_wms.Models.Entities.Product>
+@model List<practice_for_wms.Models.Entities.Product>
 
 @{
     ViewData["Title"] = "Product";
@@ -19,11 +19,20 @@
         </div>
 
         <div class="flex justify-center items-center gap-3">
-            <select class="flex flex-column btn-style gap-3 shadow-md px-5">
-                <option>All Categories</option>
-                <option>Safety Equipment</option>
-                <option>Packaging</option>
-            </select>
+            <form method="get" asp-action="Index" class="flex gap-3 m-0">
+                <div class="flex items-center border rounded-lg bg-white px-3 shadow-sm border-gray-300 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 mr-2"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
+                    <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Search..." class="w-full focus:outline-none p-2 border-none bg-transparent" />
+                </div>
+                <select name="categoryFilter" onchange="this.form.submit()" class="flex flex-column btn-style gap-3 shadow-md px-5 bg-white border border-gray-300 rounded-lg">
+                    <option value="All Categories" selected="@(ViewBag.CategoryFilter == "All Categories")">All Categories</option>
+                    <option value="Electronics" selected="@(ViewBag.CategoryFilter == "Electronics")">Electronics</option>
+                    <option value="Safety Equipment" selected="@(ViewBag.CategoryFilter == "Safety Equipment")">Safety Equipment</option>
+                    <option value="Packaging" selected="@(ViewBag.CategoryFilter == "Packaging")">Packaging</option>
+                    <option value="General" selected="@(ViewBag.CategoryFilter == "General")">General</option>
+                </select>
+                <button type="submit" class="hidden">Search</button>
+            </form>
 
             <button class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2" data-modal="productModal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
@@ -60,13 +69,16 @@
                                 <label>Supplier</label>
                                 <select name="supplierId" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option value="">— No Supplier —</option>
-                                   
+                                    @foreach (var s in suppliers)
+                                    {
+                                        <option value="@s.Id">@s.SupplierName</option>
+                                    }
                                 </select>
                             </div>
                             <div>
                                 <label>Unit</label>
                                 <select name= "unit" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    <option>Peaces</option>
+                                    <option>Piece</option>
                                     <option>Box</option>
                                 </select>
                             </div>
@@ -117,15 +129,6 @@
     @* TABLE !!!!!!*@
     <div class="card flex flex-col justify-center items-start mt-5 rounded-xl w-full">
         @* HEADER !!!!!!*@
-        <div class="flex items-center card w-[30%] m-3 p-2">
-            <span class="mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search">
-                    <path d="m21 21-4.34-4.34" />
-                    <circle cx="11" cy="11" r="8" />
-                </svg>
-            </span>
-            <input placeholder="Search..." class="font-sm w-full" />
-        </div>
 
         @* TABLE DATA!!!!!!*@
         <div class=" w-full">
@@ -147,7 +150,7 @@
                         <tr>
                             <td>@product.Id</td>
                             <td class="table-product-name">@product.Name</td>
-                            @* <td>@(product.Supplier?.Name ?? "—")</td> *@
+                            <td>@(product.Supplier?.SupplierName ?? "—")</td>
                             <td>@product.Category</td>
                             <td>@product.qty pcs</td>
                             <td>@product.Price</td>
@@ -184,12 +187,28 @@
                                                         </select>
                                                     </div>
 
-                                                   
+                                                    <div>
+                                                        <label>Supplier</label>
+                                                        <select name="supplierId" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                            <option value="">— No Supplier —</option>
+                                                            @foreach (var s in suppliers)
+                                                            {
+                                                                if (product.SupplierId == s.Id)
+                                                                {
+                                                                    <option value="@s.Id" selected="selected">@s.SupplierName</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="@s.Id">@s.SupplierName</option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
 
                                                     <div>
                                                         <label>Unit</label>
                                                         <select name="unit" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                                            @foreach (var u in new[] { "Peaces", "Box" })
+                                                            @foreach (var u in new[] { "Pieces", "Box" })
                                                             {
                                                                 <option selected="@(product.Unit == u)">@u</option>
                                                             }
