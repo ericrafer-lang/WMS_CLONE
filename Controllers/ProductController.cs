@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using practice_for_wms.Data;
-using practice_for_wms.Models;
 using practice_for_wms.Models.Entities;
 namespace practice_for_wms.Controllers
 {

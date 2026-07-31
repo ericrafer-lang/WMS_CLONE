@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using practice_for_wms.Data;
-using practice_for_wms.Models;
+
 using practice_for_wms.Models.Entities;
+
 
 namespace practice_for_wms.Controllers
 {
@@ -40,6 +41,27 @@ namespace practice_for_wms.Controllers
                 Status = "Active"
             };
             _context.Suppliers.Add(supplier);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(int id, string name, string contactPerson, string supplierEmail, string phone, string address, string status)
+        {
+            var supplier = _context.Suppliers.Find(id);
+            if (supplier == null)
+            {
+                return NotFound();
+            }
+
+            supplier.SupplierName = name;
+            supplier.ContactPerson = contactPerson;
+            supplier.SupplierEmail = supplierEmail;
+            supplier.Phone = phone ?? "";
+            supplier.Address = address ?? "";
+            supplier.Status = status ?? "Inactive";
+
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
