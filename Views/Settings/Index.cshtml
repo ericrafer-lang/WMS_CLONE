@@ -1,0 +1,148 @@
+﻿@{
+Layout = "_SettingsLayout";
+ViewData["Title"] = "Settings";
+}
+
+<div class="settings-page">
+
+<div class="settings-header">
+    <div class="header-left">
+        <a asp-controller="Dashboard" asp-action="Index" class="back-btn">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+    <button class="save-btn">Save Changes</button>
+</div>
+
+<div class="header-text">
+            <h1>System Settings</h1>
+            <p>Manage warehouse preferences, account settings, and application configuration.</p>
+        </div>
+
+<div class="settings-card">
+
+    <div class="section-header">
+        <h2>User Preferences</h2>
+        <p>Customize how the system works for your account.</p>
+    </div>
+
+    <div class="setting-row">
+        <div class="setting-info">
+            <label>Theme</label>
+            <span>Select the appearance of the dashboard.</span>
+        </div>
+
+        <select>
+            <option>Light</option>
+            <option>Dark</option>
+        </select>
+    </div>
+
+    <div class="setting-row">
+        <div class="setting-info">
+            <label>Enable Notifications</label>
+            <span>Receive inventory and warehouse alerts.</span>
+        </div>
+
+        <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider"></span>
+        </label>
+    </div>
+
+</div>
+
+<div class="settings-card">
+
+    <div class="section-header">
+        <h2>Warehouse Defaults</h2>
+        <p>Default warehouse behavior and inventory thresholds.</p>
+    </div>
+
+    <div class="setting-row">
+        <div class="setting-info">
+            <label>Low Stock Threshold</label>
+            <span>Alert when stock falls below this value.</span>
+        </div>
+
+        <input type="number" value="10">
+    </div>
+
+    <div class="setting-row">
+        <div class="setting-info">
+            <label>Default Branch</label>
+            <span>Select the default warehouse location.</span>
+        </div>
+
+        <select>
+            <option>Main Warehouse</option>
+            <option>Branch A</option>
+            <option>Branch B</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="settings-card">
+
+    <div class="section-header">
+        <h2>Account Management</h2>
+        <p>Update account credentials and security settings.</p>
+    </div>
+
+    <div class="setting-row">
+        <div class="setting-info">
+            <label>Username</label>
+            <span>Your administrator account username.</span>
+        </div>
+
+        <input type="text" value="JuanAdmin">
+    </div>
+
+    <div class="setting-row">
+        <div class="setting-info">
+            <label>Change Password</label>
+            <span>Enter a new secure password.</span>
+        </div>
+
+        <input type="password" placeholder="New password">
+    </div>
+
+</div>
+
+<div class="settings-card">
+
+    <div class="section-header">
+        <h2>System Configuration</h2>
+        <p>Control user roles and warehouse permissions.</p>
+    </div>
+
+    <div class="setting-row">
+        <div class="setting-info">
+            <label>Default Role</label>
+            <span>Role assigned to newly created users.</span>
+        </div>
+
+        <select>
+            <option>Admin</option>
+            <option>Manager</option>
+            <option>Staff</option>
+        </select>
+    </div>
+
+    <div class="setting-row">
+        <div class="setting-info">
+            <label>Advanced Permissions</label>
+            <span>Enable granular access control.</span>
+        </div>
+
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider"></span>
+        </label>
+    </div>
+
+</div>
+
+</div>
