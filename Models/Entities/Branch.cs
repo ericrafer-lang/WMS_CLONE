@@ -17,6 +17,8 @@
 
         public BranchStatus Status { get; set; } = BranchStatus.Active;
 
+        public DateTime CreatedAt { get; set; }
+
         // Navigation Property
         public ICollection<User> Users { get; set; } = new List<User>();
 
