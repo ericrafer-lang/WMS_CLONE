@@ -16,7 +16,7 @@
         public string Email { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
         public int BranchId { get; set; }
-        //public Branch Branch { get; set; } = null!;
+        public Branch? Branch { get; set; } = null!;
 
         public UserStatus Status { get; set; } = UserStatus.PendingApproval;
         public DateTime? LastLogin { get; set; }

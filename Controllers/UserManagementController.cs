@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using practice_for_wms.Data;
 using practice_for_wms.Models.Entities;
-using practice_for_wms.Models.ViewModels;
+using practice_for_wms.Models.ViewModels.UserManagement;
 
 namespace practice_for_wms.Controllers
 {
@@ -22,7 +22,11 @@ namespace practice_for_wms.Controllers
 
             var viewModel = new UserManagementIndexViewModel
             {
-                Users = await _context.Users.ToListAsync()
+                Users = await _context.Users
+                    .Include(u => u.Branch)
+                    .ToListAsync(),
+
+                Branches = await _context.Branches.ToListAsync()
             };
 
             return View(viewModel);
@@ -34,7 +38,12 @@ namespace practice_for_wms.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View("Index");
+                model.Users = await _context.Users
+                        .Include(u => u.Branch)
+                        .ToListAsync();
+
+                model.Branches = await _context.Branches.ToListAsync();
+                return View("Index", model);
             }
 
             var create = model.CreateUser;

@@ -244,7 +244,7 @@ table {
     text-transform: capitalize;
 }
 
-.inspection, .pending, .medium, .picking, .yellow {
+.inspection, .pendingapproval, .medium, .picking, .yellow {
     background: rgb(254 243 199);
     color: rgb(180 83 9);
     text-transform: capitalize;

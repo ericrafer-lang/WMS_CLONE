@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace practice_for_wms.Models.ViewModels
+namespace practice_for_wms.Models.ViewModels.UserManagement
 {
     public class CreateUserViewModel
     {
