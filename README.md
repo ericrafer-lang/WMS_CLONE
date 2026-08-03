@@ -6,12 +6,6 @@ A modern Warehouse Management System (WMS) built using **ASP.NET MVC** that help
 
 ---
 
-## 📸 Preview
-
-> Screenshots will be added as the project progresses.
-
----
-
 ## ✨ Features
 
 ### Current Features
@@ -46,7 +40,7 @@ A modern Warehouse Management System (WMS) built using **ASP.NET MVC** that help
 - **Tailwind CSS**
 - **JavaScript**
 - **SQL Server**
-- **Entity Framework** *(optional if you're using it)*
+- **Entity Framework**
 
 ---
 
