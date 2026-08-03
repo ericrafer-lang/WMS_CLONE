@@ -5,13 +5,191 @@
     --main-bg: hsl(210 40% 98%);
     --border-color: hsl(214 32% 91%);
     --muted-bg: hsl(210 40% 96%);
-
-     --sidebar-text: #F8FAFCB2;
+    --sidebar-text: #F8FAFCB2;
     --sidebar-text-active: #ffffff;
     --sidebar-bg-hover: hsl(217 33% 17%);
     --accent: #258cfb;
     --radius-sm: 8px;
 }
+
+/* Dark theme variables: apply by adding class 'dark' to the html element */
+html.dark {
+    --sidebar-hover-bg: hsl(218 12% 12%);
+    --sidebar-background: hsl(218 12% 18%);
+    --text-muted: #cbd5e1;
+    --main-bg: #071122;
+    --border-color: rgba(255,255,255,0.06);
+    --muted-bg: #0b1220;
+    --sidebar-text: #cbd5e1;
+    --sidebar-text-active: #ffffff;
+    --sidebar-bg-hover: hsl(218 12% 12%);
+    --accent: #60a5fa;
+}
+
+/* Smooth transition when switching themes */
+html, body {
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+    /* Dark mode overrides for UI components that used hard-coded light backgrounds */
+    html.dark .grid-card {
+        background: rgba(255,255,255,0.02);
+        border-color: var(--border-color);
+        box-shadow: none;
+    }
+
+    html.dark .card {
+        background: rgba(255,255,255,0.02);
+        border-color: var(--border-color);
+    }
+
+    html.dark .btn-style, html.dark .btn-style[type="submit"] {
+        background: transparent;
+        color: var(--text-muted);
+        border-color: var(--border-color);
+    }
+
+    html.dark .modern-select {
+        background: rgba(255,255,255,0.03);
+        color: var(--text-muted);
+        border-color: rgba(255,255,255,0.06);
+    }
+
+    html.dark .form-control {
+        background: rgba(255,255,255,0.03);
+        color: var(--text-muted);
+        border: none;
+    }
+
+    html.dark .settings-page {
+        background: var(--main-bg);
+        color: var(--text-muted);
+    }
+
+    html.dark .settings-card {
+        background: rgba(255,255,255,0.03);
+        border-color: var(--border-color);
+    }
+
+    html.dark .login-page::before {
+        background: rgba(2,6,23,0.6);
+    }
+
+    html.dark .login-card {
+        background: rgba(255,255,255,0.03);
+        border-color: rgba(255,255,255,0.04);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    html.dark th, html.dark td {
+        color: var(--text-muted);
+    }
+
+    html.dark table thead tr {
+        background: rgba(255,255,255,0.02);
+    }
+
+    html.dark .sidebar-list label {
+        color: rgba(203,213,225,0.6);
+    }
+
+    html.dark .sidebar-list li a {
+        color: var(--sidebar-text);
+    }
+
+    html.dark main {
+        background-color: var(--main-bg);
+    }
+
+    html.dark header {
+        background: var(--muted-bg) !important;
+        color: var(--text-muted) !important;
+        border-color: var(--border-color) !important;
+    }
+
+    /* Dark-mode text visibility overrides ONLY (do not affect light mode) */
+    html.dark body,
+    html.dark main,
+    html.dark .grid-card,
+    html.dark .card,
+    html.dark .settings-card,
+    html.dark .settings-page,
+    html.dark .login-card,
+    html.dark .modal-overlay,
+    html.dark .modal,
+    html.dark .product-table,
+    html.dark .product-table th,
+    html.dark .product-table td {
+        color: #E6EEF8; /* readable primary text on dark backgrounds */
+    }
+
+        /* Muted/secondary text in dark mode */
+        html.dark .textcolor,
+        html.dark .muted,
+        html.dark .text-muted,
+        html.dark .setting-info span,
+        html.dark .product-table thead,
+        html.dark small {
+            color: #9CA3AF; /* muted secondary */
+        }
+
+    /* Links and icons (many svgs use currentColor) */
+    html.dark a,
+    html.dark a:visited {
+        color: #60A5FA; /* brighter accent for links in dark */
+    }
+
+    /* Sidebar specific */
+    html.dark .sidebar-list label {
+        color: rgba(203,213,225,0.9);
+    }
+
+    html.dark .sidebar-list li a {
+        color: #E6EEF8;
+    }
+
+    html.dark .sidebar-list li.sidebar-selected a {
+        color: #ffffff !important;
+    }
+
+    /* Header text and small items */
+    html.dark .header-text h1,
+    html.dark .header-text p,
+    html.dark .font-inter,
+    html.dark .p-3 {
+        color: #E6EEF8;
+    }
+
+    /* Form controls and inputs */
+    html.dark .form-control,
+    html.dark input,
+    html.dark select,
+    html.dark textarea,
+    html.dark .modern-select {
+        color: #E6EEF8;
+    }
+
+    /* Ensure table cells are visible */
+    html.dark th,
+    html.dark td {
+        color: #E6EEF8;
+    }
+
+    /* Buttons: keep readable text on dark backgrounds */
+    html.dark .btn,
+    html.dark .login-btn,
+    html.dark .save-btn,
+    html.dark .btn-style {
+        color: #ffffff;
+    }
+
+
+    /* Ensure badges, tags remain visible in dark */
+    html.dark .badge {
+        background: rgba(255,255,255,0.04);
+        color: var(--text-muted);
+    }
+
 
 html {
     font-size: 14px;
@@ -42,52 +220,53 @@ html {
     padding: 5px 10px;
 }
 
-.sidebar-list label {
-    margin: 10px 3px 10px 10px;
-    font-size: .75rem;
-    text-transform: uppercase;
-    color: hsl(210 40% 98%/ .4);
-    font-weight: 500;
-    letter-spacing: 1px;
-}
+    .sidebar-list label {
+        margin: 10px 3px 10px 10px;
+        font-size: .75rem;
+        text-transform: uppercase;
+        color: hsl(210 40% 98%/ .4);
+        font-weight: 500;
+        letter-spacing: 1px;
+    }
 
-.sidebar-list li {
-    color: #ffffff;
-    margin-bottom: 5px;
-}
+    .sidebar-list li {
+        color: #ffffff;
+        margin-bottom: 5px;
+    }
 
-.sidebar-list li a {
-    display: flex;
-    padding: 8px 10px;
-    align-items: center;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #F8FAFCB2
-}
+        .sidebar-list li a {
+            display: flex;
+            padding: 8px 10px;
+            align-items: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #F8FAFCB2
+        }
 
-.sidebar-list li.sidebar-selected a {
-    background: var(--sidebar-background);
-    color: #fff !important;
-    border-radius: 10px;
-}
+        .sidebar-list li.sidebar-selected a {
+            background: var(--sidebar-background);
+            color: #fff !important;
+            border-radius: 10px;
+        }
 
-.sidebar-list li:not(.sidebar-selected):hover, .sidebar-list a:not(.sidebar-selected):hover {
-    background: var(--sidebar-hover-bg);
-    color: #ffffff;
-    border-radius: 10px;
-}
+        .sidebar-list li:not(.sidebar-selected):hover, .sidebar-list a:not(.sidebar-selected):hover {
+            background: var(--sidebar-hover-bg);
+            color: #ffffff;
+            border-radius: 10px;
+        }
 
-.sidebar-list li a span {
-    margin-left: 10px;
-}
+        .sidebar-list li a span {
+            margin-left: 10px;
+        }
+
 .sidebar {
     transition: width 0.18s ease, min-width 0.18s ease;
 }
 
-.sidebar.collapsed {
-    width: 76px;
-    min-width: 76px;
-}
+    .sidebar.collapsed {
+        width: 76px;
+        min-width: 76px;
+    }
 
 #appSidebar {
     width: 288px;
@@ -95,19 +274,19 @@ html {
     transition: width 0.3s ease, min-width 0.3s ease;
 }
 
-#appSidebar.collapsed {
+    #appSidebar.collapsed {
         width: 76px;
         min-width: 76px;
-}
+    }
 
-#appSidebar.collapsed span,
+        #appSidebar.collapsed span,
         #appSidebar.collapsed label {
             display: none;
-}
+        }
 
-#appSidebar.collapsed .sidebar-options a {
+        #appSidebar.collapsed .sidebar-options a {
             justify-content: center;
-}
+        }
 
 .sidebar-options a {
     display: flex;
@@ -118,14 +297,15 @@ html {
     transition: background 0.18s ease, transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.sidebar-options a:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateX(3px);
-}
+    .sidebar-options a:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateX(3px);
+    }
 
 .sidebar-selected a {
     background: rgba(255, 255, 255, 0.1);
 }
+
 aside {
     scrollbar-width: none;
 }
@@ -149,16 +329,17 @@ main {
     min-width: 0;
     overflow: hidden;
 }
+
     .grid-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 12px 25px rgb(0 0 0 / 15%);
         border-color: rgba(37, 99, 235, 0.25);
     }
 
-.grid-card .grid-header-text {
+    .grid-card .grid-header-text {
         color: var(--text-muted);
         font-weight: 500;
-}
+    }
 
 .btn-style, .btn-style[type="submit"] {
     padding: 10px;
@@ -294,7 +475,7 @@ table {
 }
 
 /*  */
-form input:focus        
+form input:focus
 form select:focus,
 form textarea:focus {
     outline: none;
@@ -429,15 +610,16 @@ login {
         transform: translateY(0);
     }
 }
+
 .eye-icon {
     cursor: pointer;
     transition: color 0.2s ease;
 }
 
- .eye-icon:hover {
-    color: #2563eb;
-    transform: scale(1.15);
-}
+    .eye-icon:hover {
+        color: #2563eb;
+        transform: scale(1.15);
+    }
 /*delete button color*/
 .btndelete {
     color: #DC2626;
@@ -495,10 +677,10 @@ login {
     transition: all 0.25s ease;
 }
 
-.back-btn:hover {
-    background: #1d4ed8;
-    transform: translateY(-1px);
-}
+    .back-btn:hover {
+        background: #1d4ed8;
+        transform: translateY(-1px);
+    }
 
 /* Cards */
 .settings-card {
@@ -514,17 +696,17 @@ login {
     margin-bottom: 20px;
 }
 
-.section-header h2 {
-    font-size: 20px;
-    color: #0B1736; /* Warehouse navy */
-    font-weight: 600;
-    margin-bottom: 6px;
-}
+    .section-header h2 {
+        font-size: 20px;
+        color: #0B1736; /* Warehouse navy */
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
 
-.section-header p {
-    color: #6b7280;
-    font-size: 14px;
-}
+    .section-header p {
+        color: #6b7280;
+        font-size: 14px;
+    }
 
 /* Settings Rows */
 .setting-row {
@@ -535,10 +717,10 @@ login {
     border-top: 1px solid #f3f4f6;
 }
 
-.setting-row:first-of-type {
-    border-top: none;
-    padding-top: 0;
-}
+    .setting-row:first-of-type {
+        border-top: none;
+        padding-top: 0;
+    }
 
 .setting-info {
     display: flex;
@@ -546,15 +728,15 @@ login {
     gap: 4px;
 }
 
-.setting-info label {
-    font-weight: 600;
-    color: #111827;
-}
+    .setting-info label {
+        font-weight: 600;
+        color: #111827;
+    }
 
-.setting-info span {
-    font-size: 13px;
-    color: #6b7280;
-}
+    .setting-info span {
+        font-size: 13px;
+        color: #6b7280;
+    }
 
 /* Inputs */
 .setting-row input[type='text'],
@@ -571,12 +753,12 @@ login {
     transition: all 0.2s ease;
 }
 
-.setting-row input:focus,
-.setting-row select:focus {
-    outline: none;
-    border-color: #2563EB;
-    box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
-}
+    .setting-row input:focus,
+    .setting-row select:focus {
+        outline: none;
+        border-color: #2563EB;
+        box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+    }
 
 /* Toggle Switch */
 .switch {
@@ -585,9 +767,9 @@ login {
     height: 28px;
 }
 
-.switch input {
-    display: none;
-}
+    .switch input {
+        display: none;
+    }
 
 .slider {
     position: absolute;
@@ -597,26 +779,26 @@ login {
     transition: .25s;
 }
 
-.slider:before {
-    content: '';
-    position: absolute;
-    width: 22px;
-    height: 22px;
-    left: 3px;
-    top: 3px;
-    background: #fff;
-    border-radius: 50%;
-    transition: .25s;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
+    .slider:before {
+        content: '';
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        left: 3px;
+        top: 3px;
+        background: #fff;
+        border-radius: 50%;
+        transition: .25s;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
 
 .switch input:checked + .slider {
     background: #2563EB;
 }
 
-.switch input:checked + .slider:before {
-    transform: translateX(24px);
-}
+    .switch input:checked + .slider:before {
+        transform: translateX(24px);
+    }
 
 /* Save Button */
 .save-btn {
@@ -630,9 +812,9 @@ login {
     transition: .2s;
 }
 
-.save-btn:hover {
-    background: #1d4ed8;
-}
+    .save-btn:hover {
+        background: #1d4ed8;
+    }
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -654,12 +836,42 @@ login {
         gap: 12px;
     }
 
-    .setting-row input,
-    .setting-row select {
-        width: 100%;
-    }
+        .setting-row input,
+        .setting-row select {
+            width: 100%;
+        }
 
     .save-btn {
         width: 100%;
     }
+}
+
+/* Additional dark overrides for inputs and settings when theme is active */
+html.dark .setting-row input[type='text'],
+html.dark .setting-row input[type='password'],
+html.dark .setting-row input[type='number'],
+html.dark .setting-row select {
+    background: rgba(255,255,255,0.03);
+    color: var(--text-muted);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+html.dark .section-header h2 {
+    color: var(--text-muted);
+}
+
+/* make sure any explicitly white card backgrounds switch in dark mode */
+html.dark .settings-card,
+html.dark .grid-card,
+html.dark .login-card,
+html.dark .card {
+    background: rgba(255,255,255,0.03) !important;
+}
+
+/* form labels and small text */
+html.dark .form-label,
+html.dark .setting-info label,
+html.dark .header-text h1,
+html.dark .header-text p {
+    color: var(--text-muted);
 }
