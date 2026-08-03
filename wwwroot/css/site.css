@@ -207,6 +207,7 @@ th, td {
     font-size: 0.800rem;
     padding: 8px 13px;
     text-align: center;
+    text-transform: capitalize;
 }
 
 thead tr, tbody tr {
