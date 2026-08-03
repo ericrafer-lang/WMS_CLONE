@@ -33,6 +33,7 @@ namespace practice_for_wms.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(UserManagementIndexViewModel model)
         {
 
@@ -61,6 +62,24 @@ namespace practice_for_wms.Controllers
                 CreatedAt = DateTime.Now
             };
             _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.Users.Remove(user);
+
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
