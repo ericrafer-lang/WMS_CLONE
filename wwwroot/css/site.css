@@ -492,7 +492,7 @@ form textarea:focus {
 }
 
 .modern-select {
-    width: 200%;
+    width: 100%;
     padding: 12px 16px;
     border: 1px solid #d1d5db;
     border-radius: 10px;
