@@ -50,3 +50,51 @@ function initializeSidebar() {
 
 initializeSidebar();
 initializeModals();
+
+// THEME (dark / light) support
+function setTheme(theme) {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+        root.classList.add('dark');
+        root.setAttribute('data-theme', 'dark');
+    } else {
+        root.classList.remove('dark');
+        root.removeAttribute('data-theme');
+    }
+    localStorage.setItem('wms-theme', theme);
+    updateThemeToggle();
+}
+
+function getPreferredTheme() {
+    const stored = localStorage.getItem('wms-theme');
+    if (stored) return stored;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+    return 'light';
+}
+
+function updateThemeToggle() {
+    const btn = document.getElementById('themeToggleBtn');
+    if (!btn) return;
+    if (document.documentElement.classList.contains('dark')) {
+        btn.textContent = '☀️';
+    } else {
+        btn.textContent = '🌙';
+    }
+}
+
+function initializeTheme() {
+    try {
+        setTheme(getPreferredTheme());
+        const btn = document.getElementById('themeToggleBtn');
+        if (btn) {
+            btn.addEventListener('click', function () {
+                const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+                setTheme(current === 'dark' ? 'light' : 'dark');
+            });
+        }
+    } catch (e) {
+        console.error('Theme initialization failed', e);
+    }
+}
+
+initializeTheme();

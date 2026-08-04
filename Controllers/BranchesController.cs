@@ -25,6 +25,7 @@ namespace practice_for_wms.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BranchIndexViewModel model)
         {
             if (!ModelState.IsValid)
@@ -50,5 +51,22 @@ namespace practice_for_wms.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var branch = await _context.Branches.FindAsync(id);
+
+            if (branch == null)
+            {
+                return NotFound();
+            }
+
+            _context.Branches.Remove(branch);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
