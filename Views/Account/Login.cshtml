@@ -1,4 +1,5 @@
-﻿@{
+﻿@model practice_for_wms.Models.ViewModels.Account.LoginViewModel
+@{
     Layout = "_LoginLayout";
     ViewData["Title"] = "Login Page";
 }
@@ -28,18 +29,22 @@
         </p>
 
         <!-- Sign In Form -->
-        <form asp-controller="Account" asp-action="DoLogin" method="post" class="space-y-4">
+        <form asp-controller="Account" asp-action="Login" method="post" class="space-y-4">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-sm text-red-300"></div>
+
             <div>
-                <label for="username" class="block text-sm font-medium text-white">Username</label>
-                <input id="username" name="username" type="text" placeholder="Enter username"
+                <label asp-for="Email" class="block text-sm font-medium text-white">Email</label>
+                <input asp-for="Email" placeholder="Enter email"
                        class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <span asp-validation-for="Email" class="text-xs text-red-300"></span>
             </div>
 
             <div class="relative">
-                <label for="password" class="flex items-center text-sm font-medium text-white">Password</label>
+                <label asp-for="Password" class="flex items-center text-sm font-medium text-white">Password</label>
 
                 <!-- Password input with extra right padding -->
-                <input id="password" name="password" type="password" placeholder="Enter password"
+                <input asp-for="Password" id="password" placeholder="Enter password"
                        class="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 pr-10">
 
                 <!-- Eye toggle button aligned inside the input -->
@@ -56,7 +61,7 @@
 
             <div class="flex items-center justify-between text-sm">
                 <label class="flex items-center">
-                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                    <input asp-for="RememberMe" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                     <span class="ml-2 text-white">Remember Me</span>
                 </label>
                 <a href="#" class="text-blue-600 hover:underline">Forgot Password?</a>
