@@ -53,6 +53,55 @@ namespace practice_for_wms.Migrations
                     b.ToTable("Branches");
                 });
 
+            modelBuilder.Entity("practice_for_wms.Models.Entities.MyTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AssignedToId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Priority")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaskType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignedToId");
+
+                    b.HasIndex("BranchId");
+
+                    b.ToTable("MyTasks");
+                });
+
             modelBuilder.Entity("practice_for_wms.Models.Entities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -181,6 +230,25 @@ namespace practice_for_wms.Migrations
                     b.HasIndex("BranchId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("practice_for_wms.Models.Entities.MyTask", b =>
+                {
+                    b.HasOne("practice_for_wms.Models.Entities.User", "AssignedTo")
+                        .WithMany()
+                        .HasForeignKey("AssignedToId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("practice_for_wms.Models.Entities.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AssignedTo");
+
+                    b.Navigation("Branch");
                 });
 
             modelBuilder.Entity("practice_for_wms.Models.Entities.Product", b =>

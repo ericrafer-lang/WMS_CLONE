@@ -1,114 +1,86 @@
-﻿@{
+@model practice_for_wms.Models.MyTaskIndexViewModel
+@{
     ViewData["Title"] = "Mytask";
 }
 <div class="p-4 lg:p-6">
-    <h1 class="text-2xl font-bold">
-        My Task
-    </h1>
+    <h1 class="text-2xl font-bold">My Task</h1>
 
     <p class="text-sm mt-1 text-[#65758B]">
-        2 active tasks
+        @Model.ActiveTasks.Count active task@(Model.ActiveTasks.Count == 1 ? "" : "s")
     </p>
 
-    <p class="text-md font-semibold mt-8 text-[#65758B]">
-        ACTIVE
-    </p>
+    <p class="text-md font-semibold mt-8 text-[#65758B]">ACTIVE</p>
 
-    @* Pending/Incoming card details *@
-    <div class="h-30 bg-white border border-gray-200 rounded-2xl p-6 mt-6">
-        <div class="flex justify-between items-center">
-            <div>
-
-                <div class=" items-center gap-3">
-                    <h3 class="text-l font-semibold">
-                        Order #ORD-001
-                    </h3>
-                    <span class="bg-[#DBEAFE] text-[#1D4ED8] font-semibold rounded-full px-3 py-1 text-xs">
-                        Dispatched
-                    </span>
-                    <span class="bg-[#fee2e2] text-[#B91C1C] font-semibold rounded-full px-3 py-1 text-xs">
-                        High
-                    </span>
-
+    @foreach (var task in Model.ActiveTasks)
+    {
+        <div class="task-card">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <h3 class="text-l font-semibold">@task.Title</h3>
+                        <span class="bg-[#DBEAFE] text-[#1D4ED8] font-semibold rounded-full px-3 py-1 text-xs">
+                            @task.Status
+                        </span>
+                        @{
+                            var priorityBg = task.Priority?.ToLower() switch {
+                                "high" => "bg-[#fee2e2] text-[#B91C1C]",
+                                "medium" => "bg-[#fef3c7] text-[#b45309]",
+                                "low" => "bg-[#D1FAE5] text-[#047857]",
+                                _ => "bg-[#f3f4f6] text-[#374151]"
+                            };
+                        }
+                        <span class="@priorityBg font-semibold rounded-full px-3 py-1 text-xs">
+                            @task.Priority
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-500">@task.Description</p>
                 </div>
-                <p class="text-sm text-gray-500 mt-2">
-                    Urgent — deliver to Branch A by end of day
-                </p>
 
+                <form asp-action="UpdateStatus" method="post"
+                      onsubmit="return confirm('Are you sure you want to mark this task as completed?');">
+                    <input type="hidden" name="id" value="@task.Id" />
+                    <input type="hidden" name="status" value="Completed" />
+                    <button type="submit" class="btn-complete">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                        Mark Completed
+                    </button>
+                </form>
             </div>
-
-            @*Receive/Inspect Button*@
-            <button class="flex item-center gap-2 text-sm bg-blue-600 text-white px-6 py-2 rounded-xl">
-                Completed
-            </button>
         </div>
-    </div>
+    }
 
-    @* Pending/Incoming card details *@
-    <div class="h-30 bg-white border border-gray-200 rounded-2xl p-6 mt-6">
-        <div class="flex justify-between items-center">
-            <div>
+    <p class="text-md font-semibold mt-8 text-[#65758B]">COMPLETED</p>
 
-                <div class=" items-center gap-3">
-                    <h3 class="text-l font-semibold">
-                        Order #ORD-003
-                    </h3>
-                    <span class="bg-[#DBEAFE] text-[#1D4ED8] font-semibold rounded-full px-3 py-1 text-xs">
-                        Assigned
-                    </span>
-                    <span class="bg-[#D1FAE5] text-[#047857] font-semibold rounded-full px-3 py-1 text-xs">
-                        Low
-                    </span>
-
+    @foreach (var task in Model.CompletedTasks)
+    {
+        <div class="task-card" style="opacity: 0.75;">
+            <div class="flex justify-between items-center">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <h3 class="text-l font-semibold">@task.Title</h3>
+                        <span class="bg-[#D1FAE5] text-[#047857] font-semibold rounded-full px-3 py-1 text-xs">
+                            @task.Status
+                        </span>
+                        @{
+                            var compPriorityBg = task.Priority?.ToLower() switch {
+                                "high" => "bg-[#fee2e2] text-[#B91C1C]",
+                                "medium" => "bg-[#fef3c7] text-[#b45309]",
+                                "low" => "bg-[#D1FAE5] text-[#047857]",
+                                _ => "bg-[#f3f4f6] text-[#374151]"
+                            };
+                        }
+                        <span class="@compPriorityBg font-semibold rounded-full px-3 py-1 text-xs">
+                            @task.Priority
+                        </span>
+                    </div>
+                    <p class="text-sm text-gray-500">@task.Description</p>
                 </div>
-                <p class="text-sm text-gray-500 mt-2">
-                    Weekly supply run
-                </p>
 
-            </div>
-
-            @*Receive/Inspect Button*@
-            <button class="flex item-center gap-2 text-sm bg-blue-600 text-white px-6 py-2 rounded-xl">
-                Picking
-            </button>
-        </div>
-    </div>
-
-    <p class="text-md font-semibold mt-8 text-[#65758B]">
-        COMPLETED
-    </p>
-    @* Pending/Incoming card details *@
-    <div class="h-25 bg-white border border-gray-200 rounded-2xl p-6 mt-6">
-        <div class="flex justify-between items-center">
-
-            <div class=" items-center gap-3">
-                <h3 class="text-l font-semibold">
-                    Order #ORD-002
-                </h3>
-
-                <span class="bg-[#D1FAE5] text-[#047857] rounded-full px-3 py-1 text-xs">
-                    Completed
+                <span class="text-sm text-emerald-600 font-semibold flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    Done
                 </span>
-
             </div>
         </div>
-    </div>
-
-    @* Pending/Incoming card details *@
-    <div class="h-25 bg-white border border-gray-200 rounded-2xl p-6 mt-6">
-        <div class="flex justify-between items-center">
-
-            <div class=" items-center gap-3">
-                <h3 class="text-l font-semibold">
-                    Order #ORD-004
-                </h3>
-
-                <span class="bg-[#D1FAE5] text-[#047857] rounded-full px-3 py-1 text-xs">
-                    Completed
-                </span>
-
-            </div>
-        </div>
-    </div>
+    }
 </div>
-
