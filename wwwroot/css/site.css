@@ -1161,3 +1161,13 @@ html.dark .header-text h1,
 html.dark .header-text p {
     color: var(--text-muted);
 }
+/*Hovering effect for buttons*/
+.hovering {
+    border: none; /* Remove border */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.hovering:hover {
+    transform: scale(1.06); /* Slight zoom */
+}
