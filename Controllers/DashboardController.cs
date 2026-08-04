@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using practice_for_wms.Models.ViewModels;
+using practice_for_wms.Models.ViewModels.Dashboard;
 using practice_for_wms.Data;
 namespace practice_for_wms.Controllers
 {
@@ -16,7 +16,9 @@ namespace practice_for_wms.Controllers
             var vm = new DashboardViewModel
             {
                 TotalProducts = _context.Products.Count(),
-                TotalSuppliers = _context.Suppliers.Count()
+                TotalSuppliers = _context.Suppliers.Count(),
+                TotalUsers = _context.Users.Count(),
+                TotalBranches = _context.Branches.Count(),
             };
             return View(vm);
         }
