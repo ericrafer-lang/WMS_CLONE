@@ -24,7 +24,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 mr-2"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
                     <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Search..." class="w-full focus:outline-none p-2 border-none bg-transparent" />
                 </div>
-                <select name="categoryFilter" onchange="this.form.submit()" class="flex flex-column btn-style gap-3 shadow-md px-5 bg-white border border-gray-300 rounded-lg">
+                <select name="categoryFilter" onchange="this.form.submit()" class="flex flex-column btn-style gap-3 shadow-md px-5 bg-white border border-gray-300 rounded-lg hovering">
                     <option value="All Categories" selected="@(ViewBag.CategoryFilter == "All Categories")">All Categories</option>
                     <option value="Electronics" selected="@(ViewBag.CategoryFilter == "Electronics")">Electronics</option>
                     <option value="Safety Equipment" selected="@(ViewBag.CategoryFilter == "Safety Equipment")">Safety Equipment</option>
@@ -34,7 +34,7 @@
                 <button type="submit" class="hidden">Search</button>
             </form>
 
-            <button class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2" data-modal="productModal">
+            <button class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2 hovering" data-modal="productModal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
                 <span>Add Product</span>
             </button>
@@ -118,10 +118,10 @@
 
                         <div class="modal-footer">
                             <a asp-action="Index" type="button"
-                                    class="close-modal btn-secondary">
+                                    class="close-modal btn-secondary hovering">
                                 Cancel
                             </a>
-                            <button type="submit" class="btn-primary">
+                            <button type="submit" class="btn-primary hovering">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                                 Create Product
                             </button>
@@ -163,7 +163,7 @@
                             <td>
                                 @*Edit Modal*@
                                 <div class="flex justify-center items-center gap-3 h-full">
-                                    <button class="open-modal flex gap-2" data-modal="editModal-@product.Id">
+                                    <button class="open-modal flex gap-2 hovering" data-modal="editModal-@product.Id">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
                                     </button>
 
@@ -251,8 +251,8 @@
                                                 </div>
 
                                                 <div class="modal-footer">
-                                                    <button type="button" class="close-modal btn-secondary">Cancel</button>
-                                                    <button type="submit" class="btn-primary">Save Changes</button>
+                                                    <button type="button" class="close-modal btn-secondary hovering">Cancel</button>
+                                                    <button type="submit" class="btn-primary hovering">Save Changes</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -260,7 +260,7 @@
                                     <form asp-action="Delete" method="post" style="display:inline">
                                      @Html.AntiForgeryToken()
                                      <input type="hidden" name="id" value="@product.Id" />
-                                    <button type="submit" class="btndelete" onclick="return confirm('Delete this product?')">
+                                    <button type="submit" class="btndelete hovering" onclick="return confirm('Delete this product?')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6" /><path d="M14 11v6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
                                     </button>
                                     </form>
