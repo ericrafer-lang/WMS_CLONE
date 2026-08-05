@@ -22,6 +22,7 @@ namespace practice_for_wms.Controllers
 
         // Show login page
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View(new LoginViewModel());
@@ -29,6 +30,7 @@ namespace practice_for_wms.Controllers
 
         // Handle login form POST
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
