@@ -1,8 +1,15 @@
+@model List<practice_for_wms.Models.Entities.Request>
 @{
     ViewData["Title"] = "RestockRequest";
 }
 
 <div class="p-4 lg:p-6">
+    @if (TempData["Error"] != null)
+    {
+        <div style="background:#FEE2E2; color:#B91C1C; padding:12px 16px; border-radius:10px; margin-bottom:16px;">
+            @TempData["Error"]
+        </div>
+    }
     @* HEADING !!!!!!*@
     <div class="flex justify-between items-center">
         <div class="flex flex-col">
@@ -11,13 +18,13 @@
             </p>
 
             <p class="">
-                0 requests
+                @Model.Count(r => r.Status == "Pending") Product Request
             </p>
         </div>
 
         <div class="flex justify-center items-center gap-3">
-
-            <button class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2 hovering" data-modal="orderModal">
+            @*Add Request*@
+            <button type="button" id="openOrderModalBtn" class="open-modal flex btn-style bg-blue-600 text-white text-sm gap-2 hovering" data-modal="orderModal">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14" /><path d="M12 5v14" /></svg>
                 <span>New Request</span>
             </button>
@@ -36,28 +43,33 @@
                             <h2>New Product Request</h2>
                             <p>Fill in the product request details below.</p>
                         </div>
-                        <button type="button" class="modal-close-btn close-modal">
+                        <button type="button" id="cancelOrderModal"class="modal-close-btn close-modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                         </button>
                     </div>
 
-                    <form>
+                    <form asp-action="Create" asp-controller="RestockRequest" method="post">
                         <div class="mb-3">
                             <label class="form-label text-sm mb-1">Product <span class="text-red-500">*</span></label>
-                            <select class="modern-select" style="padding: 8px 12px; height: 42px;">
+                            <select name="ProductId"class="modern-select" style="padding: 8px 12px; height: 42px;">
                                 <option>Select product</option>
+                                @foreach (var product in (List<practice_for_wms.Models.Entities.Product>)ViewBag.Products)
+                                {
+                                    <option value="@product.Id">@product.Name</option>
+                                }
                             </select>
                         </div>
 
                         <div class="flex gap-3 mb-3">
                             <div class="w-1/2">
                                 <label class="form-label text-sm mb-1">Quantity <span class="text-red-500">*</span></label>
-                                <input type="number" value="1" class="form-control mb-0" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #fff; height: 42px;" />
+                                <input name="Quantity" type="number" value="1" class="form-control mb-0" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #fff; height: 42px;" />
                             </div>
                             <div class="w-1/2">
                                 <label class="form-label text-sm mb-1">Unit</label>
-                                <select class="modern-select" style="padding: 8px 12px; height: 42px;">
-                                    <option>pcs</option>
+                                <select name="Unit"class="modern-select" style="padding: 8px 12px; height: 42px;">
+                                    <option value="pcs">Piece</option>
+                                    <option value="box">Box</option>
                                 </select>
                             </div>
                         </div>
@@ -65,29 +77,28 @@
                         <div class="flex gap-3 mb-3">
                             <div class="w-1/2">
                                 <label class="form-label text-sm mb-1">Priority</label>
-                                <select class="modern-select" style="padding: 8px 12px; height: 42px;">
-                                    <option>Medium</option>
+                                <select name="Priority" class="modern-select" style="padding: 8px 12px; height: 42px;">
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
                                 </select>
                             </div>
-                            <div class="w-1/2">
-                                <label class="form-label text-sm mb-1">Expected Date</label>
-                                <input type="date" class="form-control mb-0" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #fff; height: 42px; color: #6b7280;" />
-                            </div>
+                            
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label text-sm mb-1">Reason <span class="text-red-500">*</span></label>
-                            <textarea rows="2" placeholder="Why is this product needed?" class="form-control mb-0" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #fff; resize: none;"></textarea>
+                            <textarea name="Reason" rows="2" placeholder="Why is this product needed?" class="form-control mb-0" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #fff; resize: none;"></textarea>
                         </div>
 
                         <div class="mb-4">
                             <label class="form-label text-sm mb-1">Additional Notes</label>
-                            <textarea rows="2" placeholder="Any special requirements, delivery instructions, etc." class="form-control mb-0" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #fff; resize: none;"></textarea>
+                            <textarea name="Notes" rows="2" placeholder="Any special requirements, delivery instructions, etc." class="form-control mb-0" style="padding: 8px 12px; border: 1px solid #d1d5db; background: #fff; resize: none;"></textarea>
                         </div>
 
                         <div class="modal-footer mt-2 pt-4">
-                            <button type="button" class="close-modal btn-secondary hovering" style="padding: 8px 16px;">Cancel</button>
-                            <button type="button" class="btn-primary hovering" style="padding: 8px 16px;">Submit Request</button>
+                            <button type="button" id="cancelOrderModal" class="close-modal btn-secondary hovering" style="padding: 8px 16px;">Cancel</button>
+                            <button type="submit" class="btn-primary hovering" style="padding: 8px 16px;">Submit Request</button>
                         </div>
                     </form>
                 </div>
@@ -116,63 +127,65 @@
                     <tr>
                         <th>Product</th>
                         <th>Supplier</th>
-                        <th>Qty</th>
+                        <th>Quantity</th>
                         <th>Priority</th>
                         <th>Reason</th>
                         <th>Requested By</th>
-                        <th>Expected By</th>
                         <th>Status</th>
                         <th>Remarks</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="table-product-name">LED Display Panel</td>
-                        <td>fgdgdg</td>
-                        <td>12</td>
-                        <td>
-                            <span class="badge medium">Medium</span>
-                        </td>
-                        <td>sdf</td>
-                        <td>Clarence Mendoza</td>
-                        <td>—</td>
-                        <td>
-                            <span class="badge approve">Approved</span>
-                        </td>
-                        <td>—</td>
-                    </tr>
-                    <tr>
-                        <td class="table-product-name">Copper Wire 2mm</td>
-                        <td>fgdgdg</td>
-                        <td>1</td>
-                        <td>
-                            <span class="badge medium">Medium</span>
-                        </td>
-                        <td>wfrawf</td>
-                        <td>Solis 98</td>
-                        <td>—</td>
-                        <td>
-                            <span class="badge pending">Pending</span>
-                        </td>
-                        <td>—</td>
-                    </tr>
-                    <tr>
-                        <td class="table-product-name">Copper Wire 2mm</td>
-                        <td>fgdgdg</td>
-                        <td>5</td>
-                        <td>
-                            <span class="badge medium">Medium</span>
-                        </td>
-                        <td>wanna aprob dis?</td>
-                        <td>Solis 98</td>
-                        <td>—</td>
-                        <td>
-                            <span class="badge rejected">Rejected</span>
-                        </td>
-                        <td>sample clarence</td>
-                    </tr>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="8" style="text-align:center; padding: 20px;">No restock requests yet.</td>
+                        </tr>
+                    }
+                    @foreach (var req in Model)
+                    {
+                        <tr>
+                            <td class="table-product-name">@req.Product?.Name</td>
+                            <td>@(req.Product?.Supplier?.SupplierName ?? "—")</td>
+                            <td>@req.Quantity @req.Unit</td>
+                            <td>
+                                <span class="badge @req.Priority.ToLower()">@req.Priority</span>
+                            </td>
+                            <td>@req.Reason</td>
+                            <td>@req.RequestedBy?.FirstName @req.RequestedBy?.LastName</td>
+                            <td>
+                                <span class="badge @req.Status.ToLower()">@req.Status</span>
+                            </td>
+                            <td>@(req.ReviewNotes ?? "—")</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('orderModal');
+        const openBtn = document.getElementById('openOrderModalBtn');
+        const cancelBtn = document.getElementById('cancelOrderModalBtn');
+        const cancelX = document.getElementById('cancelOrderModalX');
+
+        function showModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        function hideModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        openBtn.addEventListener('click', showModal);
+        cancelBtn.addEventListener('click', hideModal);
+        cancelX.addEventListener('click', hideModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) hideModal();
+        });
+    });
+</script>
