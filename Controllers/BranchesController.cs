@@ -47,7 +47,7 @@ namespace practice_for_wms.Controllers
             };
             _context.Branches.Add(branch);
             await _context.SaveChangesAsync();
-
+            TempData["Success"] = "Branch added successfully!";
             return RedirectToAction(nameof(Index));
         }
 

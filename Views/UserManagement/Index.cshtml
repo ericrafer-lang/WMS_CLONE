@@ -111,6 +111,22 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13" /><path d="m22 2-7 20-4-9-9-4z" /></svg>
                                 Send Invite
                             </button>
+                            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                            @if (TempData["Success"] != null)
+                            {
+                            <script>
+                            Swal.fire({
+                            icon: 'success',
+                            title: '@TempData["Success"]',
+                            iconColor: '#2563eb',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 1000,
+                            timerProgressBar: true
+                            });
+                                </script>
+                            }
                         </div>
                     </form>
                 </div>
