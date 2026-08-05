@@ -49,9 +49,15 @@ namespace practice_for_wms.Controllers
                 return View(model);
             }
 
+            if (user.Status == UserStatus.PendingApproval)
+            {
+                ModelState.AddModelError(string.Empty, "Please verify your email before signing in. Check your inbox for the verification link.");
+                return View(model);
+            }
+
             if (user.Status != UserStatus.Active)
             {
-                ModelState.AddModelError(string.Empty, "This account is not active yet. Contact an administrator.");
+                ModelState.AddModelError(string.Empty, "This account is not active. Contact an administrator.");
                 return View(model);
             }
 
@@ -87,6 +93,45 @@ namespace practice_for_wms.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Dashboard");
+        }
+
+        // Clicked from the verification email sent by UserManagementController.Create
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> VerifyEmail(int userId, string token)
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null || string.IsNullOrEmpty(user.EmailVerificationToken))
+            {
+                TempData["StatusMessageType"] = "error";
+                TempData["StatusMessage"] = "This verification link is invalid.";
+                return RedirectToAction(nameof(Login));
+            }
+
+            if (user.EmailVerificationToken != token)
+            {
+                TempData["StatusMessageType"] = "error";
+                TempData["StatusMessage"] = "This verification link is invalid.";
+                return RedirectToAction(nameof(Login));
+            }
+
+            if (user.EmailVerificationTokenExpiresAt is null || user.EmailVerificationTokenExpiresAt < DateTime.Now)
+            {
+                TempData["StatusMessageType"] = "error";
+                TempData["StatusMessage"] = "This verification link has expired. Ask an administrator to create your account again.";
+                return RedirectToAction(nameof(Login));
+            }
+
+            user.Status = UserStatus.Active;
+            user.EmailVerificationToken = null;
+            user.EmailVerificationTokenExpiresAt = null;
+            user.UpdatedAt = DateTime.Now;
+            await _context.SaveChangesAsync();
+
+            TempData["StatusMessageType"] = "success";
+            TempData["StatusMessage"] = "Email verified! You can now sign in.";
+            return RedirectToAction(nameof(Login));
         }
 
         // Handle logout
