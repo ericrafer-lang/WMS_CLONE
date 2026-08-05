@@ -63,7 +63,7 @@ namespace practice_for_wms.Controllers
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-
+            TempData["Success"] = "Sent successfully!";
             return RedirectToAction(nameof(Index));
         }
 

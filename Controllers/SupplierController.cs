@@ -42,6 +42,7 @@ namespace practice_for_wms.Controllers
             };
             _context.Suppliers.Add(supplier);
             _context.SaveChanges();
+            TempData["Success"] = "Supplier added successfully!";
             return RedirectToAction("Index");
         }
 
