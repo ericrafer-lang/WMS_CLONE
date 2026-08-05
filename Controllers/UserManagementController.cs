@@ -84,5 +84,12 @@ namespace practice_for_wms.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update()
+        {
+            return View();
+        }
     }
 }
