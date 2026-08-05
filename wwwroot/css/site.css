@@ -190,6 +190,461 @@ html, body {
         color: var(--text-muted);
     }
 
+    /* Dark-mode badge colors for common delivery/receiving statuses */
+    html.dark .badge.inspection,
+    html.dark .badge.pending,
+    html.dark .badge.receiving,
+    html.dark .badge.incoming {
+        background: rgba(255,255,255,0.03);
+        color: #E6EEF8;
+        border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    html.dark .badge.in-transit {
+        background: rgba(96,165,250,0.08);
+        color: #BFDBFE; /* lighter blue text */
+        border: 1px solid rgba(96,165,250,0.12);
+    }
+
+    html.dark .badge.rejected {
+        background: rgba(220,38,38,0.06);
+        color: #FECACA;
+        border: 1px solid rgba(220,38,38,0.08);
+    }
+
+    /* Dark-mode card backgrounds for Delivery Receiving list */
+    html.dark .h-30.bg-white,
+    html.dark .h-25.bg-white {
+        background: rgba(255,255,255,0.02);
+        border-color: rgba(255,255,255,0.04);
+        color: #E6EEF8;
+    }
+
+    html.dark .h-30.bg-white h3,
+    html.dark .h-25.bg-white h3 {
+        color: #E6EEF8;
+    }
+
+    html.dark .h-30.bg-white p,
+    html.dark .h-25.bg-white p {
+        color: #9CA3AF;
+    }
+
+    /* Dark-mode badge variants for delivery receiving */
+    html.dark .badge.arrived {
+        background: rgba(6,182,212,0.06);
+        color: #67E8F9;
+        border: 1px solid rgba(6,182,212,0.08);
+    }
+
+    html.dark .badge.completed {
+        background: rgba(34,197,94,0.06);
+        color: #86EFAC;
+        border: 1px solid rgba(34,197,94,0.08);
+    }
+
+    html.dark .badge.rejected {
+        background: rgba(220,38,38,0.06);
+        color: #FECACA;
+        border: 1px solid rgba(220,38,38,0.08);
+    }
+
+/* Dark-mode hover and interaction overrides to ensure contrasts remain readable */
+html.dark .sidebar-options a:hover {
+    background: rgba(255,255,255,0.03);
+    transform: translateX(3px);
+}
+
+html.dark .grid-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    border-color: rgba(96,165,250,0.12);
+}
+
+html.dark .modern-select:hover {
+    border-color: rgba(255,255,255,0.06);
+}
+
+html.dark .login-btn:hover {
+    background: #1f59c6; /* slightly darker blue for dark background */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37,99,235,0.18);
+}
+
+html.dark .back-btn:hover {
+    background: #173a8a;
+    transform: translateY(-1px);
+}
+
+html.dark .save-btn:hover,
+html.dark .btn-primary:hover,
+html.dark .btn-secondary:hover {
+    filter: brightness(0.95);
+}
+
+html.dark .product-table tbody tr:hover {
+    background: rgba(255,255,255,0.02);
+}
+
+html.dark .task-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+}
+
+html.dark .hovering:hover {
+    filter: brightness(0.95);
+}
+
+/* Make focus outlines visible in dark mode */
+html.dark .btn:focus, html.dark .form-control:focus {
+    box-shadow: 0 0 0 0.1rem rgba(255,255,255,0.08), 0 0 0 0.25rem #60A5FA;
+}
+
+/* Product page: make search input, select and icons visible in dark mode */
+html.dark .search-box {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.06);
+}
+
+html.dark .search-box svg,
+html.dark .search-box .lucide {
+    color: #9CA3AF; /* icon color */
+}
+
+html.dark .search-box input {
+    color: #E6EEF8; /* input text */
+    background: transparent;
+}
+
+html.dark .search-box input::placeholder {
+    color: #9CA3AF; /* placeholder muted */
+}
+
+/* Category select uses bg-white class; make it adapt in dark mode */
+html.dark select.bg-white,
+html.dark .btn-style.bg-white {
+    background: rgba(255,255,255,0.03) !important;
+    color: #E6EEF8 !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Ensure dropdown text visible */
+html.dark select.bg-white option {
+    background: var(--main-bg);
+    color: #E6EEF8;
+}
+
+/* Ensure the search box is fully dark and focus states are visible */
+html.dark .search-box {
+    box-shadow: none;
+}
+
+html.dark .search-box:focus-within {
+    border-color: rgba(96,165,250,0.18);
+    box-shadow: 0 0 0 4px rgba(96,165,250,0.06);
+}
+
+html.dark .search-box input,
+html.dark .search-box input:focus {
+    background: transparent;
+    color: #E6EEF8;
+}
+
+html.dark .search-box svg,
+html.dark .search-box .lucide,
+html.dark .search-box .text-gray-500 {
+    color: #9CA3AF;
+}
+
+/* If the container had bg-white class, force it darker in dark mode */
+html.dark .bg-white.search-box,
+html.dark .bg-white.btn-style {
+    background: rgba(255,255,255,0.03) !important;
+}
+
+/* Modal panel dark-mode overrides */
+/* Make modal content solid black in dark mode (no translucent backgrounds) */
+html.dark .modal-panel {
+    /* use the app's dark page background so modals match the overall theme */
+    background: var(--main-bg) !important; /* e.g. #071122 from :root dark variables */
+    color: #E6EEF8;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+}
+
+html.dark .modal-panel h2,
+html.dark .modal-panel h3 {
+    color: #E6EEF8;
+}
+
+html.dark .modal-panel p,
+html.dark .modal-panel span,
+html.dark .modal-panel label,
+html.dark .modal-panel .text-sm,
+html.dark .modal-panel .text-gray-500,
+html.dark .modal-panel .text-gray-200 {
+    color: #9CA3AF !important;
+}
+
+/* Ensure buttons inside modal are readable */
+html.dark .modal-panel .icon-button,
+html.dark .modal-panel .hovering,
+html.dark .modal-panel button {
+    color: #E6EEF8;
+}
+
+/* Override utility bg-white inside modal panel to reveal the black background */
+html.dark .modal-panel .bg-white,
+html.dark .modal-panel .bg-gray-100,
+html.dark .modal-panel [class*="#DBEAFE"] {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+/* Report page specific dark overrides */
+/* Make the report dropdown and action buttons dark */
+html.dark select.btn-style,
+html.dark .btn-style.hovering,
+html.dark .btn-style {
+    background: rgba(255,255,255,0.03) !important;
+    color: #E6EEF8 !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+/* Search box in report header */
+html.dark .card.w-\[30%\] input,
+html.dark .card.w-\[30%\] svg {
+    color: #E6EEF8 !important;
+}
+
+html.dark .card.w-\[30%\] {
+    background: rgba(255,255,255,0.02) !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Make grid-card and table area darker */
+html.dark .grid-card,
+html.dark .card {
+    background: rgba(255,255,255,0.02) !important;
+    border-color: rgba(255,255,255,0.04) !important;
+    color: #E6EEF8;
+}
+
+/* Table header and rows */
+html.dark .product-table thead {
+    background: rgba(255,255,255,0.02) !important;
+}
+
+html.dark .product-table thead th,
+html.dark .product-table tbody td {
+    color: #E6EEF8 !important;
+}
+
+html.dark .product-table tbody tr:hover {
+    background: rgba(255,255,255,0.02) !important;
+}
+
+/* Make small action badges readable in report */
+html.dark .badge.good,
+html.dark .badge.active,
+html.dark .badge.inspection {
+    background: rgba(255,255,255,0.03) !important;
+    color: #E6EEF8 !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Ensure native select options fallback is dark where supported */
+html.dark select.btn-style option {
+    background: var(--main-bg) !important;
+    color: #E6EEF8 !important;
+}
+
+/* Make selects / dropdowns inside modal dark and readable */
+html.dark .modal-panel select,
+html.dark .modal-panel .modern-select,
+html.dark .modal-panel .form-control,
+html.dark .modal-panel .select-input {
+    background: rgba(255,255,255,0.02) !important;
+    color: #E6EEF8 !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+/* Ensure option list is dark when possible (browser support varies) */
+html.dark .modal-panel select option,
+html.dark .modal-panel .modern-select option {
+    background: var(--main-bg) !important;
+    color: #E6EEF8 !important;
+}
+
+/* Focus/hover for selects inside modal */
+html.dark .modal-panel select:focus,
+html.dark .modal-panel .modern-select:focus,
+html.dark .modal-panel .form-control:focus {
+    box-shadow: 0 0 0 4px rgba(96,165,250,0.06) !important;
+    border-color: rgba(96,165,250,0.18) !important;
+}
+
+/* If a dropdown uses a custom list element, ensure it matches the modal style */
+html.dark .modal-panel .dropdown-menu,
+html.dark .modal-panel .dropdown-content {
+    background: var(--main-bg) !important;
+    color: #E6EEF8 !important;
+    border-color: rgba(255,255,255,0.04) !important;
+}
+
+/* Target modal inner colored blocks (header, summary boxes) and make them dark */
+html.dark .modal-panel .bg-gray-100,
+html.dark .modal-panel .border-blue-400,
+html.dark .modal-panel [class*="DBEAFE"],
+html.dark .modal-panel [class*="DBEAFE"] * {
+    background: rgba(255,255,255,0.03) !important;
+    border-color: rgba(255,255,255,0.04) !important;
+    color: #E6EEF8 !important;
+}
+
+/* Ensure input-like areas inside modal are readable */
+html.dark .modal-panel input,
+html.dark .modal-panel textarea,
+html.dark .modal-panel select,
+html.dark .modal-panel .form-control {
+    background: rgba(255,255,255,0.02) !important;
+    color: #E6EEF8 !important;
+    border-color: rgba(255,255,255,0.06) !important;
+}
+
+html.dark .modal-panel input::placeholder,
+html.dark .modal-panel textarea::placeholder {
+    color: #9CA3AF !important;
+}
+
+/* Make small summary box (light blue) darker */
+html.dark .modal-panel .summary-box,
+html.dark .modal-panel .bg-\[\#DBEAFE\] {
+    background: rgba(96,165,250,0.06) !important;
+    color: #BFDBFE !important;
+    border-color: rgba(96,165,250,0.12) !important;
+}
+
+/* Product modal: apply same dark styling as modal-panel */
+html.dark .modal {
+    background: var(--main-bg) !important;
+    color: #E6EEF8;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+}
+
+html.dark .modal h2,
+html.dark .modal h3 {
+    color: #E6EEF8;
+}
+
+html.dark .modal p,
+html.dark .modal span,
+html.dark .modal label,
+html.dark .modal .text-sm,
+html.dark .modal .text-gray-500,
+html.dark .modal .text-gray-200 {
+    color: #9CA3AF !important;
+}
+
+/* override inner white boxes inside product modal */
+html.dark .modal .bg-white,
+html.dark .modal .bg-gray-100 {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+/* inputs, selects, textarea inside product modal */
+html.dark .modal input,
+html.dark .modal textarea,
+html.dark .modal select,
+html.dark .modal .form-control,
+html.dark .modal .modern-select {
+    background: rgba(255,255,255,0.02) !important;
+    color: #E6EEF8 !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+}
+
+html.dark .modal input::placeholder,
+html.dark .modal textarea::placeholder {
+    color: #9CA3AF !important;
+}
+
+/* Buttons inside product modal */
+html.dark .modal .btn-style,
+html.dark .modal button,
+html.dark .modal .open-modal {
+    color: #E6EEF8 !important;
+}
+
+/* Cancel / secondary buttons inside modals */
+html.dark .modal .btn-secondary,
+html.dark .modal .close-modal.btn-secondary,
+html.dark .modal-panel .btn-secondary,
+html.dark .modal-panel .close-modal.btn-secondary {
+    background: transparent !important;
+    border: 1px solid rgba(255,255,255,0.06) !important;
+    color: #E6EEF8 !important;
+}
+
+html.dark .modal .btn-secondary:hover,
+html.dark .modal-panel .btn-secondary:hover {
+    background: rgba(255,255,255,0.03) !important;
+}
+
+/* Ensure plus / open icons are visible */
+html.dark .open-modal svg,
+html.dark .modal .open-modal svg,
+html.dark .modal-panel .open-modal svg {
+    color: #E6EEF8 !important;
+    stroke: currentColor !important;
+    fill: none !important;
+}
+
+/* Ensure close X (plain button) is visible when it lacks modal-close-btn class */
+html.dark button[onclick^="closeModal"],
+html.dark .close-modal {
+    color: #E6EEF8 !important;
+}
+/* Improved visibility for modal close (X) buttons in dark mode:
+   lighter button background with dark icon for contrast. Target the
+   general modal-close-btn, modal-panel and specifically the Product modal. */
+html.dark .modal .modal-close-btn,
+html.dark .modal-panel .modal-close-btn {
+    background: rgba(255,255,255,0.08) !important;
+    border-color: rgba(255,255,255,0.12) !important;
+    color: #071122 !important; /* dark icon on light button for contrast */
+}
+
+html.dark .modal .modal-close-btn:hover,
+html.dark .modal-panel .modal-close-btn:hover {
+    background: rgba(255,255,255,0.05) !important;
+    color: #FFFFFF !important;
+}
+
+/* Stronger, targeted rule for Product modal close button to ensure visibility */
+html.dark #productModal .modal-close-btn,
+html.dark .modal-overlay #productModal .modal-close-btn,
+html.dark .modal.bg-white .modal-close-btn {
+    background: rgba(255,255,255,0.10) !important;
+    border-color: rgba(255,255,255,0.14) !important;
+    color: #071122 !important;
+}
+
+/* Make sure SVG inside close button uses the button color for stroke */
+html.dark .modal-close-btn svg,
+html.dark #productModal .modal-close-btn svg {
+    color: inherit !important;
+    stroke: currentColor !important;
+    fill: none !important;
+}
+
+/* Make native select options dark where supported */
+html.dark .modal select option {
+    background: var(--main-bg) !important;
+    color: #E6EEF8 !important;
+}
+
 
 html {
     font-size: 14px;

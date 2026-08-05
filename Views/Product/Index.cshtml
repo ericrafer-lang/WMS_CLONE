@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Product";
-    var suppliers = ViewBag.Suppliers as List<practice_for_wms.Models.Entities.Supplier> ?? new List<practice_for_wms.Models.Entities.Supplier>();
+    var suppliers = ViewBag.Suppliers as List<practice_for_wms.Models.Entities.Supplier> ?? [];
 }
 
 <div class="p-4 lg:p-6">
@@ -20,7 +20,7 @@
 
         <div class="flex justify-center items-center gap-3">
             <form method="get" asp-action="Index" class="flex gap-3 m-0">
-                <div class="flex items-center border rounded-lg bg-white px-3 shadow-sm border-gray-300 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
+                <div class="search-box flex items-center border rounded-lg bg-white px-3 shadow-sm border-gray-300 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-500 mr-2"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg>
                     <input type="text" name="searchString" value="@ViewBag.SearchString" placeholder="Search..." class="w-full focus:outline-none p-2 border-none bg-transparent" />
                 </div>
