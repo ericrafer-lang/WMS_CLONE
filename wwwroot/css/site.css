@@ -714,35 +714,6 @@ html {
             margin-left: 10px;
         }
 
-.sidebar {
-    transition: width 0.18s ease, min-width 0.18s ease;
-}
-
-    .sidebar.collapsed {
-        width: 76px;
-        min-width: 76px;
-    }
-
-#appSidebar {
-    width: 288px;
-    min-width: 288px;
-    transition: width 0.3s ease, min-width 0.3s ease;
-}
-
-    #appSidebar.collapsed {
-        width: 76px;
-        min-width: 76px;
-    }
-
-        #appSidebar.collapsed span,
-        #appSidebar.collapsed label {
-            display: none;
-        }
-
-        #appSidebar.collapsed .sidebar-options a {
-            justify-content: center;
-        }
-
 .sidebar-options a {
     display: flex;
     align-items: center;

@@ -32,23 +32,6 @@ function initializeModals() {
     })
 }
 
-function initializeSidebar() {
-    const sidebar = document.getElementById("appSidebar");
-    const collapseBtn = document.getElementById("sidebarCollapseBtn");
-
-    if (!sidebar || !collapseBtn) return;
-
-    if (localStorage.getItem("wms-sidebar-collapsed") === "true") {
-        sidebar.classList.add("collapsed");
-    }
-
-    collapseBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("collapsed");
-        localStorage.setItem("wms-sidebar-collapsed", sidebar.classList.contains("collapsed"));
-    });
-}
-
-initializeSidebar();
 initializeModals();
 
 // THEME (dark / light) support
