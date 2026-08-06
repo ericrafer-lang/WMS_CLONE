@@ -29,6 +29,9 @@ namespace practice_for_wms.Models.Entities
 
         public int? ApprovedById { get; set; }
         [ForeignKey("ApprovedById")]
+        public int? SupplierId { get; set; }
+        [ForeignKey("SupplierId")]
+        public Supplier? Supplier { get; set; }
         public User? ApprovedBy { get; set; }
 
         public int? QuantityApproved { get; set; }
