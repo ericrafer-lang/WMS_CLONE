@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>practice_for_wms</RootNamespace>
+    <UserSecretsId>f2b8ed10-c9b5-4bdf-913d-36ceeaac2127</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
