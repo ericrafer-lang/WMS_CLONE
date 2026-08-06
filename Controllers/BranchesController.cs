@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using practice_for_wms.Data;
 using practice_for_wms.Models.Entities;
@@ -6,6 +7,7 @@ using practice_for_wms.ViewModels.Branches;
 
 namespace practice_for_wms.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class BranchesController : Controller
     {
         private readonly ApplicationDbContext _context;

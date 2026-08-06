@@ -22,5 +22,15 @@ namespace practice_for_wms.Models.ViewModels.UserManagement
 
         [Required]
         public int BranchId { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [MinLength(8, ErrorMessage = "Password must be at least 8 characters.")]
+        public string Password { get; set; } = string.Empty;
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare(nameof(Password), ErrorMessage = "Passwords do not match.")]
+        public string ConfirmPassword { get; set; } = string.Empty;
     }
 }

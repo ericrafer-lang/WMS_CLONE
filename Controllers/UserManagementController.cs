@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using practice_for_wms.Data;
 using practice_for_wms.Models.Entities;
@@ -6,6 +8,7 @@ using practice_for_wms.Models.ViewModels.UserManagement;
 
 namespace practice_for_wms.Controllers
 {
+    [Authorize(Policy = "AdminOnly")]
     public class UserManagementController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -61,6 +64,10 @@ namespace practice_for_wms.Controllers
                 Status = UserStatus.PendingApproval, // UserStatus from Models/Entities/User.cs (for referce kasi nakakalito)
                 CreatedAt = DateTime.Now
             };
+
+            var hasher = new PasswordHasher<User>();
+            user.PasswordHash = hasher.HashPassword(user, create.Password);
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 

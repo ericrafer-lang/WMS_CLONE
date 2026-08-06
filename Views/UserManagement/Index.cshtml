@@ -72,15 +72,27 @@
                                        class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
                             </div>
 
+                            <div>
+                                <label class="font-medium">Password: <span class="text-red-500">*</span></label>
+                                <input asp-for="CreateUser.Password" type="password" placeholder="At least 8 characters"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+                            </div>
+
+                            <div>
+                                <label class="font-medium">Confirm Password: <span class="text-red-500">*</span></label>
+                                <input asp-for="CreateUser.ConfirmPassword" type="password" placeholder="Re-enter password"
+                                       class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+                            </div>
+
                             <div class="col-span-2" z>
                                 <div class="form-group">
                                     <label class="form-label">Role <span class="text-red-500">*</span></label>
 
                                     <select asp-for="CreateUser.Role" class="modern-select">
                                         <option>-Select Role-</option>
-                                        <option value="admin">Administrator</option>
-                                        <option value="supervisor">Supervisor</option>
-                                        <option value="staff">Staff</option>
+                                        <option value="Admin">Administrator</option>
+                                        <option value="Supervisor">Supervisor</option>
+                                        <option value="Staff">Staff</option>
                                     </select>
                                 </div>
 
