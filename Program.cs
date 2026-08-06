@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using practice_for_wms.Data;
+using practice_for_wms.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,18 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("WMSPortal")));
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("Email"));
+
+builder.Services.AddScoped<IEmailSender>(sp =>
+{
+    var settings = sp.GetRequiredService<Microsoft.Extensions.Options.IOptions<EmailSettings>>().Value;
+    return settings.IsConfigured
+        ? sp.GetRequiredService<SmtpEmailSender>()
+        : sp.GetRequiredService<ConsoleEmailSender>();
+});
+builder.Services.AddScoped<SmtpEmailSender>();
+builder.Services.AddScoped<ConsoleEmailSender>();
 
 // ---- Authentication ----
 // Plain cookie authentication backed by our own Users table (see AccountController).

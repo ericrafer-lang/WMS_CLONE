@@ -31,6 +31,15 @@
         <!-- Sign In Form -->
         <form asp-controller="Account" asp-action="Login" method="post" class="space-y-4">
             @Html.AntiForgeryToken()
+
+            @if (TempData["StatusMessage"] != null)
+            {
+                var isError = (TempData["StatusMessageType"] as string) == "error";
+                <div class="text-sm text-center rounded-md p-2 @(isError ? "bg-red-100 text-red-700" : "bg-green-100 text-green-700")">
+                    @TempData["StatusMessage"]
+                </div>
+            }
+
             <div asp-validation-summary="ModelOnly" class="text-sm text-red-300"></div>
 
             <div>

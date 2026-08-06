@@ -21,6 +21,10 @@
         public UserStatus Status { get; set; } = UserStatus.PendingApproval;
         public DateTime? LastLogin { get; set; }
 
+        // Set when the account is created; cleared once the email is verified.
+        public string? EmailVerificationToken { get; set; }
+        public DateTime? EmailVerificationTokenExpiresAt { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
