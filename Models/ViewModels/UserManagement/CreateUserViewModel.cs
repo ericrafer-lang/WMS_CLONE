@@ -7,7 +7,6 @@ namespace practice_for_wms.Models.ViewModels.UserManagement
         [Required]
         public string FirstName { get; set; } = string.Empty;
 
-        [Required]
         public string MiddleName { get; set; } = string.Empty;
 
         [Required]
