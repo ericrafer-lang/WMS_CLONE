@@ -33,6 +33,31 @@ function initializeModals() {
 }
 
 initializeModals();
+function populateUpdateModal(button) {
+    document.getElementById("updateId").value = button.dataset.id;
+    document.getElementById("updateFirstName").value = button.dataset.firstName;
+    document.getElementById("updateMiddleName").value = button.dataset.middleName;
+    document.getElementById("updateLastName").value = button.dataset.lastName;
+    document.getElementById("updateEmail").value = button.dataset.email;
+    document.getElementById("updateRoleSelect").value = button.dataset.role;
+    document.getElementById("updateBranchSelect").value = button.dataset.branchId;
+
+    const status = button.dataset.status;
+    const statusSelect = document.getElementById("updateStatusSelect");
+    const pendingOption = document.getElementById("statusPendingOption");
+    pendingOption.disabled = (status !== "PendingApproval");
+    statusSelect.value = status;
+}
+
+function initializeUpdateModal() {
+    document.querySelectorAll(".edit-user").forEach((button) => {
+        button.addEventListener("click", () => {
+            populateUpdateModal(button);
+        });
+    });
+}
+
+initializeUpdateModal();
 
 // THEME (dark / light) support
 function setTheme(theme) {
