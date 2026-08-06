@@ -18,7 +18,6 @@ namespace practice_for_wms.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //List<User>;
 
             var viewModel = new UserManagementIndexViewModel
             {
@@ -34,20 +33,20 @@ namespace practice_for_wms.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserManagementIndexViewModel model)
+        public async Task<IActionResult> Create(UserManagementIndexViewModel CreateUser)
         {
-
+            
             if (!ModelState.IsValid)
             {
-                model.Users = await _context.Users
+                CreateUser.Users = await _context.Users
                         .Include(u => u.Branch)
                         .ToListAsync();
 
-                model.Branches = await _context.Branches.ToListAsync();
-                return View("Index", model);
+                CreateUser.Branches = await _context.Branches.ToListAsync();
+                return View("Index", CreateUser);
             }
 
-            var create = model.CreateUser;
+            var create = CreateUser.CreateUser;
 
             User user = new User
             {
@@ -69,6 +68,41 @@ namespace practice_for_wms.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(UserManagementIndexViewModel UpdateUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                UpdateUser.Users = await _context.Users
+                        .Include(u => u.Branch)
+                        .ToListAsync();
+                UpdateUser.Branches = await _context.Branches.ToListAsync();
+                return View("Index", UpdateUser);
+            }
+
+            var update = UpdateUser.UpdateUser;
+
+            var user = await _context.Users.FindAsync(update.Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.FirstName = update.FirstName;
+            user.MiddleName = update.MiddleName;
+            user.LastName = update.LastName;
+            user.Email = update.Email;
+            user.Role = update.Role;
+            user.BranchId = update.BranchId;
+            user.Status = update.Status;
+            user.UpdatedAt = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "User updated successfully!";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             var user = await _context.Users.FindAsync(id);
@@ -85,11 +119,5 @@ namespace practice_for_wms.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update()
-        {
-            return View();
-        }
     }
 }
