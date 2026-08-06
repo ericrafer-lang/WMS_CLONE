@@ -15,7 +15,7 @@ namespace practice_for_wms.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<MyTask> MyTasks { get; set; }
-        
+        public DbSet<ProductSupplier> ProductSuppliers { get; set; }
         public DbSet<Request> Requests { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,10 @@ namespace practice_for_wms.Data
                 .WithMany()
                 .HasForeignKey(r => r.BranchId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ProductSupplier>()
+            .HasIndex(ps => new { ps.ProductId, ps.SupplierId })
+            .IsUnique();
         }
     }
 }

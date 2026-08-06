@@ -4,12 +4,7 @@
 }
 
 <div class="p-4 lg:p-6">
-    @if (TempData["Error"] != null)
-    {
-        <div style="background:#FEE2E2; color:#B91C1C; padding:12px 16px; border-radius:10px; margin-bottom:16px;">
-            @TempData["Error"]
-        </div>
-    }
+    
     @* HEADING !!!!!!*@
     <div class="flex justify-between items-center">
         <div class="flex flex-col">
@@ -169,8 +164,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById('orderModal');
         const openBtn = document.getElementById('openOrderModalBtn');
-        const cancelBtn = document.getElementById('cancelOrderModalBtn');
-        const cancelX = document.getElementById('cancelOrderModalX');
+        const cancelBtn = document.getElementById('cancelOrderModal');
+        
 
         function showModal() {
             modal.classList.remove('hidden');
