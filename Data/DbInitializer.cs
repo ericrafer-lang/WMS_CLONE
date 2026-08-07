@@ -8,7 +8,7 @@ namespace practice_for_wms.Data
         // Seeds a default branch + Admin account so the app is loggable-into
         // right after the first migration. Change/remove this account before
         // using real data.
-        public const string DefaultAdminEmail = "admin@wms.local";
+        public const string DefaultAdminEmail = "admin@gmail.com";
         public const string DefaultAdminPassword = "Admin@123";
 
         public static void Seed(ApplicationDbContext context)
