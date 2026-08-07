@@ -18,7 +18,6 @@ namespace practice_for_wms.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            //List<User>;
 
             var viewModel = new UserManagementIndexViewModel
             {
@@ -34,36 +33,68 @@ namespace practice_for_wms.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserManagementIndexViewModel model)
+        public async Task<IActionResult> Create([Bind(Prefix = "CreateUser")] CreateUserViewModel createUserInput)
         {
-
             if (!ModelState.IsValid)
             {
-                model.Users = await _context.Users
-                        .Include(u => u.Branch)
-                        .ToListAsync();
-
-                model.Branches = await _context.Branches.ToListAsync();
+                var model = new UserManagementIndexViewModel
+                {
+                    Users = await _context.Users.Include(u => u.Branch).ToListAsync(),
+                    Branches = await _context.Branches.ToListAsync(),
+                    CreateUser = createUserInput
+                };
                 return View("Index", model);
             }
 
-            var create = model.CreateUser;
-
             User user = new User
             {
-                FirstName = create.FirstName,
-                MiddleName = create.MiddleName,
-                LastName = create.LastName,
-                Email = create.Email,
-                Role = create.Role,
-                BranchId = create.BranchId,
-
-                Status = UserStatus.PendingApproval, // UserStatus from Models/Entities/User.cs (for referce kasi nakakalito)
+                FirstName = createUserInput.FirstName,
+                MiddleName = createUserInput.MiddleName,
+                LastName = createUserInput.LastName,
+                Email = createUserInput.Email,
+                Role = createUserInput.Role,
+                BranchId = createUserInput.BranchId,
+                Status = UserStatus.PendingApproval,
                 CreatedAt = DateTime.Now
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            TempData["Success"] = "Sent successfully!";
+            TempData["Success"] = "User created successfully!";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update([Bind(Prefix = "UpdateUser")] UpdateUserViewModel updateUserInput)
+        {
+            if (!ModelState.IsValid)
+            {
+                var model = new UserManagementIndexViewModel
+                {
+                    Users = await _context.Users.Include(u => u.Branch).ToListAsync(),
+                    Branches = await _context.Branches.ToListAsync(),
+                    UpdateUser = updateUserInput
+                };
+                return View("Index", model);
+            }
+
+            var user = await _context.Users.FindAsync(updateUserInput.Id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.FirstName = updateUserInput.FirstName;
+            user.MiddleName = updateUserInput.MiddleName;
+            user.LastName = updateUserInput.LastName;
+            user.Email = updateUserInput.Email;
+            user.Role = updateUserInput.Role;
+            user.BranchId = updateUserInput.BranchId;
+            user.Status = updateUserInput.Status;
+            user.UpdatedAt = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "User updated successfully!";
             return RedirectToAction(nameof(Index));
         }
 
@@ -84,5 +115,6 @@ namespace practice_for_wms.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

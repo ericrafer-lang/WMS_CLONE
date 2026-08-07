@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using practice_for_wms.Models.Entities;
 
 namespace practice_for_wms.Models.ViewModels.UserManagement
 {
-    public class CreateUserViewModel
+    public class UpdateUserViewModel
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required]
         public string FirstName { get; set; } = string.Empty;
 
@@ -21,5 +25,8 @@ namespace practice_for_wms.Models.ViewModels.UserManagement
 
         [Required]
         public int BranchId { get; set; }
+
+        [Required]
+        public UserStatus Status { get; set; }
     }
 }
