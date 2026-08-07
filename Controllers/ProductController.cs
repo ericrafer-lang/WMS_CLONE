@@ -17,7 +17,7 @@ namespace practice_for_wms.Controllers
             ViewBag.CategoryFilter = categoryFilter;
 
             ViewBag.Suppliers = await _context.Suppliers.Where(s => s.Status == "Active").ToListAsync();
-            
+
             var productsQuery = _context.Products
                 .Include(p => p.Supplier)
                 .AsQueryable();
@@ -58,6 +58,8 @@ namespace practice_for_wms.Controllers
             };
             _context.Products.Add(product);
             _context.SaveChanges();
+
+            TempData["Success"] = "Product added successfully!";
             return RedirectToAction("Index");
         }
 
