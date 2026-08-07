@@ -33,67 +33,64 @@ namespace practice_for_wms.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(UserManagementIndexViewModel CreateUser)
+        public async Task<IActionResult> Create([Bind(Prefix = "CreateUser")] CreateUserViewModel createUserInput)
         {
-            
             if (!ModelState.IsValid)
             {
-                CreateUser.Users = await _context.Users
-                        .Include(u => u.Branch)
-                        .ToListAsync();
-
-                CreateUser.Branches = await _context.Branches.ToListAsync();
-                return View("Index", CreateUser);
+                var model = new UserManagementIndexViewModel
+                {
+                    Users = await _context.Users.Include(u => u.Branch).ToListAsync(),
+                    Branches = await _context.Branches.ToListAsync(),
+                    CreateUser = createUserInput
+                };
+                return View("Index", model);
             }
-
-            var create = CreateUser.CreateUser;
 
             User user = new User
             {
-                FirstName = create.FirstName,
-                MiddleName = create.MiddleName,
-                LastName = create.LastName,
-                Email = create.Email,
-                Role = create.Role,
-                BranchId = create.BranchId,
-
-                Status = UserStatus.PendingApproval, // UserStatus from Models/Entities/User.cs (for referce kasi nakakalito)
+                FirstName = createUserInput.FirstName,
+                MiddleName = createUserInput.MiddleName,
+                LastName = createUserInput.LastName,
+                Email = createUserInput.Email,
+                Role = createUserInput.Role,
+                BranchId = createUserInput.BranchId,
+                Status = UserStatus.PendingApproval,
                 CreatedAt = DateTime.Now
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            TempData["Success"] = "Sent successfully!";
+            TempData["Success"] = "User created successfully!";
             return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(UserManagementIndexViewModel UpdateUser)
+        public async Task<IActionResult> Update([Bind(Prefix = "UpdateUser")] UpdateUserViewModel updateUserInput)
         {
             if (!ModelState.IsValid)
             {
-                UpdateUser.Users = await _context.Users
-                        .Include(u => u.Branch)
-                        .ToListAsync();
-                UpdateUser.Branches = await _context.Branches.ToListAsync();
-                return View("Index", UpdateUser);
+                var model = new UserManagementIndexViewModel
+                {
+                    Users = await _context.Users.Include(u => u.Branch).ToListAsync(),
+                    Branches = await _context.Branches.ToListAsync(),
+                    UpdateUser = updateUserInput
+                };
+                return View("Index", model);
             }
 
-            var update = UpdateUser.UpdateUser;
-
-            var user = await _context.Users.FindAsync(update.Id);
+            var user = await _context.Users.FindAsync(updateUserInput.Id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            user.FirstName = update.FirstName;
-            user.MiddleName = update.MiddleName;
-            user.LastName = update.LastName;
-            user.Email = update.Email;
-            user.Role = update.Role;
-            user.BranchId = update.BranchId;
-            user.Status = update.Status;
+            user.FirstName = updateUserInput.FirstName;
+            user.MiddleName = updateUserInput.MiddleName;
+            user.LastName = updateUserInput.LastName;
+            user.Email = updateUserInput.Email;
+            user.Role = updateUserInput.Role;
+            user.BranchId = updateUserInput.BranchId;
+            user.Status = updateUserInput.Status;
             user.UpdatedAt = DateTime.Now;
 
             await _context.SaveChangesAsync();
