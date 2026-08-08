@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using practice_for_wms.Data;
 
@@ -11,9 +12,11 @@ using practice_for_wms.Data;
 namespace practice_for_wms.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260805075146_Add Request Table")]
+    partial class AddRequestTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,30 +144,6 @@ namespace practice_for_wms.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("practice_for_wms.Models.Entities.ProductSupplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SupplierId");
-
-                    b.HasIndex("ProductId", "SupplierId")
-                        .IsUnique();
-
-                    b.ToTable("ProductSuppliers");
-                });
-
             modelBuilder.Entity("practice_for_wms.Models.Entities.Request", b =>
                 {
                     b.Property<int>("id")
@@ -215,9 +194,6 @@ namespace practice_for_wms.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Unit")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -231,8 +207,6 @@ namespace practice_for_wms.Migrations
                     b.HasIndex("ProductId");
 
                     b.HasIndex("RequestedById");
-
-                    b.HasIndex("SupplierId");
 
                     b.ToTable("Requests");
                 });
@@ -292,12 +266,6 @@ namespace practice_for_wms.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailVerificationToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("EmailVerificationTokenExpiresAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -310,6 +278,7 @@ namespace practice_for_wms.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MiddleName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
@@ -361,25 +330,6 @@ namespace practice_for_wms.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("practice_for_wms.Models.Entities.ProductSupplier", b =>
-                {
-                    b.HasOne("practice_for_wms.Models.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("practice_for_wms.Models.Entities.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Supplier");
-                });
-
             modelBuilder.Entity("practice_for_wms.Models.Entities.Request", b =>
                 {
                     b.HasOne("practice_for_wms.Models.Entities.User", "ApprovedBy")
@@ -405,10 +355,6 @@ namespace practice_for_wms.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("practice_for_wms.Models.Entities.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId");
-
                     b.Navigation("ApprovedBy");
 
                     b.Navigation("Branch");
@@ -416,8 +362,6 @@ namespace practice_for_wms.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("RequestedBy");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("practice_for_wms.Models.Entities.User", b =>

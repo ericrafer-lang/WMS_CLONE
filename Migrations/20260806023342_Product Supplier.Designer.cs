@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using practice_for_wms.Data;
 
@@ -11,9 +12,11 @@ using practice_for_wms.Data;
 namespace practice_for_wms.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260806023342_Product Supplier")]
+    partial class ProductSupplier
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -292,12 +295,6 @@ namespace practice_for_wms.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmailVerificationToken")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("EmailVerificationTokenExpiresAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -310,6 +307,7 @@ namespace practice_for_wms.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MiddleName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")

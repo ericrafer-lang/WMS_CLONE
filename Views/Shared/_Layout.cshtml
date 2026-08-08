@@ -148,13 +148,17 @@
                     </li>
                 </ul>
 
-           
-                <section class="mt-auto border-t border-gray-800 p-4">
-                    <a asp-controller="Account" asp-action="Logout" class="flex py-2.5 px-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5" /><path d="M21 12H9" /><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /></svg>
-                        <span class="ml-2"> Logout </span>
-                    </a>
 
+                <section class="mt-auto border-t border-gray-800 p-4">
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit"
+                                class="flex py-2.5 px-3 logout-btn w-full text-left"
+                                title="Logout">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5" /><path d="M21 12H9" /><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /></svg>
+                            <span class="ml-2"> Logout </span>
+                        </button>
+                    </form>
                 </section>
             </aside>
 
@@ -168,13 +172,13 @@
                         </div>
 
                         <div class="flex items-center p-3 gap-4 ">
-                            <a class="p-2 text-black hover:text-indigo-600 hovering">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
+                            <a class="p-2 text-black hover:text-indigo-600 hovering" href="#" aria-label="Notifications">
+                                <svg id="notificationBell" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell-icon lucide-bell notify-bell"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/></svg>
                             </a>
 
                             <!-- Theme toggle button (site-wide) -->
                             <a id="themeToggleBtn" class="p-2 text-black hover:text-indigo-600 hovering" aria-label="Toggle theme" title="Toggle dark / light theme">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>    
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-moon-icon lucide-moon"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
                             </a>
 
                             <a asp-controller="Settings" asp-action="Index" class="p-2 text-black hover:text-indigo-600 hovering">
@@ -194,6 +198,53 @@
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
         <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script>
+            (function () {
+                function onReady(fn) {
+                    if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn);
+                }
+
+                onReady(function () {
+                    var bell = document.getElementById('notificationBell');
+                    if (!bell) return;
+                    var trigger = bell.closest('a') || bell;
+
+                    // continuous shake while pointer is over the bell
+                    function startHover() {
+                        bell.classList.add('ring-shake');
+                    }
+
+                    function stopHover() {
+                        bell.classList.remove('ring-shake');
+                    }
+
+                    trigger.addEventListener('pointerenter', startHover);
+                    trigger.addEventListener('pointerleave', stopHover);
+                    // also support the svg element directly
+                    bell.addEventListener('pointerenter', startHover);
+                    bell.addEventListener('pointerleave', stopHover);
+
+                    // single programmatic ring support
+                    function programmaticRing() {
+                        bell.classList.remove('ring');
+                        // force reflow to restart single-run animation
+                        /* eslint-disable no-unused-expressions */
+                        bell.getBoundingClientRect();
+                        /* eslint-enable no-unused-expressions */
+                        bell.classList.add('ring');
+                    }
+
+                    // expose helper if other code wants to trigger a single ring
+                    window.ringBell = programmaticRing;
+
+                    // cleanup single-run class after animation ends
+                    function onAnimEnd() { bell.classList.remove('ring'); }
+                    bell.addEventListener('animationend', onAnimEnd);
+                    bell.addEventListener('webkitAnimationEnd', onAnimEnd);
+                });
+            })();
+        </script>
 
         @await RenderSectionAsync("Scripts", required: false)
     </body>

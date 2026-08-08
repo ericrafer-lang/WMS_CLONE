@@ -49,7 +49,77 @@ html, body {
         border-color: var(--border-color);
     }
 
-    html.dark .modern-select {
+.    html.dark .modern-select {
+    }
+/* Notification bell animation */
+.notify-bell {
+    display: inline-block;
+    /* Ensure transforms apply correctly to the SVG shape */
+    transform-box: fill-box; /* include stroke in transform calculations */
+    transform-origin: 50% 0%; /* top center */
+    will-change: transform;
+    pointer-events: auto;
+}
+
+.notify-bell.ring {
+    /* programmatic ring: a short burst of shakes when a notification arrives */
+    animation-name: bell-swing;
+    animation-duration: 0.9s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 3; /* shake a few times */
+}
+
+/* continuous shake while pointer is over the bell (controlled via JS) */
+.notify-bell.ring-shake {
+    animation-name: bell-swing;
+    animation-duration: 0.6s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes bell-swing {
+    0% { transform: rotate(0deg); }
+    10% { transform: rotate(-22deg); }
+    30% { transform: rotate(18deg); }
+    50% { transform: rotate(-12deg); }
+    70% { transform: rotate(6deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Logout button hover/interaction styles */
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 8px;
+    transition: background-color 0.15s ease, transform 0.12s ease, color 0.12s ease;
+    cursor: pointer;
+    color: inherit;
+}
+
+.logout-btn svg {
+    transition: transform 0.12s ease, color 0.12s ease;
+}
+
+.logout-btn:hover,
+.logout-btn:focus {
+    background: rgba(96,165,250,0.08); /* subtle blue highlight */
+    transform: translateX(6px);
+    color: var(--accent);
+}
+
+.logout-btn:hover svg,
+.logout-btn:focus svg {
+    transform: translateX(2px);
+    color: var(--accent);
+}
+
+.logout-btn:focus {
+    outline: 2px solid rgba(96,165,250,0.16);
+    outline-offset: 2px;
+}
+
         background: rgba(255,255,255,0.03);
         color: var(--text-muted);
         border-color: rgba(255,255,255,0.06);
@@ -241,7 +311,7 @@ html, body {
         background: rgba(34,197,94,0.06);
         color: #86EFAC;
         border: 1px solid rgba(34,197,94,0.08);
-    }
+    }x
 
     html.dark .badge.rejected {
         background: rgba(220,38,38,0.06);
@@ -1580,6 +1650,38 @@ html.dark .card {
     background: rgba(255,255,255,0.03) !important;
 }
 
+/* My Task card in dark mode */
+html.dark .task-card {
+    background: rgba(255,255,255,0.02) !important;
+    border-color: rgba(255,255,255,0.04) !important;
+    color: #E6EEF8 !important;
+}
+
+html.dark .task-card:hover {
+    border-color: rgba(96,165,250,0.08) !important;
+    box-shadow: 0 8px 24px rgba(2,6,23,0.6) !important;
+}
+
+/* Badge variants for My Task */
+html.dark .badge.active {
+    background: rgba(96,165,250,0.06) !important; /* bluish */
+    color: #BFDBFE !important;
+    border: 1px solid rgba(96,165,250,0.12) !important;
+}
+
+html.dark .badge.completed {
+    background: rgba(34,197,94,0.06) !important; /* green */
+    color: #86EFAC !important;
+    border: 1px solid rgba(34,197,94,0.12) !important;
+}
+
+/* Ensure small text inside task cards is readable */
+html.dark .task-card .table-product-name,
+html.dark .task-card p,
+html.dark .task-card .text-sm {
+    color: #9CA3AF !important;
+}
+
 /* form labels and small text */
 html.dark .form-label,
 html.dark .setting-info label,
@@ -1587,6 +1689,7 @@ html.dark .header-text h1,
 html.dark .header-text p {
     color: var(--text-muted);
 }
+
 /*Hovering effect for buttons*/
 .hovering {
     border: none; /* Remove border */

@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using practice_for_wms.Models.Entities;
 
 namespace practice_for_wms.Models.ViewModels.UserManagement
 {
-    public class CreateUserViewModel
+    public class UpdateUserViewModel
     {
+        [Required]
+        public int Id { get; set; }
+
         [Required]
         public string FirstName { get; set; } = string.Empty;
 
@@ -23,13 +27,6 @@ namespace practice_for_wms.Models.ViewModels.UserManagement
         public int BranchId { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
-        [MinLength(8, ErrorMessage = "Password must be at least 8 characters.")]
-        public string Password { get; set; } = string.Empty;
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare(nameof(Password), ErrorMessage = "Passwords do not match.")]
-        public string ConfirmPassword { get; set; } = string.Empty;
+        public UserStatus Status { get; set; }
     }
 }

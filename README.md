@@ -115,7 +115,7 @@ This project is being developed to:
 - [x] Dashboard Layout
 - [x] Sidebar Navigation
 - [x] Product Page UI
-- [ ] Product CRUD
+- [x] Product CRUD
 - [ ] Search Functionality
 - [ ] Category Management
 - [ ] Inventory Transactions

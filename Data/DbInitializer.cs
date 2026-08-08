@@ -36,7 +36,7 @@ namespace practice_for_wms.Data
                 MiddleName = "",
                 LastName = "Admin",
                 Email = DefaultAdminEmail,
-                Role = "Admin",
+                Role = "admin",
                 BranchId = branch.Id,
                 Status = UserStatus.Active,
                 CreatedAt = DateTime.Now,
