@@ -57,7 +57,7 @@
                             </div>
 
                             <div class="col-span-2">
-                                <label class="font-medium">Middle Name: <span class="text-red-500">*</span></label>
+                                <label class="font-medium">Middle Name: <span>(optional)</span></label>
                                 <input asp-for="CreateUser.MiddleName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"/>
                             </div>
 
@@ -74,7 +74,7 @@
 
                             <div class="col-span-2" z>
                                 <div class="form-group">
-                                    <label class="form-label">Role <span class="text-red-500">*</span></label>
+                                    <label class="form-label">Role: <span class="text-red-500">*</span></label>
 
                                     <select asp-for="CreateUser.Role" class="modern-select">
                                         <option>-Select Role-</option>
@@ -85,7 +85,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="form-label">Branch</label>
+                                    <label class="form-label">Branch: <span class="text-red-500">*</span></label>
 
                                     <select asp-for="CreateUser.BranchId" class="modern-select">
                                         <option value="">Select a branch</option>
