@@ -2,8 +2,10 @@
 
 namespace practice_for_wms.Models.ViewModels.Branches
 {
-    public class CreateBranchViewModel
+    public class UpdateBranchViewModel
     {
+        [Required]
+        public int Id { get; set; }
         [Required]
         public string BranchName { get; set; } = string.Empty;
 
