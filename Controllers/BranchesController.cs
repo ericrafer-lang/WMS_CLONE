@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using practice_for_wms.Data;
 using practice_for_wms.Models.Entities;
-using practice_for_wms.ViewModels.Branches;
+using practice_for_wms.Models.ViewModels.Branches;
 
 namespace practice_for_wms.Controllers
 {
@@ -28,21 +28,22 @@ namespace practice_for_wms.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BranchIndexViewModel model)
+        public async Task<IActionResult> Create([Bind(Prefix ="CreateBranch")] CreateBranchViewModel CreateBranchInput)
         {
             if (!ModelState.IsValid)
             {
-                model.Branches = await _context.Branches.ToListAsync();
+                var model = new BranchIndexViewModel
+                {
+                    Branches = await _context.Branches.ToListAsync()
+                };
                 return View("Index", model);
             }
 
-            var create = model.CreateBranch;
-
             Branch branch = new Branch
             {
-                BranchName = create.BranchName,
-                BranchAddress = create.BranchAddress,
-                PhoneNumber = create.PhoneNumber,
+                BranchName = CreateBranchInput.BranchName,
+                BranchAddress = CreateBranchInput.BranchAddress,
+                PhoneNumber = CreateBranchInput.PhoneNumber,
 
                 Status = BranchStatus.Active,
                 CreatedAt = DateTime.UtcNow
@@ -50,6 +51,37 @@ namespace practice_for_wms.Controllers
             _context.Branches.Add(branch);
             await _context.SaveChangesAsync();
             TempData["Success"] = "Branch added successfully!";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update([Bind(Prefix = "UpdateBranch")] UpdateBranchViewModel updateBranchInput)
+        {
+            if (!ModelState.IsValid)
+            {
+                var model = new BranchIndexViewModel
+                {
+                    Branches = await _context.Branches.ToListAsync(),
+                    UpdateBranch = updateBranchInput
+                };
+                return View("Index", model);
+            }
+
+            var branch = await _context.Branches.FindAsync(updateBranchInput.Id);
+            if (branch == null)
+            {
+                return NotFound();
+            }
+
+            branch.BranchName = updateBranchInput.BranchName;
+            branch.BranchAddress = updateBranchInput.BranchAddress;
+            branch.PhoneNumber = updateBranchInput.PhoneNumber;
+            //branch.Status = updateBranchInput.Status;
+            //branch.UpdatedAt = DateTime.Now;
+
+            await _context.SaveChangesAsync();
+            TempData["Success"] = "Branch updated successfully!";
             return RedirectToAction(nameof(Index));
         }
 

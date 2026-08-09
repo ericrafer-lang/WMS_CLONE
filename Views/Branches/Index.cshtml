@@ -4,7 +4,7 @@
     var branchCount = Model.Branches?.Count() ?? 0;
 }
 
-@model practice_for_wms.ViewModels.Branches.BranchIndexViewModel
+@model practice_for_wms.Models.ViewModels.Branches.BranchIndexViewModel
 
 <div class="p-4 lg:p-6">
     @* HEADING !!!!!!*@
@@ -28,18 +28,18 @@
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
             @if (TempData["Success"] != null)
             {
-            <script>
-            Swal.fire({
-            icon: 'success',
-            title: '@TempData["Success"]',
-            iconColor: '#2563eb',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true
-            });
-            </script>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '@TempData["Success"]',
+                        iconColor: '#2563eb',
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true
+                    });
+                </script>
             }
 
             <!-- Modal Overlay -->
@@ -56,7 +56,7 @@
 
                             <div>
                                 <label>Branch Name</label>
-                                <input asp-for="CreateBranch.BranchName"class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <input asp-for="CreateBranch.BranchName" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                             </div>
 
                             <div>
@@ -142,7 +142,13 @@
                                 <td>@branch.CreatedAt.ToString("MM/dd/yyyy")</td>
                                 <td>
                                     <div class="flex justify-center items-center gap-3 h-full">
-                                        <button class="hovering">
+                                        <button class="open-modal hovering edit"
+                                                data-modal="UpdateModal"
+                                                data-id="@branch.Id"
+                                                data-branch-name="@branch.BranchName"
+                                                data-branch-address="@branch.BranchAddress"
+                                                data-phone-number="@branch.PhoneNumber"
+                                                data-status="@branch.Status">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" /></svg>
                                         </button>
                                         <form asp-controller="Branches" asp-action="Delete" asp-route-id="@branch.Id" method="post">
@@ -164,6 +170,59 @@
                     }
                 </tbody>
             </table>
+        </div>
+        <!-- Modal Overlay -->
+        <div id="UpdateModal"
+             class="modal-overlay fixed inset-0 bg-black/50 hidden justify-center items-center z-50">
+
+            <!-- Modal -->
+            <div class="modal bg-white rounded-xl shadow-xl w-full max-w-xl p-6 relative">
+                <h2 class="text-2xl font-semibold mb-6">Update Branch</h2>
+
+                <form id="updateForm" asp-controller="Branches" asp-action="Update" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="UpdateBranch.Id" data-field="id" />
+                    <div class="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-3">
+
+                        <div>
+                            <label>Branch Name</label>
+                            <input asp-for="UpdateBranch.BranchName" id="updateBranchName" data-field="branchName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <div>
+                            <label>Branch Address</label>
+                            <input asp-for="UpdateBranch.BranchAddress" id="updateBranchAddress" data-field="branchAddress" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <div class="col-span-2">
+                            <label class="font-medium">Phone Number</label>
+                            <input asp-for="UpdateBranch.PhoneNumber" id="updatePhoneNumber" data-field="phoneNumber" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
+
+                        <div class="col-span-2">
+                            <label>Notes</label>
+                            <textarea class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+
+                    </div>
+
+                    @* buttons *@
+                    <div class="flex justify-end gap-3 mt-6">
+
+                        <button type="button"
+                                id="cancelModal"
+                                class="close-modal px-4 py-2 border rounded-lg hovering">
+                            Cancel
+                        </button>
+
+                        <button type="submit"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-lg hovering">
+                            Add Branch
+                        </button>
+
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
