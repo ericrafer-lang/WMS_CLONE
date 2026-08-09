@@ -204,7 +204,7 @@
                                 <td>
                                     <div class="flex justify-center items-center gap-3 h-full">
 
-                                        <button class="open-modal hovering edit-user"
+                                        <button class="open-modal hovering edit"
                                                 data-modal="updateModal"
                                                 data-id="@user.Id"
                                                 data-first-name="@user.FirstName"
@@ -259,34 +259,34 @@
 
                 <form id="updateForm" asp-controller="UserManagement" asp-action="Update" method="post">
                     @Html.AntiForgeryToken()
-                    <input type="hidden" asp-for="UpdateUser.Id" id="updateId" />
+                    <input type="hidden" asp-for="UpdateUser.Id" id="updateId" data-field="id" />
                     <div class="grid grid-cols-2 gap-4">
 
                         <div class="col-span-2">
                             <label class="font-medium">First Name: <span class="text-red-500">*</span></label>
-                            <input asp-for="UpdateUser.FirstName" id="updateFirstName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                            <input asp-for="UpdateUser.FirstName" id="updateFirstName" data-field="firstName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                         </div>
 
                         <div class="col-span-2">
                             <label class="font-medium">Middle Name:</label>
-                            <input asp-for="UpdateUser.MiddleName" id="updateMiddleName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                            <input asp-for="UpdateUser.MiddleName" id="updateMiddleName" data-field="middleName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" />
                         </div>
 
                         <div class="col-span-2">
                             <label class="font-medium">Surname: <span class="text-red-500">*</span></label>
-                            <input asp-for="UpdateUser.LastName" id="updateLastName" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                            <input input asp-for="UpdateUser.LastName" id="updateLastName" data-field="lastName" type="text" class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
                         </div>
 
                         <div class="col-span-2">
                             <label class="font-medium">Email Address: <span class="text-red-500">*</span></label>
-                            <input asp-for="UpdateUser.Email" id="updateEmail" type="email" placeholder="email@example.com"
+                            <input asp-for="UpdateUser.Email" id="updateEmail" data-field="email" type="email" placeholder="email@example.com"
                                    class="w-full rounded-lg border border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
                         </div>
 
                         <div class="col-span-2">
                             <div class="form-group">
                                 <label class="form-label">Role <span class="text-red-500">*</span></label>
-                                <select asp-for="UpdateUser.Role" id="updateRoleSelect" class="modern-select">
+                                <select asp-for="UpdateUser.Role" id="updateRoleSelect" data-field="role" class="modern-select">
                                     <option value="">-Select Role-</option>
                                     <option value="admin">Administrator</option>
                                     <option value="supervisor">Supervisor</option>
@@ -296,7 +296,7 @@
 
                             <div class="form-group">
                                 <label class="form-label">Branch</label>
-                                <select asp-for="UpdateUser.BranchId" id="updateBranchSelect" class="modern-select">
+                                <select asp-for="UpdateUser.BranchId" id="updateBranchSelect" data-field="branchId" class="modern-select">
                                     <option value="">Select a branch</option>
                                     @foreach (var branch in Model.Branches)
                                     {
@@ -316,7 +316,6 @@
                                 </select>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="modal-footer">
