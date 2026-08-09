@@ -30,30 +30,44 @@ function initializeModals() {
 }
 
 initializeModals();
-function populateUpdateModal(button) {
-    document.getElementById("updateId").value = button.dataset.id;
-    document.getElementById("updateFirstName").value = button.dataset.firstName;
-    document.getElementById("updateMiddleName").value = button.dataset.middleName;
-    document.getElementById("updateLastName").value = button.dataset.lastName;
-    document.getElementById("updateEmail").value = button.dataset.email;
-    document.getElementById("updateRoleSelect").value = button.dataset.role;
-    document.getElementById("updateBranchSelect").value = button.dataset.branchId;
 
-    const status = button.dataset.status;
-    const statusSelect = document.getElementById("updateStatusSelect");
-    const pendingOption = document.getElementById("statusPendingOption");
-    pendingOption.disabled = (status !== "PendingApproval");
-    statusSelect.value = status;
+const modalPopulateHooks = {
+    updateModal: (button) => {
+        const status = button.dataset.status;
+        const statusSelect = document.getElementById("updateStatusSelect");
+        const pendingOption = document.getElementById("statusPendingOption");
+        if (statusSelect && pendingOption) {
+            pendingOption.disabled = (status !== "PendingApproval");
+            statusSelect.value = status;
+        }
+    }
+};
+
+function populateModal(modalId, button) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    modal.querySelectorAll("[data-field]").forEach((field) => {
+        const key = field.dataset.field;
+        if (key in button.dataset) {
+            field.value = button.dataset[key];
+        }
+    });
+
+    if (modalPopulateHooks[modalId]) {
+        modalPopulateHooks[modalId](button);
+    }
 }
 
-function initializeUpdateModal() {
-    document.querySelectorAll(".edit-user").forEach((button) => {
+function initializeEditButtons() {
+    document.querySelectorAll(".edit").forEach((button) => {
         button.addEventListener("click", () => {
-            populateUpdateModal(button);
+            populateModal(button.dataset.modal, button);
         });
     });
 }
 
+initializeEditButtons();
 initializeUpdateModal();
 
 // THEME (dark / light) support
