@@ -49,7 +49,10 @@ html, body {
         border-color: var(--border-color);
     }
 
-.    html.dark .modern-select {
+    html.dark .modern-select {
+        background: rgba(255,255,255,0.03);
+        color: var(--text-muted);
+        border-color: rgba(255,255,255,0.06);
     }
 /* Notification bell animation */
 .notify-bell {
@@ -119,11 +122,6 @@ html, body {
     outline: 2px solid rgba(96,165,250,0.16);
     outline-offset: 2px;
 }
-
-        background: rgba(255,255,255,0.03);
-        color: var(--text-muted);
-        border-color: rgba(255,255,255,0.06);
-    }
 
     html.dark .form-control {
         background: rgba(255,255,255,0.03);
@@ -482,12 +480,12 @@ html.dark .btn-style {
 }
 
 /* Search box in report header */
-html.dark .card.w-\[30%\] input,
-html.dark .card.w-\[30%\] svg {
+html.dark .card.w-\[30\%\] input,
+html.dark .card.w-\[30\%\] svg {
     color: #E6EEF8 !important;
 }
 
-html.dark .card.w-\[30%\] {
+html.dark .card.w-\[30\%\] {
     background: rgba(255,255,255,0.02) !important;
     border-color: rgba(255,255,255,0.04) !important;
 }
