@@ -69,14 +69,6 @@ function initializeEditButtons() {
 
 initializeEditButtons();
 
-function initializeUpdateModal() {
-    const updateModal = document.getElementById("updateModal");
-    if (!updateModal) return;
-
-    const statusSelect = document.getElementById("updateStatusSelect");
-}
-initializeUpdateModal();
-
 // THEME (dark / light) support
 function setTheme(theme) {
     const root = document.documentElement;
