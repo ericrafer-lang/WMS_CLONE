@@ -1,148 +1,447 @@
 ﻿@{
-Layout = "_SettingsLayout";
-ViewData["Title"] = "Settings";
+    Layout = "_SettingsLayout";
+    ViewData["Title"] = "Settings";
 }
 
 <div class="settings-page">
 
-<div class="settings-header">
-    <div class="header-left">
-        <a asp-controller="Dashboard" asp-action="Index" class="back-btn">
-            ← Back to Dashboard
+    <!-- =====================================================
+         PAGE HEADER
+         ===================================================== -->
+    <header class="settings-header">
+
+        <a asp-controller="Dashboard"
+           asp-action="Index"
+           class="back-btn">
+
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6" /></svg>
+            </span>
+                Go Back
+
         </a>
-    </div>
 
-    <button class="save-btn hovering">Save Changes</button>
-</div>
 
-<div class="header-text">
-            <h1>System Settings</h1>
-            <p>Manage warehouse preferences, account settings, and application configuration.</p>
+        <button type="button" class="save-btn">
+
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save-icon lucide-save"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" /><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" /><path d="M7 3v4a1 1 0 0 0 1 1h7" /></svg>
+            </span>
+
+            Save Changes
+
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         PAGE INTRODUCTION
+         ===================================================== -->
+    <div class="settings-intro">
+
+        <div>
+
+            <span class="eyebrow">
+                CONFIGURATION
+            </span>
+
+            <h1>
+                System Settings
+            </h1>
+
+            <p>
+                Manage warehouse preferences, account settings,
+                and application configuration.
+            </p>
+
         </div>
 
-<div class="settings-card">
-
-    <div class="section-header">
-        <h2>User Preferences</h2>
-        <p>Customize how the system works for your account.</p>
     </div>
 
-    <div class="setting-row">
-        <div class="setting-info">
-            <label>Theme</label>
-            <span>Select the appearance of the dashboard.</span>
-        </div>
 
-        <select>
-            <option>Light</option>
-            <option>Dark</option>
-        </select>
+    <!-- =====================================================
+         SETTINGS GRID
+         2 COLUMNS × 2 ROWS
+         ===================================================== -->
+    <div class="settings-grid">
+
+
+        <!-- =================================================
+             CARD 1 - USER PREFERENCES
+             ================================================= -->
+        <section class="settings-card">
+
+            <div class="section-header">
+
+                <div class="section-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog"><path d="M11 10.27 7 3.34" /><path d="m11 13.73-4 6.93" /><path d="M12 22v-2" /><path d="M12 2v2" /><path d="M14 12h8" /><path d="m17 20.66-1-1.73" /><path d="m17 3.34-1 1.73" /><path d="M2 12h2" /><path d="m20.66 17-1.73-1" /><path d="m20.66 7-1.73 1" /><path d="m3.34 17 1.73-1" /><path d="m3.34 7 1.73 1" /><circle cx="12" cy="12" r="2" /><circle cx="12" cy="12" r="8" /></svg>
+                </div>
+
+                <div>
+
+                    <h2>
+                        User Preferences
+                    </h2>
+
+                    <p>
+                        Customize how the system works for your account.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+                <!-- Theme -->
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <label for="theme">
+                            Theme
+                        </label>
+
+                        <span>
+                            Select the appearance of the dashboard.
+                        </span>
+
+                    </div>
+
+
+                    <select id="theme"
+                            name="Theme"
+                            class="setting-control">
+
+                        <option value="Light">
+                            Light
+                        </option>
+
+                        <option value="Dark">
+                            Dark
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Notifications -->
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <label for="notifications">
+                            Enable Notifications
+                        </label>
+
+                        <span>
+                            Receive inventory and warehouse alerts.
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input id="notifications"
+                               name="Notifications"
+                               type="checkbox"
+                               checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CARD 2 - WAREHOUSE DEFAULTS
+             ================================================= -->
+        <section class="settings-card">
+
+            <div class="section-header">
+
+                <div class="section-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-pile-icon lucide-circle-pile"><circle cx="12" cy="19" r="2" /><circle cx="12" cy="5" r="2" /><circle cx="16" cy="12" r="2" /><circle cx="20" cy="19" r="2" /><circle cx="4" cy="19" r="2" /><circle cx="8" cy="12" r="2" /></svg>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Warehouse Defaults
+                    </h2>
+
+                    <p>
+                        Default warehouse behavior and inventory thresholds.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+                <!-- Low Stock Threshold -->
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <label for="stockThreshold">
+                            Low Stock Threshold
+                        </label>
+
+                        <span>
+                            Alert when stock falls below this value.
+                        </span>
+
+                    </div>
+
+
+                    <input id="stockThreshold"
+                           name="StockThreshold"
+                           class="setting-control number-control"
+                           type="number"
+                           value="10"
+                           min="0">
+
+                </div>
+
+
+                <!-- Default Branch -->
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <label for="branch">
+                            Default Branch
+                        </label>
+
+                        <span>
+                            Select the default warehouse location.
+                        </span>
+
+                    </div>
+
+
+                    <select id="branch"
+                            name="Branch"
+                            class="setting-control">
+
+                        <option value="Main Warehouse">
+                            Main Warehouse
+                        </option>
+
+                        <option value="Branch A">
+                            Branch A
+                        </option>
+
+                        <option value="Branch B">
+                            Branch B
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CARD 3 - ACCOUNT MANAGEMENT
+             ================================================= -->
+        <section class="settings-card">
+
+            <div class="section-header">
+
+                <div class="section-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-pen-icon lucide-user-round-pen"><path d="M2 21a8 8 0 0 1 10.821-7.487" /><path d="M21.378 16.626a1 1 0 0 0-3.004-3.004l-4.01 4.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z" /><circle cx="10" cy="8" r="5" /></svg>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Account Management
+                    </h2>
+
+                    <p>
+                        Update account credentials and security settings.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+                <!-- Username -->
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+                        <span>
+                            Your administrator account username.
+                        </span>
+
+                    </div>
+
+
+                    <input id="username"
+                           name="Username"
+                           class="setting-control"
+                           type="text"
+                           value="JuanAdmin"
+                           autocomplete="username">
+
+                </div>
+
+
+                <!-- Password -->
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <label for="password">
+                            Change Password
+                        </label>
+
+                        <span>
+                            Enter a new secure password.
+                        </span>
+
+                    </div>
+
+
+                    <input id="password"
+                           name="Password"
+                           class="setting-control"
+                           type="password"
+                           placeholder="New password"
+                           autocomplete="new-password">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             CARD 4 - SYSTEM CONFIGURATION
+             ================================================= -->
+        <section class="settings-card">
+
+            <div class="section-header">
+
+                <div class="section-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal-icon lucide-sliders-horizontal"><path d="M10 5H3" /><path d="M12 19H3" /><path d="M14 3v4" /><path d="M16 17v4" /><path d="M21 12h-9" /><path d="M21 19h-5" /><path d="M21 5h-7" /><path d="M8 10v4" /><path d="M8 12H3" /></svg>
+                </div>
+
+                <div>
+
+                    <h2>
+                        System Configuration
+                    </h2>
+
+                    <p>
+                        Control user roles and warehouse permissions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="settings-list">
+
+                <!-- Default Role -->
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <label for="role">
+                            Default Role
+                        </label>
+
+                        <span>
+                            Role assigned to newly created users.
+                        </span>
+
+                    </div>
+
+
+                    <select id="role"
+                            name="Role"
+                            class="setting-control">
+
+                        <option value="Admin">
+                            Admin
+                        </option>
+
+                        <option value="Manager">
+                            Manager
+                        </option>
+
+                        <option value="Staff">
+                            Staff
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Advanced Permissions -->
+                <div class="setting-row">
+
+                    <div class="setting-info">
+
+                        <label for="permissions">
+                            Advanced Permissions
+                        </label>
+
+                        <span>
+                            Enable granular access control.
+                        </span>
+
+                    </div>
+
+
+                    <label class="switch">
+
+                        <input id="permissions"
+                               name="Permissions"
+                               type="checkbox">
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
     </div>
-
-    <div class="setting-row">
-        <div class="setting-info">
-            <label>Enable Notifications</label>
-            <span>Receive inventory and warehouse alerts.</span>
-        </div>
-
-        <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider"></span>
-        </label>
-    </div>
-
-</div>
-
-<div class="settings-card">
-
-    <div class="section-header">
-        <h2>Warehouse Defaults</h2>
-        <p>Default warehouse behavior and inventory thresholds.</p>
-    </div>
-
-    <div class="setting-row">
-        <div class="setting-info">
-            <label>Low Stock Threshold</label>
-            <span>Alert when stock falls below this value.</span>
-        </div>
-
-        <input type="number" value="10">
-    </div>
-
-    <div class="setting-row">
-        <div class="setting-info">
-            <label>Default Branch</label>
-            <span>Select the default warehouse location.</span>
-        </div>
-
-        <select>
-            <option>Main Warehouse</option>
-            <option>Branch A</option>
-            <option>Branch B</option>
-        </select>
-    </div>
-
-</div>
-
-<div class="settings-card">
-
-    <div class="section-header">
-        <h2>Account Management</h2>
-        <p>Update account credentials and security settings.</p>
-    </div>
-
-    <div class="setting-row">
-        <div class="setting-info">
-            <label>Username</label>
-            <span>Your administrator account username.</span>
-        </div>
-
-        <input type="text" value="JuanAdmin">
-    </div>
-
-    <div class="setting-row">
-        <div class="setting-info">
-            <label>Change Password</label>
-            <span>Enter a new secure password.</span>
-        </div>
-
-        <input type="password" placeholder="New password">
-    </div>
-
-</div>
-
-<div class="settings-card">
-
-    <div class="section-header">
-        <h2>System Configuration</h2>
-        <p>Control user roles and warehouse permissions.</p>
-    </div>
-
-    <div class="setting-row">
-        <div class="setting-info">
-            <label>Default Role</label>
-            <span>Role assigned to newly created users.</span>
-        </div>
-
-        <select>
-            <option>Admin</option>
-            <option>Manager</option>
-            <option>Staff</option>
-        </select>
-    </div>
-
-    <div class="setting-row">
-        <div class="setting-info">
-            <label>Advanced Permissions</label>
-            <span>Enable granular access control.</span>
-        </div>
-
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider"></span>
-        </label>
-    </div>
-
-</div>
 
 </div>
