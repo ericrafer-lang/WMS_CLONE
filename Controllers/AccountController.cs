@@ -75,7 +75,8 @@ namespace practice_for_wms.Controllers
                 new(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}".Trim()),
                 new(ClaimTypes.Email, user.Email),
-                new(ClaimTypes.Role, user.Role)
+                new(ClaimTypes.Role, user.Role),
+                new("BranchId", user.BranchId.ToString())
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
