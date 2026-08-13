@@ -309,7 +309,7 @@ html, body {
         background: rgba(34,197,94,0.06);
         color: #86EFAC;
         border: 1px solid rgba(34,197,94,0.08);
-    }x
+    }
 
     html.dark .badge.rejected {
         background: rgba(220,38,38,0.06);
@@ -1119,224 +1119,790 @@ login {
     color: #DC2626;
     text-transform: capitalize;
 }
-/*SETTING SECTION*/
+
+/* =========================================================
+   SETTINGS PAGE
+   ========================================================= */
+
 .settings-page {
-    background: #e5e7eb; /* Lighter gray background */
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff6ff;
+    --text: #111827;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    --border: #e5e7eb;
+    --border-light: #f0f1f3;
+    --surface: #ffffff;
+    --background: #f5f7fb;
     min-height: 100vh;
-    padding: 28px;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    color: #1f2937; /* Dark text for readability */
+    padding: 32px 40px 60px;
+    background: var(--background);
+    color: var(--text);
+    font-family: Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    box-sizing: border-box;
 }
 
-/* Header */
+    .settings-page *,
+    .settings-page *::before,
+    .settings-page *::after {
+        box-sizing: border-box;
+    }
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 .settings-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
+    margin: -32px -40px 35px;
+    padding: 16px 40px;
+    background: rgba(255,255,255,.94);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 }
 
-.header-left {
+.settings-header-actions {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 10px;
 }
 
-.header-text h1 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #0B1736; /* Dark navy accent */
-    margin: 0 0 6px 0;
-}
 
-.header-text p {
-    color: #4b5563; /* Muted gray */
-    font-size: 15px;
-    margin: 0;
-}
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
 
-/* Back Button */
 .back-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: #2563EB; /* Blue accent */
-    color: #ffffff;
+    gap: 9px;
+    color: #4b5563;
     text-decoration: none;
-    padding: 11px 18px;
-    border-radius: 12px;
-    font-weight: 600;
     font-size: 14px;
-    border: 1px solid #1e40af;
-    transition: all 0.25s ease;
+    font-weight: 600;
+    transition: color .2s ease,transform .2s ease;
 }
 
+    .back-btn span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        background: #fff;
+        color: #374151;
+        font-size: 17px;
+        transition: background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease;
+    }
+
     .back-btn:hover {
-        background: #1d4ed8;
+        color: var(--primary);
+    }
+
+        .back-btn:hover span {
+            background: var(--primary-light);
+            border-color: #bfdbfe;
+            color: var(--primary);
+            transform: translateX(-2px);
+        }
+
+
+/* =========================================================
+   THEME BUTTON
+   ========================================================= */
+
+.theme-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease;
+}
+
+    .theme-toggle-btn:hover {
+        background: var(--primary-light);
+        border-color: #bfdbfe;
+        color: var(--primary);
         transform: translateY(-1px);
     }
 
-/* Cards */
-.settings-card {
-    background: #ffffff; /* White card for contrast */
-    border: 1px solid #d1d5db;
-    border-radius: 18px;
-    padding: 26px;
-    margin-bottom: 22px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.section-header {
-    margin-bottom: 20px;
-}
-
-    .section-header h2 {
-        font-size: 20px;
-        color: #0B1736; /* Warehouse navy */
-        font-weight: 600;
-        margin-bottom: 6px;
+    .theme-toggle-btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37,99,235,.18);
     }
 
-    .section-header p {
-        color: #6b7280;
+
+/* =========================================================
+   SAVE BUTTON
+   ========================================================= */
+
+.save-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 10px 17px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--primary);
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(37,99,235,.2);
+    transition: background .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+
+    .save-btn span {
         font-size: 14px;
     }
 
-/* Settings Rows */
-.setting-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 0;
-    border-top: 1px solid #f3f4f6;
+    .save-btn:hover {
+        background: var(--primary-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 15px rgba(37,99,235,.25);
+    }
+
+    .save-btn:active {
+        transform: translateY(0);
+    }
+
+    .save-btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(37,99,235,.2),0 4px 12px rgba(37,99,235,.2);
+    }
+
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.settings-intro {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 30px;
 }
 
-    .setting-row:first-of-type {
-        border-top: none;
-        padding-top: 0;
+    .settings-intro > div {
+        padding: 0 2px;
+    }
+
+.eyebrow {
+    display: inline-block;
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .13em;
+}
+
+.settings-intro h1 {
+    margin: 0;
+    color: #111827;
+    font-size: clamp(28px,4vw,38px);
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -.035em;
+}
+
+.settings-intro p {
+    max-width: 650px;
+    margin: 10px 0 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   GRID
+   ========================================================= */
+
+.settings-grid {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 22px;
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.settings-card {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 2px 5px rgba(15,23,42,.025),0 8px 24px rgba(15,23,42,.035);
+    transition: transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+
+    .settings-card:hover {
+        transform: translateY(-2px);
+        border-color: #d8dde6;
+        box-shadow: 0 5px 10px rgba(15,23,42,.035),0 15px 35px rgba(15,23,42,.055);
+    }
+
+
+/* =========================================================
+   SECTION HEADER
+   ========================================================= */
+
+.section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    min-height: 88px;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--border-light);
+    background: linear-gradient(180deg,#fff 0%,#fcfdff 100%);
+}
+
+.section-icon {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 19px;
+    line-height: 1;
+    box-shadow: inset 0 0 0 1px rgba(37,99,235,.05);
+}
+
+.section-header h2 {
+    margin: 2px 0 4px;
+    color: #111827;
+    font-size: 16px;
+    line-height: 1.3;
+    font-weight: 750;
+    letter-spacing: -.015em;
+}
+
+.section-header p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SETTINGS LIST
+   ========================================================= */
+
+.settings-list {
+    padding: 0 22px;
+}
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    min-height: 76px;
+    padding: 17px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+    .setting-row:last-child {
+        border-bottom: 0;
     }
 
 .setting-info {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    min-width: 0;
+    flex: 1;
 }
 
     .setting-info label {
-        font-weight: 600;
-        color: #111827;
+        display: block;
+        margin: 0 0 4px;
+        color: #1f2937;
+        font-size: 13px;
+        line-height: 1.4;
+        font-weight: 650;
+        cursor: pointer;
     }
 
     .setting-info span {
-        font-size: 13px;
-        color: #6b7280;
+        display: block;
+        color: var(--text-muted);
+        font-size: 11px;
+        line-height: 1.45;
     }
 
-/* Inputs */
-.setting-row input[type='text'],
-.setting-row input[type='password'],
-.setting-row input[type='number'],
-.setting-row select {
-    width: 240px;
-    padding: 12px 14px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
-    background: #f9fafb; /* Light input background */
-    color: #111827;
-    font-size: 14px;
-    transition: all 0.2s ease;
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.setting-control {
+    flex: 0 0 150px;
+    width: 150px;
+    height: 38px;
+    padding: 0 11px;
+    border: 1px solid #d8dde5;
+    border-radius: 8px;
+    outline: 0;
+    background: #fff;
+    color: #374151;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    transition: border-color .2s ease,box-shadow .2s ease,background .2s ease;
 }
 
-    .setting-row input:focus,
-    .setting-row select:focus {
-        outline: none;
-        border-color: #2563EB;
-        box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+    .setting-control:hover {
+        border-color: #bdc5d1;
     }
 
-/* Toggle Switch */
+    .setting-control:focus {
+        border-color: var(--primary);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+    }
+
+    .setting-control::placeholder {
+        color: #a1a8b3;
+    }
+
+.number-control {
+    text-align: left;
+}
+
+select.setting-control {
+    cursor: pointer;
+}
+
+input[type="password"].setting-control {
+    letter-spacing: .03em;
+}
+
+
+/* =========================================================
+   TOGGLE
+   ========================================================= */
+
 .switch {
     position: relative;
-    width: 52px;
-    height: 28px;
+    display: inline-block;
+    flex: 0 0 auto;
+    width: 46px;
+    height: 26px;
+    cursor: pointer;
 }
 
     .switch input {
-        display: none;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        white-space: nowrap;
+        border: 0;
     }
 
 .slider {
     position: absolute;
     inset: 0;
-    background: #d1d5db;
     border-radius: 999px;
-    transition: .25s;
+    background: #d1d5db;
+    transition: background .25s ease,box-shadow .25s ease;
 }
 
-    .slider:before {
-        content: '';
+    .slider::before {
+        content: "";
         position: absolute;
-        width: 22px;
-        height: 22px;
-        left: 3px;
+        width: 20px;
+        height: 20px;
         top: 3px;
-        background: #fff;
+        left: 3px;
         border-radius: 50%;
-        transition: .25s;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,.18);
+        transition: transform .25s ease;
     }
 
 .switch input:checked + .slider {
-    background: #2563EB;
+    background: var(--primary);
 }
 
-    .switch input:checked + .slider:before {
-        transform: translateX(24px);
+    .switch input:checked + .slider::before {
+        transform: translateX(20px);
     }
 
-/* Save Button */
-.save-btn {
-    background: #2563EB;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 22px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .2s;
+.switch input:focus-visible + .slider {
+    box-shadow: 0 0 0 3px rgba(37,99,235,.18);
 }
 
-    .save-btn:hover {
-        background: #1d4ed8;
+
+/* =========================================================
+   CARD COLORS
+   ========================================================= */
+
+.settings-card:nth-child(1) .section-icon {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.settings-card:nth-child(2) .section-icon {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.settings-card:nth-child(3) .section-icon {
+    background: #fff7ed;
+    color: #ea580c;
+}
+
+.settings-card:nth-child(4) .section-icon {
+    background: #f5f3ff;
+    color: #7c3aed;
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+html.dark {
+    color-scheme: dark;
+}
+
+    html.dark .settings-page {
+        --primary: #60a5fa;
+        --primary-dark: #3b82f6;
+        --primary-light: #172554;
+        --text: #f3f4f6;
+        --text-secondary: #aeb7c5;
+        --text-muted: #7f8a9a;
+        --border: #303846;
+        --border-light: #272e39;
+        --surface: #171b23;
+        --background: #0d1117;
+        background: var(--background);
+        color: var(--text);
     }
 
-/* Responsive */
-@media (max-width: 768px) {
+    html.dark .settings-header {
+        background: rgba(23,27,35,.94);
+        border-color: var(--border);
+    }
+
+    html.dark .back-btn {
+        color: #cbd5e1;
+    }
+
+        html.dark .back-btn span {
+            background: #171b23;
+            border-color: var(--border);
+            color: #d1d5db;
+        }
+
+        html.dark .back-btn:hover {
+            color: var(--primary);
+        }
+
+            html.dark .back-btn:hover span {
+                background: var(--primary-light);
+                border-color: #315b91;
+                color: var(--primary);
+            }
+
+    html.dark .settings-intro h1,
+    html.dark .section-header h2,
+    html.dark .setting-info label {
+        color: #f3f4f6;
+    }
+
+    html.dark .settings-intro p,
+    html.dark .section-header p {
+        color: var(--text-secondary);
+    }
+
+    html.dark .settings-card {
+        background: var(--surface);
+        border-color: var(--border);
+        box-shadow: 0 4px 15px rgba(0,0,0,.18);
+    }
+
+        html.dark .settings-card:hover {
+            border-color: #3b4655;
+            box-shadow: 0 10px 30px rgba(0,0,0,.25);
+        }
+
+    html.dark .section-header {
+        background: linear-gradient(180deg,#1b2029 0%,#171b23 100%);
+        border-color: var(--border-light);
+    }
+
+    html.dark .setting-row {
+        border-color: var(--border-light);
+    }
+
+    html.dark .setting-control {
+        background: #11161d;
+        border-color: #374151;
+        color: #e5e7eb;
+    }
+
+        html.dark .setting-control:hover {
+            border-color: #4b5563;
+        }
+
+        html.dark .setting-control:focus {
+            background: #11161d;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(96,165,250,.15);
+        }
+
+        html.dark .setting-control::placeholder {
+            color: #6b7280;
+        }
+
+    html.dark .theme-toggle-btn {
+        background: #171b23;
+        border-color: var(--border);
+        color: #cbd5e1;
+    }
+
+        html.dark .theme-toggle-btn:hover {
+            background: var(--primary-light);
+            border-color: #315b91;
+            color: var(--primary);
+        }
+
+    html.dark .settings-card:nth-child(1) .section-icon {
+        background: #172554;
+        color: #60a5fa;
+    }
+
+    html.dark .settings-card:nth-child(2) .section-icon {
+        background: #052e24;
+        color: #34d399;
+    }
+
+    html.dark .settings-card:nth-child(3) .section-icon {
+        background: #431407;
+        color: #fb923c;
+    }
+
+    html.dark .settings-card:nth-child(4) .section-icon {
+        background: #2e1065;
+        color: #a78bfa;
+    }
+
+    html.dark .slider {
+        background: #4b5563;
+    }
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width:900px) {
+    .settings-page {
+        padding: 28px 25px 50px;
+    }
+
     .settings-header {
-        flex-direction: column;
-        align-items: flex-start;
+        margin: -28px -25px 30px;
+        padding: 15px 25px;
+    }
+
+    .settings-grid {
+        gap: 18px;
+    }
+
+    .section-header {
+        padding: 18px;
+    }
+
+    .settings-list {
+        padding: 0 18px;
+    }
+
+    .setting-row {
+        gap: 14px;
+    }
+
+    .setting-control {
+        flex-basis: 135px;
+        width: 135px;
+    }
+}
+
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width:760px) {
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-card {
+        height: auto;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width:540px) {
+    .settings-page {
+        padding: 18px 14px 35px;
+    }
+
+    .settings-header {
+        margin: -18px -14px 24px;
+        padding: 12px 14px;
+    }
+
+    .back-btn {
+        font-size: 0;
+    }
+
+        .back-btn span {
+            width: 36px;
+            height: 36px;
+            font-size: 18px;
+        }
+
+    .settings-header-actions {
+        gap: 7px;
+    }
+
+    .theme-toggle-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .save-btn {
+        min-height: 38px;
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+
+    .settings-intro {
+        margin-bottom: 22px;
+    }
+
+    .eyebrow {
+        font-size: 10px;
+    }
+
+    .settings-intro h1 {
+        font-size: 27px;
+    }
+
+    .settings-intro p {
+        margin-top: 8px;
+        font-size: 13px;
+    }
+
+    .settings-grid {
         gap: 16px;
     }
 
-    .header-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+    .settings-card {
+        border-radius: 13px;
+    }
+
+    .section-header {
+        min-height: auto;
+        padding: 17px;
+    }
+
+    .section-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        font-size: 17px;
+    }
+
+    .section-header h2 {
+        font-size: 15px;
+    }
+
+    .section-header p {
+        font-size: 11px;
+    }
+
+    .settings-list {
+        padding: 0 17px;
     }
 
     .setting-row {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
+        align-items: stretch;
+        gap: 11px;
+        padding: 17px 0;
     }
 
-        .setting-row input,
-        .setting-row select {
-            width: 100%;
-        }
+    .setting-control {
+        width: 100%;
+        flex: 1 1 auto;
+        height: 40px;
+    }
+
+    .switch {
+        margin-top: 2px;
+    }
+}
+
+
+/* =========================================================
+   EXTRA SMALL
+   ========================================================= */
+
+@media (max-width:380px) {
+    .settings-intro h1 {
+        font-size: 24px;
+    }
 
     .save-btn {
-        width: 100%;
+        padding: 9px 11px;
+    }
+
+    .settings-list {
+        padding: 0 15px;
     }
 }
 
