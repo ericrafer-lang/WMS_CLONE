@@ -21,10 +21,10 @@ namespace practice_for_wms.Data
         {
             // MyTask: two FK references to Users and Branch
             modelBuilder.Entity<MyTask>()
-                .HasOne(t => t.AssignedTo)
-                .WithMany()
-                .HasForeignKey(t => t.AssignedToId)
-                .OnDelete(DeleteBehavior.Restrict);
+                 .HasOne(t => t.AssignedTo)
+                 .WithMany()
+                 .HasForeignKey(t => t.AssignedToId)
+                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<MyTask>()
                 .HasOne(t => t.Branch)
