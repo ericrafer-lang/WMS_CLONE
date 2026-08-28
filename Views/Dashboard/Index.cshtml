@@ -28,17 +28,17 @@
         <div class="grid-card">
             <div>
                 <p class="grid-header-text">Available Stock</p>
-                <p>0</p>
+                <p>@Model.AvailableStock</p>
             </div>
             <div class="flex justify-center items-center w-11 h-11 bg-green-50 text-green-600 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up-icon lucide-trending-up"><path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" /></svg>
             </div>
         </div>
-        @* Available Stocks !!!!!!*@
+        @* Low Stock !!!!!!*@
         <div class="grid-card">
             <div>
                 <p class="grid-header-text">Low Stock Items</p>
-                <p>0</p>
+                <p>@Model.LowStockCount</p>
             </div>
             <div class="flex justify-center items-center w-11 h-11 bg-yellow-50 text-yellow-600 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert-icon lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>
@@ -48,7 +48,7 @@
         <div class="grid-card">
             <div>
                 <p class="grid-header-text">Quality: Good</p>
-                <p>0</p>
+                <p>@Model.GoodStockCount</p>
             </div>
             <div class="flex justify-center items-center w-11 h-11 bg-emerald-50 text-emerald-600 rounded-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check-icon lucide-shield-check"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>
@@ -101,13 +101,27 @@
         <div class="grid-card p-3 lg:p-5    ">
             <div class="flex flex-col justify-between items-center ">
                 <div class="text-base font-semibold mb-5">Inventory by Category</div>
-                <div>GRAPH</div>
+                @if (Model.CategoryLabels.Count == 0)
+                {
+                    <div class="text-sm text-gray-400 py-8">No products yet.</div>
+                }
+                else
+                {
+                    <canvas id="categoryChart" style="max-height:280px;"></canvas>
+                }
             </div>
         </div>
         <div class="grid-card">
             <div class="flex flex-col justify-between items-center ">
                 <div class="text-base font-semibold mb-5">Product Quality Status</div>
-                <div>GRAPH</div>
+                @if (Model.TotalProducts == 0)
+                {
+                    <div class="text-sm text-gray-400 py-8">No products yet.</div>
+                }
+                else
+                {
+                    <canvas id="stockStatusChart" style="max-height:280px;"></canvas>
+                }
             </div>
         </div>
     </div>
@@ -121,6 +135,58 @@
             <div class="text-base font-semibold ">Recent Activities</div>
         </div>
 
-        <div>GRAPH</div>
+        <div class="text-sm text-gray-400 py-4">Activity feed isn't wired up to real data yet.</div>
     </div>
 </div>
+
+@section Scripts {
+    @if (Model.CategoryLabels.Count > 0 || Model.TotalProducts > 0)
+    {
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+        <script>
+            (function () {
+                var categoryLabels = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.CategoryLabels))
+                var categoryData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.CategoryQuantities))
+
+                var categoryCanvas = document.getElementById('categoryChart');
+                if (categoryCanvas && categoryLabels.length > 0) {
+                    new Chart(categoryCanvas, {
+                        type: 'bar',
+                        data: {
+                            labels: categoryLabels,
+                            datasets: [{
+                                label: 'Quantity on hand',
+                                data: categoryData,
+                                backgroundColor: '#258cfb',
+                                borderRadius: 6,
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { display: false } },
+                            scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                        }
+                    });
+                }
+
+                var stockCanvas = document.getElementById('stockStatusChart');
+                if (stockCanvas) {
+                    new Chart(stockCanvas, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Good', 'Low Stock', 'Out of Stock'],
+                            datasets: [{
+                                data: [@Model.GoodStockCount, @Model.LowStockCount, @Model.OutOfStockCount],
+                                backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: { legend: { position: 'bottom' } }
+                        }
+                    });
+                }
+            })();
+        </script>
+    }
+}
